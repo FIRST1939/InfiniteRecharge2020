@@ -15,7 +15,11 @@ public class Intake extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    // the piston out of the frame at the start of the match
+    //if 5 balls in indexer
+       //stop spinning intake
+    //else 
+      //spin intake
+    // 
   }
 }
