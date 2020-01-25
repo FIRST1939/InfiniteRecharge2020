@@ -15,11 +15,26 @@ public class Intake extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // the piston out of the frame at the start of the match
-    //if 5 balls in indexer
-       //stop spinning intake
-    //else 
-      //spin intake
-    // 
+    /*
+    if intake extended:
+      if not 5 balls in index:
+        spinIntake()
+      else:
+        stopSpinningIntake()
+
+    if intake retracted:
+      stopSpinningIntake()
+
+    if buttonx pressed:
+      if extended:
+        retract
+
+      else:
+        extend
+
+    if buttony pressed:
+      SpinIntakeRev()
+
+*/
   }
 }
