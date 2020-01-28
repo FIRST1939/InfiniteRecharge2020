@@ -22,8 +22,8 @@ public class RobotMap {
   public static final int rightFrontTalon = 0;
 
       //Shooter
-  public static final int shooter1 = 0;
-  public static final int shooter2 = 0;
+  public static final int shooterTalon1 = 0;
+  public static final int shooterTalon2 = 0;
 
   // Solenoids
   public static final int PCM = 0;
