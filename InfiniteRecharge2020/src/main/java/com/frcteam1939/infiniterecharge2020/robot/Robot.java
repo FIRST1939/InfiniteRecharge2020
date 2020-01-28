@@ -7,6 +7,13 @@
 
 package com.frcteam1939.infiniterecharge2020.robot;
 
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Drivetrain;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Intake;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Shooter;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +26,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  public static Climber climber;
+  public static ControlPanelManipulator controlpanelmanipulator;
+  public static Drivetrain drivetrain;
+  public static Intake intake;
+  public static Shooter shooter;
+  public static Turret turret;
+
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;

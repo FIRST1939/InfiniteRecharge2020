@@ -7,24 +7,34 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
+  private Solenoid intakeSolenoid = new Solenoid(RobotMap.intakeSolenoid);
+  private TalonSRX intakeTalon = new TalonSRX(RobotMap.intakeRollersTalon);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
   @Override
   public void initDefaultCommand() {
     /*
-    if intake extended:
+    if intakeSolenoid = true{
       if not 5 balls in index:
         spinIntake()
       else:
         stopSpinningIntake()
+    }
 
-    if intake retracted:
+    if intakeSolenoid = false{
       stopSpinningIntake()
-
+    }
+    
     if buttonx pressed:
       if extended:
         retract
@@ -36,5 +46,27 @@ public class Intake extends Subsystem {
       SpinIntakeRev()
 
 */
+
+  }
+
+  public void extendIntake(){
+    intakeSolenoid.set(true);
+
+  }
+
+  public void retractIntake(){
+    intakeSolenoid.set(false);
+  }
+
+  public void enableBrakeMode(){
+    intakeTalon.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void disableBrakeMode(){
+    intakeTalon.setNeutralMode(NeutralMode.Coast);
+  }
+  
+  public void setRoller(double value){
+    intakeTalon.set(ControlMode.PercentOutput,value);
   }
 }
