@@ -18,35 +18,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
   private Solenoid intakeSolenoid = new Solenoid(RobotMap.intakeSolenoid);
   private TalonSRX intakeTalon = new TalonSRX(RobotMap.intakeRollersTalon);
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
 
   @Override
   public void initDefaultCommand() {
-    /*
-    if intakeSolenoid = true{
-      if not 5 balls in index:
-        spinIntake()
-      else:
-        stopSpinningIntake()
-    }
-
-    if intakeSolenoid = false{
-      stopSpinningIntake()
-    }
-    
-    if buttonx pressed:
-      if extended:
-        retract
-
-      else:
-        extend
-
-    if buttony pressed:
-      SpinIntakeRev()
-
-*/
-
   }
 
   public void extendIntake(){

@@ -12,6 +12,10 @@ public class RobotMap {
   
   // Talons/Victors
   public static final int intakeRollersTalon = 0;
+  public static final int leftBackTalon = 0;
+  public static final int leftFrontTalon = 0;
+  public static final int rightBackTalon = 0;
+  public static final int rightFrontTalon = 0;
 
   // Solenoids
   public static final int PCM = 0;
