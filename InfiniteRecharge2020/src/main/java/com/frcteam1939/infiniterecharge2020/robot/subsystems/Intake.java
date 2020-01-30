@@ -25,7 +25,6 @@ public class Intake extends Subsystem {
 
   public void extendIntake(){
     intakeSolenoid.set(true);
-
   }
 
   public void retractIntake(){
