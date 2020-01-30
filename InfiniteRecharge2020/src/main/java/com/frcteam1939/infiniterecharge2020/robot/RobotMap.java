@@ -11,9 +11,8 @@ package com.frcteam1939.infiniterecharge2020.robot;
 public class RobotMap {
   
   // Talons/Victors
-  public static final int intakeRollersTalon = 0;
+    public static final int intakeRollersTalon = 0;
 
-  // Solenoids
     public static final int indexTalon1 = 0;
     public static final int indexTalon2 = 0;
 
@@ -32,7 +31,7 @@ public class RobotMap {
     public static final int climberTalon = 0;
     public static final int gondolaSnowblower = 0;
 
-  // Solenoids
+  //Solenoids
     public static final int PCM = 0;
 
     public static final int intakeSolenoid = 0;
