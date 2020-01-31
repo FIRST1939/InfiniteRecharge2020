@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot;
-
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Drivetrain;
@@ -14,7 +13,6 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.Indexer;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Intake;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Shooter;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
