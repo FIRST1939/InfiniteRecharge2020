@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Turret extends Subsystem {
@@ -15,5 +14,5 @@ public class Turret extends Subsystem {
   public void initDefaultCommand() {
 
   }
-  
+
 }

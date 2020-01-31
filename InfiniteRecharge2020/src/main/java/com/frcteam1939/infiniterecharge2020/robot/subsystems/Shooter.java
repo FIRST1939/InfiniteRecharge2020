@@ -6,19 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
-  private TalonSRX shooterTalon1 = new TalonSRX(RobotMap.shooterTalon1);
-  private TalonSRX shooterTalon2 = new TalonSRX(RobotMap.shooterTalon2);
 
   @Override
-  public void initDefaultCommand() {}
-    public void setShooter(double value){
-      shooterTalon1.set(ControlMode.PercentOutput,value);
-      shooterTalon2.set(ControlMode.PercentOutput,value);
+  public void initDefaultCommand() {
+  
   }
+  
 }
