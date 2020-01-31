@@ -15,7 +15,8 @@ public class Shooter extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    public void setShooter(double value){
+      shooterTalon1.set(ControlMode.PercentOutput,value);
+      shooterTalon2.set(ControlMode.PercentOutput,value)
   }
 }
