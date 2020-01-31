@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot;
-
 import edu.wpi.first.wpilibj.RobotBase;
 
 public final class Main {
@@ -15,5 +14,5 @@ public final class Main {
   public static void main(String... args) {
     RobotBase.startRobot(Robot::new);
   }
-  
+
 }
