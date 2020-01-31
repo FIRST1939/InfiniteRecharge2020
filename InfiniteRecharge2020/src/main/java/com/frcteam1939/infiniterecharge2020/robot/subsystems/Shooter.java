@@ -10,8 +10,6 @@ package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
 
   @Override
   public void initDefaultCommand() {
@@ -19,4 +17,5 @@ public class Shooter extends Subsystem {
       shooterTalon1.set(ControlMode.PercentOutput,value);
       shooterTalon2.set(ControlMode.PercentOutput,value)
   }
+  
 }
