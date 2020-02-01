@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.I2C;
 public class RobotMap {
   
   // Motors
-    public static final int intakeRollersTalon = 0;
+    public static final int intakeTalon = 0;
     public static final int indexTalon1 = 0;
     public static final int indexTalon2 = 0;
     public static final int leftBackTalon = 0;

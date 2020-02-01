@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
   private Solenoid intakeSolenoid1 = new Solenoid(RobotMap.intakeSolenoid1);
   private Solenoid intakeSolenoid2 = new Solenoid(RobotMap.intakeSolenoid2);
-  private TalonSRX intakeTalon = new TalonSRX(RobotMap.intakeRollersTalon);
+  private TalonSRX intakeTalon = new TalonSRX(RobotMap.intakeTalon);
 
   @Override
   public void initDefaultCommand() {

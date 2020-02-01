@@ -12,7 +12,7 @@ import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
-  private TalonSRX climberTalon = new TalonSRX(RobotMap.intakeRollersTalon);
+  private TalonSRX climberTalon = new TalonSRX(RobotMap.climberTalon);
   private TalonSRX gondolaSnowblower = new TalonSRX(RobotMap.gondolaSnowblower);
 
   @Override
