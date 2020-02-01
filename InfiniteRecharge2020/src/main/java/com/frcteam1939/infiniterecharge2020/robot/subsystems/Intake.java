@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
-  private Solenoid intakeSolenoid = new Solenoid(RobotMap.intakeSolenoid);
+  private Solenoid intakeSolenoid1 = new Solenoid(RobotMap.intakeSolenoid1);
+  private Solenoid intakeSolenoid2 = new Solenoid(RobotMap.intakeSolenoid2);
   private TalonSRX intakeTalon = new TalonSRX(RobotMap.intakeRollersTalon);
 
   @Override
@@ -22,11 +23,13 @@ public class Intake extends Subsystem {
   }
 
   public void extendIntake(){
-    intakeSolenoid.set(true);
+    intakeSolenoid1.set(true);
+    intakeSolenoid2.set(true);
   }
 
   public void retractIntake(){
-    intakeSolenoid.set(false);
+    intakeSolenoid1.set(false);
+    intakeSolenoid2.set(false);
   }
 
   public void enableBrakeMode(){
