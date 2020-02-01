@@ -6,13 +6,25 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Turret extends Subsystem {
+  private TalonSRX turretTalon = new TalonSRX(RobotMap.turretTalon);
 
   @Override
   public void initDefaultCommand() {
-
   }
 
+  //Brake Mode
+  public void enableBrakeModeTurret(){
+    turretTalon.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void disableBrakeModeTurret(){
+    turretTalon.setNeutralMode(NeutralMode.Coast);
+  }
+  
 }

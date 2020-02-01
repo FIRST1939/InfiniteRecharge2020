@@ -32,16 +32,17 @@ public class Intake extends Subsystem {
     intakeSolenoid2.set(false);
   }
 
-  public void enableBrakeMode(){
+  public void setRoller(double value){
+    intakeTalon.set(ControlMode.PercentOutput,value);
+  }
+
+  //Brake Mode
+  public void enableBrakeModeIntake(){
     intakeTalon.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void disableBrakeMode(){
+  public void disableBrakeModeIntake(){
     intakeTalon.setNeutralMode(NeutralMode.Coast);
-  }
-  
-  public void setRoller(double value){
-    intakeTalon.set(ControlMode.PercentOutput,value);
   }
   
 }
