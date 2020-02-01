@@ -43,4 +43,5 @@ public class Intake extends Subsystem {
   public void setRoller(double value){
     intakeTalon.set(ControlMode.PercentOutput,value);
   }
+  
 }
