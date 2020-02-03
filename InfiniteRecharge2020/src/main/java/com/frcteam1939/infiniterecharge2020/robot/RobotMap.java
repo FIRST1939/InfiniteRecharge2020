@@ -11,10 +11,14 @@ package com.frcteam1939.infiniterecharge2020.robot;
 public class RobotMap {
   
   // Talons/Victors
+  public static final int indexTalon1 = 0;
+  public static final int indexTalon2 = 0;
 
   // Solenoids
 
   // Analog Input
+  public static final int indexDistanceSensor1 = 0;
+  public static final int indexDistanceSensor2 = 0;
 
   // Digital Input
 

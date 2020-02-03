@@ -7,11 +7,14 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Indexer extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  private TalonSRX talonAcross = new TalonSRX(RobotMap.indexTalon1);
+  private TalonSRX talonUp = new TalonSRX(RobotMap.indexTalon2);
 
   @Override
   public void initDefaultCommand() {
