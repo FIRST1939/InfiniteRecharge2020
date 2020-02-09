@@ -20,7 +20,7 @@ public class RobotMap {
     public static final int leftFrontTalon = 0;
     public static final int rightBackTalon = 0;
     public static final int rightFrontTalon = 0;
-    public static final int turretTalon = 0;
+    public static final int turretSnowblower = 0;
     public static final int shooterTalon1 = 0;
     public static final int shooterTalon2 = 0;
     public static final int controlPanelRedline = 0;

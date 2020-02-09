@@ -12,7 +12,7 @@ import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Turret extends Subsystem {
-  private TalonSRX turretTalon = new TalonSRX(RobotMap.turretTalon);
+  private TalonSRX turretSnowblower = new TalonSRX(RobotMap.turretSnowblower);
 
   @Override
   public void initDefaultCommand() {
@@ -20,11 +20,11 @@ public class Turret extends Subsystem {
 
   //Brake Mode
   public void enableBrakeModeTurret(){
-    turretTalon.setNeutralMode(NeutralMode.Brake);
+    turretSnowblower.setNeutralMode(NeutralMode.Brake);
   }
 
   public void disableBrakeModeTurret(){
-    turretTalon.setNeutralMode(NeutralMode.Coast);
+    turretSnowblower.setNeutralMode(NeutralMode.Coast);
   }
   
 }
