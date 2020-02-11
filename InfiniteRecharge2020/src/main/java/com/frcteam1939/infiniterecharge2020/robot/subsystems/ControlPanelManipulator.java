@@ -6,12 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
-
-import frc.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
@@ -72,6 +73,14 @@ public class ControlPanelManipulator extends Subsystem {
   public double getOffset(){
     return encoder.getPositionOffset();
   }
+  
+  public void enableBrakeMode(){
+    controlPanelRedline.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void disableBrakeMode(){
+    controlPanelRedline.setNeutralMode(NeutralMode.Coast);
+  }
 
   public String getColor(){
 
@@ -124,8 +133,9 @@ public class ControlPanelManipulator extends Subsystem {
           return "Green";
         default :
           return "Corrupt";
-  }
-}   else {
+    }
+  }   else {
       return "Unknown";
     }
   }
+}

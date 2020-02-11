@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.util;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Wait extends Command {

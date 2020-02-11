@@ -6,16 +6,34 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivetrain extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  private TalonSRX leftBackTalon = new TalonSRX(RobotMap.leftBackTalon);
+  private TalonSRX leftFrontTalon = new TalonSRX(RobotMap.leftFrontTalon);
+  private TalonSRX rightBackTalon = new TalonSRX(RobotMap.rightBackTalon);
+  private TalonSRX rightFrontTalon = new TalonSRX(RobotMap.rightFrontTalon);
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
+
+  //Brake Mode
+  public void enableBrakeModeDrivetrain(){
+    leftBackTalon.setNeutralMode(NeutralMode.Brake);
+    leftFrontTalon.setNeutralMode(NeutralMode.Brake);
+    rightBackTalon.setNeutralMode(NeutralMode.Brake);
+    rightFrontTalon.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void disableBrakeModeDrivetrain(){
+    leftBackTalon.setNeutralMode(NeutralMode.Coast);
+    leftFrontTalon.setNeutralMode(NeutralMode.Coast);
+    rightBackTalon.setNeutralMode(NeutralMode.Coast);
+    rightFrontTalon.setNeutralMode(NeutralMode.Coast);
+  }
+  
 }
