@@ -11,4 +11,5 @@ package com.frcteam1939.infiniterecharge2020.util;
  * Add your docs here.
  */
 public class DistanceConstants {
+    public static final double DEFUALT_VERT_DISTANCE = .1;
 }

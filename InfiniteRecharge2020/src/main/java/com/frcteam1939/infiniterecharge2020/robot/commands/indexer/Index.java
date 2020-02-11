@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Index extends ParallelCommandGroup {
-  /**
-   * Creates a new Index.
-   */
+ 
   public Index() {
+    super(new PowerCellForward(), new PowerCellUp());
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
   }

@@ -7,24 +7,35 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class PowerCellForward extends CommandBase {
-  /**
-   * Creates a new PowerCellForward.
-   */
+
+  private final double DIST_ONE_BALL = .1;
+
+  private boolean end = false;
+  private double currentDistance;
+
   public PowerCellForward() {
-    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.indexer);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    currentDistance = Robot.indexer.getDistanceHorz();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(Robot.indexer.getDistanceHorz()< currentDistance + DIST_ONE_BALL){
+      Robot.indexer.set(1);
+    }
+    else{
+      Robot.indexer.stop();
+      end = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -35,6 +46,6 @@ public class PowerCellForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return end;
   }
 }

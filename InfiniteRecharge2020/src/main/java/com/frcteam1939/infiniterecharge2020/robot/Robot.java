@@ -7,6 +7,8 @@
 
 package com.frcteam1939.infiniterecharge2020.robot;
 
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Indexer;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,6 +25,8 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  public static Indexer indexer = new Indexer();//ignore
+
 
   /**
    * This function is run when the robot is first started up and should be
