@@ -7,15 +7,24 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.turret.TurretGamepadControl;
+
 
 public class Turret extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  
+  private TalonSRX victor = new TalonSRX(RobotMap.turretTalon);
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new TurretGamepadControl());
+  }
+
+  public void set (double value){
+    victor.set(ControlMode.PercentOutput, value);
   }
 }
