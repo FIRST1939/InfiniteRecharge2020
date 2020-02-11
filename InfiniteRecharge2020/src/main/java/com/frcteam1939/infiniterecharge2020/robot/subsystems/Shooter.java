@@ -12,22 +12,22 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import frc.robot.commands.shooter.ShooterGamepadControl;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class Shooter extends Subsystem {
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import frc.robot.commands.shooter.ShooterGamepadControl;
 
-  private TalonFX shooterTalon1 = new TalonFX(36);
-  private TalonFX shooterTalon2 = new TalonFX(37);
+public class Shooter extends Subsystem {
+  
+  private TalonFX shooterTalon1 = new TalonFX(0);
+  private TalonFX shooterTalon2 = new TalonFX(0);
 
   private DoubleSolenoid solenoid1 = new DoubleSolenoid(2, 3);
   private DoubleSolenoid solenoid2 = new DoubleSolenoid(4, 5);
   
   public Shooter(){
     shooterTalon2.follow(shooterTalon1);
-    shooterTalon1.setNeutralMode(NeutralMode.Coast);
-    shooterTalon2.setNeutralMode(NeutralMode.Coast);
+    disableBrakeMode();
   }
 
   @Override
@@ -70,4 +70,14 @@ public class Shooter extends Subsystem {
     solenoid1.set(DoubleSolenoid.Value.kReverse);
     solenoid2.set(DoubleSolenoid.Value.kReverse);
   }
+    
+  public void enableBrakeMode(){
+    shooterTalon1.setNeutralMode(NeutralMode.Brake);
+    shooterTalon2.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void disableBrakeMode(){
+    shooterTalon1.setNeutralMode(NeutralMode.Coast);
+    shooterTalon2.setNeutralMode(NeutralMode.Coast);
+  } 
 }

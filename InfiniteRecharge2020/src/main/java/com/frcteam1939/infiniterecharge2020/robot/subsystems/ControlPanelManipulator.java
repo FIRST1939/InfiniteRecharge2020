@@ -6,16 +6,25 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ControlPanelManipulator extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-
+  private TalonSRX controlPanelRedline = new TalonSRX(RobotMap.controlPanelRedline);
+  
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
+
+  //Brake Mode
+  public void enableBrakeModeControlPanel(){
+    controlPanelRedline.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void disableBrakeModeControlPanel(){
+    controlPanelRedline.setNeutralMode(NeutralMode.Coast);
+  }
+
 }
