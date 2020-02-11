@@ -6,19 +6,30 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+
 public class Turret extends Subsystem {
+
   private TalonSRX turretSnowblower = new TalonSRX(RobotMap.turretSnowblower);
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new TurretGamepadControl());
   }
 
-  //Brake Mode
+  public void set(double value){
+    victor.set(ControlMode.PercentOutput, value);
+  }
+
   public void enableBrakeModeTurret(){
     turretSnowblower.setNeutralMode(NeutralMode.Brake);
   }
@@ -26,5 +37,4 @@ public class Turret extends Subsystem {
   public void disableBrakeModeTurret(){
     turretSnowblower.setNeutralMode(NeutralMode.Coast);
   }
-  
 }
