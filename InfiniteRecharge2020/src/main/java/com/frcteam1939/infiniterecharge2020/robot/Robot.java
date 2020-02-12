@@ -34,16 +34,25 @@ public class Robot extends TimedRobot {
   public static Indexer indexer;
   public static Shooter shooter;
   public static Turret turret;
+  public static OI oi;
 
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
+  static {
+		try {
+      drivetrain = new Drivetrain();
+      controlpanelmanipulator = new ControlPanelManipulator();
+      turret = new Turret();
+      shooter = new Shooter();
+      oi = new OI();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+  };
+  
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
