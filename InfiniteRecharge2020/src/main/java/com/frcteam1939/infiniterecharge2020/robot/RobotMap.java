@@ -16,16 +16,16 @@ public class RobotMap {
     public static final int intakeTalon = 0;
     public static final int indexTalon1 = 0;
     public static final int indexTalon2 = 0;
-    public static final int leftBackTalon = 0;
-    public static final int leftFrontTalon = 0;
-    public static final int rightBackTalon = 0;
-    public static final int rightFrontTalon = 0;
-    public static final int turretSnowblower = 0;
-    public static final int shooterTalon1 = 0;
-    public static final int shooterTalon2 = 0;
-    public static final int controlPanelRedline = 0;
-    public static final int climberTalon = 0;
-    public static final int gondolaSnowblower = 0;
+    public static final int leftBackFalcon = 0;
+    public static final int leftFrontFalcon = 0;
+    public static final int rightBackFalcon = 0;
+    public static final int rightFrontFalcon = 0;
+    public static final int turretTalon = 0;
+    public static final int shooterFalcon1 = 0;
+    public static final int shooterFalcon2 = 0;
+    public static final int controlPanelTalon = 0;
+    public static final int climberFalcon = 0;
+    public static final int gondolaTalon = 0;
 
   //Solenoids
     public static final int PCM = 0;
@@ -44,7 +44,7 @@ public class RobotMap {
     public static final int indexDistanceSensor5 = 0;
     public static final int turretEncoder = 0;
     public static final int climberEncoder = 0;
-    public static final int controlPanelManipulatorEncoder = 0;
+    public static final int controlPanelEncoder = 0;
 
   // Digital Input
     public static final int turretHallEffect = 0;

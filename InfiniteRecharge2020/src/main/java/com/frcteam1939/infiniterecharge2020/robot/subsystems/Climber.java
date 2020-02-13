@@ -12,8 +12,8 @@ import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
-  private TalonSRX climberTalon = new TalonSRX(RobotMap.climberTalon);
-  private TalonSRX gondolaSnowblower = new TalonSRX(RobotMap.gondolaSnowblower);
+  private TalonSRX climberTalon = new TalonSRX(RobotMap.climberFalcon);
+  private TalonSRX gondolaSnowblower = new TalonSRX(RobotMap.gondolaTalon);
 
   @Override
   public void initDefaultCommand() {

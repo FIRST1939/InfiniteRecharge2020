@@ -7,8 +7,38 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
-/**
- * Add your docs here.
- */
-public class TurretGamepadControl {
-}
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+public class TurretGamepadControl extends Command {
+
+    public TurretGamepadControl() {
+      requires(Robot.turret);
+    }
+  
+    @Override
+    protected void initialize() {
+    }
+  
+    @Override
+    protected void execute() {
+      //double value = Robot.oi.xboxController.getLeftStickY();
+      double value = Robot.oi.gamepad.getLeftY();
+      Robot.turret.set(value);
+    }
+  
+    @Override
+    protected boolean isFinished() {
+      return false;
+    }
+  
+    @Override
+    protected void end() {
+    }
+  
+    @Override
+    protected void interrupted() {
+    }
+  }
+  

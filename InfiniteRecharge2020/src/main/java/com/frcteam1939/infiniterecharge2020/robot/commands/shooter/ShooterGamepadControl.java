@@ -7,34 +7,106 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
-public class shooterGamepadControl extends CommandBase {
-  /**
-   * Creates a new shooterGamepadControl.
-   */
-  public shooterGamepadControl() {
-    // Use addRequirements() here to declare subsystem dependencies.
+import edu.wpi.first.wpilibj.command.Command;
+
+public class ShooterGamepadControl extends Command {
+  
+  public ShooterGamepadControl() {
+    requires(Robot.shooter);
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  protected void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  protected void execute() {
+    double speedShooter = Robot.shooter.getSpeed();
+    double temperatureShooter = Robot.shooter.getTemperature();
+ 
+    if(Robot.oi.gamepad.a.get()){
+      //Robot.shooter.set(1);
+      Robot.shooter.hoodDown();;
+    }
+    if(Robot.oi.gamepad.b.get()){
+     //Robot.shooter.set(.98);
+     Robot.shooter.hoodMiddleHigh();;
+   }
+   if(Robot.oi.gamepad.y.get()){
+     //Robot.shooter.set(.95);
+     Robot.shooter.hoodUp();
+   }
+   if(Robot.oi.gamepad.x.get()){
+     //Robot.shooter.set(.90);
+     Robot.shooter.hoodMiddleLow();
+   }
+
+   if(Robot.oi.gamepad.leftButton.get()){
+     Robot.shooter.set(0);
+   }
+
+    // LONG - 36 FEET
+  /*if (Robot.oi.gamepad.rightButton.get()){
+    if (speedShooter < 21000){
+      Robot.shooter.set(1);
+    } 
+    else if(speedShooter > 21000 && speedShooter < 22000){
+      Robot.shooter.set(0.97);
+    }
+    else {
+      Robot.shooter.set(0.85);
+    } 
+  }
+ else {
+    Robot.shooter.set(0);
+ }*/
+
+/* SHORT - 10 FEET
+if (Robot.oi.gamepad.rightButton.get()){
+    if (speedShooter < 9000){
+      Robot.shooter.set(1);
+    } 
+    else if (speedShooter > 9000 && speedShooter < 11000){
+      Robot.shooter.set(0.5);
+    }
+    else {
+      Robot.shooter.set(0.4);
+    } 
+  }
+ else {
+    Robot.shooter.set(0);
+ }*/ 
+
+ /*MEDIUM - 20 FEET
+ if (Robot.oi.gamepad.rightButton.get()){
+  if (speedShooter < 13500){
+    Robot.shooter.set(1);
+  } 
+  else if (speedShooter > 13500 && speedShooter < 15500){
+    Robot.shooter.set(0.67);
+  }
+  else {
+    Robot.shooter.set(0.5);
+  } 
+}
+else {
+  Robot.shooter.set(0);
+}*/
+
   }
 
-  // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
+  protected boolean isFinished() {
     return false;
+  }
+
+  @Override
+  protected void end() {
+  }
+
+  @Override
+  protected void interrupted() {
   }
 }

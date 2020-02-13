@@ -6,11 +6,10 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.ColorMatch;
@@ -28,7 +27,7 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public class ControlPanelManipulator extends Subsystem {
 
-  private VictorSPX victor = new VictorSPX(RobotMap.controlPanelManipulator);
+  private TalonSRX talon = new TalonSRX(RobotMap.controlPanelTalon);
   private DutyCycleEncoder encoder = new DutyCycleEncoder(RobotMap.controlPanelEncoder);
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
@@ -55,11 +54,10 @@ public class ControlPanelManipulator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ControlPanelManipulatorGamepadControl());
   }
 
   public void set(double value){
-    victor.set(ControlMode.PercentOutput, value);
+    talon.set(ControlMode.PercentOutput, value);
   }
 
   public double getRotations(){
@@ -75,11 +73,11 @@ public class ControlPanelManipulator extends Subsystem {
   }
   
   public void enableBrakeMode(){
-    controlPanelRedline.setNeutralMode(NeutralMode.Brake);
+    talon.setNeutralMode(NeutralMode.Brake);
   }
 
   public void disableBrakeMode(){
-    controlPanelRedline.setNeutralMode(NeutralMode.Coast);
+    talon.setNeutralMode(NeutralMode.Coast);
   }
 
   public String getColor(){
@@ -111,7 +109,7 @@ public class ControlPanelManipulator extends Subsystem {
   }
 
   public boolean colorIsAligned(String color){
-    if (Robot.controlPanelManipulator.getColor() == color){
+    if (Robot.controlpanelmanipulator.getColor() == color){
       return true;
     }
     else{

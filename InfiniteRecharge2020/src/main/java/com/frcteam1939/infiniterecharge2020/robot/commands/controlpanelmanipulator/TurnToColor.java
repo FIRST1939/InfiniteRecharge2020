@@ -7,38 +7,40 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator;
 
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TurnToColor extends Command {
+
+  String desiredColor;
+
   public TurnToColor() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.controlpanelmanipulator);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //desiredColor = new ControlPanelManipulator.colorFromFMS(); // Input from FMS
+    Robot.controlpanelmanipulator.set(0.3);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.controlpanelmanipulator.colorIsAligned(desiredColor);
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.controlpanelmanipulator.set(0);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.controlpanelmanipulator.set(0);
   }
 }
