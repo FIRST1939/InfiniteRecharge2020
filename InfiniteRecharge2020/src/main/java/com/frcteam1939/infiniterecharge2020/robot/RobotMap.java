@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.I2C;
 
 public class RobotMap {
   
-  // Motors
+  // Talons/Victors
     public static final int intakeTalon = 0;
     public static final int indexTalon1 = 0;
     public static final int indexTalon2 = 0;
@@ -36,20 +36,14 @@ public class RobotMap {
     public static final int shooterSolenoid2 = 0;
 
   // Analog Input
-    public static final int intakeDistanceSensor = 0;
     public static final int indexDistanceSensor1 = 0;
     public static final int indexDistanceSensor2 = 0;
-    public static final int indexDistanceSensor3 = 0;
-    public static final int indexDistanceSensor4 = 0;
-    public static final int indexDistanceSensor5 = 0;
     public static final int turretEncoder = 0;
     public static final int climberEncoder = 0;
     public static final int controlPanelEncoder = 0;
 
   // Digital Input
     public static final int turretHallEffect = 0;
-
-  // Digital Output
 
   // Other
     public static final SPI.Port navX = SPI.Port.kMXP;

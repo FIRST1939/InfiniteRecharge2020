@@ -12,11 +12,13 @@ import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
+
   private TalonSRX climberTalon = new TalonSRX(RobotMap.climberFalcon);
-  private TalonSRX gondolaSnowblower = new TalonSRX(RobotMap.gondolaTalon);
+  private TalonSRX gondolaTalon = new TalonSRX(RobotMap.gondolaTalon);
 
   @Override
   public void initDefaultCommand() {
+
   }
 
   //Brake Mode
@@ -29,11 +31,10 @@ public class Climber extends Subsystem {
   }
 
   public void enableBrakeModeGondola(){
-    gondolaSnowblower.setNeutralMode(NeutralMode.Brake);
+    gondolaTalon.setNeutralMode(NeutralMode.Brake);
   }
 
   public void disableBrakeModeGondola(){
-    gondolaSnowblower.setNeutralMode(NeutralMode.Coast);
+    gondolaTalon.setNeutralMode(NeutralMode.Coast);
   }
-  
 }
