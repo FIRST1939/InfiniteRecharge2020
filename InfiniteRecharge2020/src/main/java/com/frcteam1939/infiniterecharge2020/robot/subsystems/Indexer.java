@@ -19,11 +19,13 @@ import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Indexer extends SubsystemBase {
+  
   private TalonSRX talonHorz = new TalonSRX(RobotMap.indexTalon1);
   private TalonSRX talonVert = new TalonSRX(RobotMap.indexTalon2);
 
   private TimeOfFlight distanceSensorHorz = new TimeOfFlight(RobotMap.indexDistanceSensor1);
   private TimeOfFlight distanceSensorVert = new TimeOfFlight(RobotMap.indexDistanceSensor2);
+  
   /**
    * Creates a new Indexer.
    */
@@ -70,5 +72,4 @@ public class Indexer extends SubsystemBase {
   public double getDistanceHorz(){
     return distanceSensorHorz.getRange();
   }
-
 }

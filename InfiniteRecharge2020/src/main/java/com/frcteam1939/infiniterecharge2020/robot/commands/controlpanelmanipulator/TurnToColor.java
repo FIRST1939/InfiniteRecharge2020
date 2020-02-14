@@ -5,36 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.util;
+package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator;
+
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Wait extends Command {
+public class TurnToColor extends Command {
 
-  private double timeout;
+  String desiredColor;
 
-  public Wait(double timeout) {
-    this.timeout = timeout;
+  public TurnToColor() {
+    requires(Robot.controlpanelmanipulator);
   }
 
   @Override
   protected void initialize() {
-    this.setTimeout(timeout);
   }
 
   @Override
   protected void execute() {
+    //desiredColor = new ControlPanelManipulator.colorFromFMS(); // Input from FMS
+    Robot.controlpanelmanipulator.set(0.3);
   }
 
   @Override
   protected boolean isFinished() {
-    return this.isTimedOut();
+    return Robot.controlpanelmanipulator.colorIsAligned(desiredColor);
   }
 
   @Override
   protected void end() {
+    Robot.controlpanelmanipulator.set(0);
   }
 
   @Override
   protected void interrupted() {
+    Robot.controlpanelmanipulator.set(0);
   }
 }

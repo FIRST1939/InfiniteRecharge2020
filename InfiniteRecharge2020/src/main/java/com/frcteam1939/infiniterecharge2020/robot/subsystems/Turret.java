@@ -7,15 +7,34 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+
 public class Turret extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+
+  private TalonSRX talon = new TalonSRX(RobotMap.turretTalon);
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new TurretGamepadControl());
+  }
+
+  public void set(double value){
+    talon.set(ControlMode.PercentOutput, value);
+  }
+
+  public void enableBrakeModeTurret(){
+    talon.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void disableBrakeModeTurret(){
+    talon.setNeutralMode(NeutralMode.Coast);
   }
 }

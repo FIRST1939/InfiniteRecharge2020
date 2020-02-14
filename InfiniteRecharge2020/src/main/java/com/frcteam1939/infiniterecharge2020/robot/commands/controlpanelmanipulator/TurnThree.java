@@ -5,33 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.util;
+package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator;
+
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Wait extends Command {
-
-  private double timeout;
-
-  public Wait(double timeout) {
-    this.timeout = timeout;
+public class TurnThree extends Command {
+  
+  public TurnThree() {
+    requires(Robot.controlpanelmanipulator);
   }
 
   @Override
   protected void initialize() {
-    this.setTimeout(timeout);
   }
 
   @Override
   protected void execute() {
+    Robot.controlpanelmanipulator.set(.5);
   }
 
   @Override
   protected boolean isFinished() {
-    return this.isTimedOut();
+    return (Robot.controlpanelmanipulator.getRotations() == 3.5);
   }
 
   @Override
   protected void end() {
+    Robot.controlpanelmanipulator.set(0);
   }
 
   @Override

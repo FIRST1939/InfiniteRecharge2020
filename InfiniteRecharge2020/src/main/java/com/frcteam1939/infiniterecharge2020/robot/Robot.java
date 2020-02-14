@@ -7,7 +7,13 @@
 
 package com.frcteam1939.infiniterecharge2020.robot;
 
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Drivetrain;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Indexer;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Intake;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Shooter;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -20,7 +26,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
+
 public class Robot extends TimedRobot {
+
+  public static Climber climber;
+  public static ControlPanelManipulator controlPanelManipulator;
+  public static Drivetrain drivetrain;
+  public static Intake intake;
+  public static Indexer indexer;
+  public static Shooter shooter;
+  public static Turret turret;
+  public static OI oi;
+
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -28,15 +45,27 @@ public class Robot extends TimedRobot {
   public static Indexer indexer = new Indexer();//ignore
 
 
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
+  static {
+		try {
+      climber = new Climber();
+      controlPanelManipulator = new ControlPanelManipulator();
+      drivetrain = new Drivetrain();
+      intake = new Intake();
+      indexer = new Indexer();
+      shooter = new Shooter();
+      turret = new Turret();
+      oi = new OI();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+  };
+  
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+    //test
   }
 
   /**
@@ -98,4 +127,5 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
 }
