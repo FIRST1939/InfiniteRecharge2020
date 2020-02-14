@@ -42,8 +42,6 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  public static Indexer indexer = new Indexer();//ignore
-
 
   static {
 		try {

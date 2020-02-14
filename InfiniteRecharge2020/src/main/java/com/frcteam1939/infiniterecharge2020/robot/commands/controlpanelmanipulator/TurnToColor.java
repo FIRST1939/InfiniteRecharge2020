@@ -16,7 +16,7 @@ public class TurnToColor extends Command {
   String desiredColor;
 
   public TurnToColor() {
-    requires(Robot.controlpanelmanipulator);
+    requires(Robot.controlPanelManipulator);
   }
 
   @Override
@@ -26,21 +26,21 @@ public class TurnToColor extends Command {
   @Override
   protected void execute() {
     //desiredColor = new ControlPanelManipulator.colorFromFMS(); // Input from FMS
-    Robot.controlpanelmanipulator.set(0.3);
+    Robot.controlPanelManipulator.set(0.3);
   }
 
   @Override
   protected boolean isFinished() {
-    return Robot.controlpanelmanipulator.colorIsAligned(desiredColor);
+    return Robot.controlPanelManipulator.colorIsAligned(desiredColor);
   }
 
   @Override
   protected void end() {
-    Robot.controlpanelmanipulator.set(0);
+    Robot.controlPanelManipulator.set(0);
   }
 
   @Override
   protected void interrupted() {
-    Robot.controlpanelmanipulator.set(0);
+    Robot.controlPanelManipulator.set(0);
   }
 }

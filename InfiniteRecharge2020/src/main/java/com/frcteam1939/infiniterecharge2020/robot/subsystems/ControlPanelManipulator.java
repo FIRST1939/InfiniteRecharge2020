@@ -109,7 +109,7 @@ public class ControlPanelManipulator extends Subsystem {
   }
 
   public boolean colorIsAligned(String color){
-    if (Robot.controlpanelmanipulator.getColor() == color){
+    if (Robot.controlPanelManipulator.getColor() == color){
       return true;
     }
     else{

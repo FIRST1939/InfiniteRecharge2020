@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TurnThree extends Command {
   
   public TurnThree() {
-    requires(Robot.controlpanelmanipulator);
+    requires(Robot.controlPanelManipulator);
   }
 
   @Override
@@ -23,17 +23,17 @@ public class TurnThree extends Command {
 
   @Override
   protected void execute() {
-    Robot.controlpanelmanipulator.set(.5);
+    Robot.controlPanelManipulator.set(.5);
   }
 
   @Override
   protected boolean isFinished() {
-    return (Robot.controlpanelmanipulator.getRotations() == 3.5);
+    return (Robot.controlPanelManipulator.getRotations() == 3.5);
   }
 
   @Override
   protected void end() {
-    Robot.controlpanelmanipulator.set(0);
+    Robot.controlPanelManipulator.set(0);
   }
 
   @Override
