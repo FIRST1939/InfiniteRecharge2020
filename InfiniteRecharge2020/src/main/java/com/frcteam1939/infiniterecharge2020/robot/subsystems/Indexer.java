@@ -33,7 +33,6 @@ public class Indexer extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setDefaultCommand(new IndexerGamepadControl());
   }
 
   public void set(double value){
@@ -45,10 +44,12 @@ public class Indexer extends SubsystemBase {
     talonHorizontal.set(ControlMode.PercentOutput,0);
   }
 
+  // Positive is in
   public void setHorizontal(double value){
     talonHorizontal.set(ControlMode.PercentOutput,value);
   }
 
+  // Positive is up
   public void setVertical(double value){
     talonVertical.set(ControlMode.PercentOutput,value);
   }

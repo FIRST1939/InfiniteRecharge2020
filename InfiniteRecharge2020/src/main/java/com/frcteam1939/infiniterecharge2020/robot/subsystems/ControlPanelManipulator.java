@@ -21,6 +21,7 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ControlPanelManipulator extends SubsystemBase {
@@ -28,9 +29,9 @@ public class ControlPanelManipulator extends SubsystemBase {
   private TalonSRX talon = new TalonSRX(RobotMap.controlPanelTalon);
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+  // private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
-  private final ColorMatch m_colorMatcher = new ColorMatch();
+  // private final ColorMatch m_colorMatcher = new ColorMatch();
 
   private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
@@ -46,9 +47,11 @@ public class ControlPanelManipulator extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setDefaultCommand(new ControlPanelManipulatorGamepadControl());
+
+    //setDefaultCommand(new Control);
   }
 
+  // Positive is clockwise
   public void set(double value){
     talon.set(ControlMode.PercentOutput, value);
   }
@@ -69,20 +72,20 @@ public class ControlPanelManipulator extends SubsystemBase {
     talon.setNeutralMode(NeutralMode.Coast);
   }
 
-  public String getColor(){
+  // public String getColor(){
     
-    m_colorMatcher.addColorMatch(kBlueTarget);
-    m_colorMatcher.addColorMatch(kGreenTarget);
-    m_colorMatcher.addColorMatch(kRedTarget);
-    m_colorMatcher.addColorMatch(kYellowTarget);    
+    // m_colorMatcher.addColorMatch(kBlueTarget);
+    // m_colorMatcher.addColorMatch(kGreenTarget);
+    // m_colorMatcher.addColorMatch(kRedTarget);
+    // m_colorMatcher.addColorMatch(kYellowTarget);    
     
-    Color detectedColor = m_colorSensor.getColor();
+    // Color detectedColor = m_colorSensor.getColor();
 
-    String colorString;
+    // String colorString;
 
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    // ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
-    if (match.color == kBlueTarget) {
+    /*if (match.color == kBlueTarget) {
       colorString = "Blue";
     } else if (match.color == kRedTarget) {
       colorString = "Red";
@@ -93,17 +96,17 @@ public class ControlPanelManipulator extends SubsystemBase {
     } else {
       colorString = "Unknown";
     }
-    return colorString;
-  }
+    return colorString;*/
+  // }
 
-  public boolean colorIsAligned(String color){
+  /*public boolean colorIsAligned(String color){
     if (Robot.controlPanelManipulator.getColor() == color){
       return true;
     }
     else {
       return false;
     }
-  }
+  }*/
 
   public String colorFromFMS(){
     gameData = DriverStation.getInstance().getGameSpecificMessage();

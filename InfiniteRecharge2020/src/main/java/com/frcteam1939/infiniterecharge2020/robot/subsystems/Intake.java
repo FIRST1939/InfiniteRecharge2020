@@ -28,7 +28,6 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setDefaultCommand(new IntakeGamepadControl());
   }
 
   public void extendIntake(){
@@ -39,6 +38,7 @@ public class Intake extends SubsystemBase {
     solenoid.set(false);
   }
 
+  // Negative is in
   public void setRoller(double value){
     talon.set(ControlMode.PercentOutput, value);
   }

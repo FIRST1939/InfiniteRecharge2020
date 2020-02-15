@@ -37,9 +37,9 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setDefaultCommand(new ShooterGamepadControl());
   }
 
+  // Negative is out
   public void set(double value){
     shooterTalon1.set(ControlMode.PercentOutput, value);
   }

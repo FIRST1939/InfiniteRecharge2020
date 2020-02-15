@@ -24,8 +24,8 @@ public class TurretGamepadControl extends CommandBase {
   
     @Override
     public void execute() {
-      // double value = Robot.oi.gamepad.getLeftY();
-      // Robot.turret.set(value);
+      double value = Robot.oi.gamepad.getLeftX() / 4;
+      Robot.turret.set(value);
     }
   
     @Override

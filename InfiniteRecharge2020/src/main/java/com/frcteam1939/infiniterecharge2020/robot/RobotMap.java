@@ -14,15 +14,15 @@ public class RobotMap {
     public static final int intakeTalon = 19;
     public static final int indexerVerticalTalon = 17;
     public static final int indexerHorizontalTalon = 20;
-    public static final int leftBackFalcon = 0;
-    public static final int leftFrontFalcon = 0;
-    public static final int rightBackFalcon = 0;
-    public static final int rightFrontFalcon = 0;
+    public static final int leftBackFalcon = 41;
+    public static final int leftFrontFalcon = 44;
+    public static final int rightBackFalcon = 42;
+    public static final int rightFrontFalcon = 43;
     public static final int turretTalon = 39;
     public static final int shooterFalcon1 = 37;
     public static final int shooterFalcon2 = 36;
     public static final int controlPanelTalon = 38;
-    public static final int climberFalcon = 0;
+    public static final int climberFalcon = 40;
     public static final int gondolaTalon = 28;
 
   // Solenoids

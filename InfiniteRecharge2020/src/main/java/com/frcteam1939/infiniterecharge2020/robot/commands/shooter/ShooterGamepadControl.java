@@ -27,20 +27,20 @@ public class ShooterGamepadControl extends CommandBase {
     double speedShooter = Robot.shooter.getSpeed();
     double temperatureShooter = Robot.shooter.getTemperature();
  
-    if(Robot.oi.gamepad.a.get()){
-      //Robot.shooter.set(1);
+    if(Robot.oi.gamepad.x.get()){
+      // Robot.shooter.set(.9);
       Robot.shooter.hoodDown();;
     }
     if(Robot.oi.gamepad.b.get()){
-     //Robot.shooter.set(.98);
+     // Robot.shooter.set(.7);
      Robot.shooter.hoodMiddleHigh();;
    }
-   if(Robot.oi.gamepad.y.get()){
-     //Robot.shooter.set(.95);
+   if(Robot.oi.gamepad.a.get()){
+     // Robot.shooter.set(.);
      Robot.shooter.hoodUp();
    }
-   if(Robot.oi.gamepad.x.get()){
-     //Robot.shooter.set(.90);
+   if(Robot.oi.gamepad.y.get()){
+     // Robot.shooter.set(.90);
      Robot.shooter.hoodMiddleLow();
    }
 
@@ -60,23 +60,23 @@ public class ShooterGamepadControl extends CommandBase {
     Robot.shooter.set(0);
  }*/
 
-/* SHORT - 10 FEET
+// SHORT - 10 FEET
 if (Robot.oi.gamepad.rightButton.get()){
     if (speedShooter < 9000){
-      Robot.shooter.set(1);
+      Robot.shooter.set(-1);
     } 
     else if (speedShooter > 9000 && speedShooter < 11000){
-      Robot.shooter.set(0.5);
+      Robot.shooter.set(-0.5);
     }
     else {
-      Robot.shooter.set(0.4);
+      Robot.shooter.set(-0.4);
     } 
   }
  else {
     Robot.shooter.set(0);
- }*/ 
+ }
 
- /*MEDIUM - 20 FEET
+ /* MEDIUM - 20 FEET
  if (Robot.oi.gamepad.rightButton.get()){
   if (speedShooter < 13500){
     Robot.shooter.set(1);
@@ -86,11 +86,8 @@ if (Robot.oi.gamepad.rightButton.get()){
   }
   else {
     Robot.shooter.set(0.5);
-  } 
-}
-else {
-  Robot.shooter.set(0);
-}*/
+  }*/ 
+//}
 
   }
 

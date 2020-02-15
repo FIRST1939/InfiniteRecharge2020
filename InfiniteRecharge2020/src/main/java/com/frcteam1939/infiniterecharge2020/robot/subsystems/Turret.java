@@ -27,9 +27,9 @@ public class Turret extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setDefaultCommand(new TurretGamepadControl());
   }
 
+  // Positive is clockwise
   public void set(double value){
     talon.set(ControlMode.PercentOutput, value);
   }

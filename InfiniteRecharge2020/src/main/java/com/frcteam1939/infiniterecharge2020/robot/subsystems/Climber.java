@@ -34,13 +34,13 @@ public class Climber extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setDefaultCommand(new ClimberGamepadControl());
   }
 
   public void setClimber(double value){
     climberTalon.set(ControlMode.PercentOutput, value);
   }
 
+  // Positive is left
   public void setGondola(double value){
     gondolaTalon.set(ControlMode.PercentOutput, value);
   }

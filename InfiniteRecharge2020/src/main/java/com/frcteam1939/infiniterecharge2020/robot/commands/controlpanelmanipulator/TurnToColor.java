@@ -17,7 +17,7 @@ public class TurnToColor extends CommandBase {
   String desiredColor;
 
   public TurnToColor() {
-    addRequirements(Robot.controlPanelManipulator);
+    // addRequirements(Robot.controlPanelManipulator);
   }
 
   @Override
@@ -37,6 +37,6 @@ public class TurnToColor extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (Robot.controlPanelManipulator.colorIsAligned(desiredColor));
+    return false; //(Robot.controlPanelManipulator.colorIsAligned(desiredColor));
   }
 }

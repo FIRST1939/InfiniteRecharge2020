@@ -66,7 +66,6 @@ public class Drivetrain extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    setDefaultCommand(new DriveByJoystick());
   }
 
   // Get Methods 
@@ -172,7 +171,7 @@ public class Drivetrain extends SubsystemBase {
 		}
 
 		// Tell Drivetrain to move
-    setPercentOutput(leftMotorSpeed, rightMotorSpeed);
+    setPercentOutput(-leftMotorSpeed, -rightMotorSpeed);
     
 		SmartDashboard.putNumber("Move Output", moveValue);
 		SmartDashboard.putNumber("Turn Output", rotateValue);
@@ -206,6 +205,9 @@ public class Drivetrain extends SubsystemBase {
   // Private Convenience Methods
 
   private void setupMasterTalons(){
+
+    frontRight.setInverted(true);
+    backRight.setInverted(true);
 
     backLeft.follow(frontLeft);
     backRight.follow(frontRight);

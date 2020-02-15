@@ -7,6 +7,13 @@
 
 package com.frcteam1939.infiniterecharge2020.robot;
 
+import com.frcteam1939.infiniterecharge2020.robot.commands.DriveByJoystick;
+import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Drivetrain;
@@ -16,8 +23,10 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.Shooter;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -75,7 +84,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator,new ControlPanelManipulatorGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter,new ShooterGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.drivetrain,new DriveByJoystick());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.indexer,new IndexerGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.climber,new ClimberGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.intake,new IntakeGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.turret,new TurretGamepadControl());
+
+    CommandScheduler.getInstance().run();
   }
+
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -106,6 +125,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
     /*switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
@@ -125,6 +145,7 @@ public class Robot extends TimedRobot {
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
+
   }
 
   /**
@@ -132,6 +153,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    Scheduler.getInstance().run();
   }
 
   @Override
