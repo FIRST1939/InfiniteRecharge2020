@@ -6,43 +6,48 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Intake extends Subsystem {
-  private Solenoid intakeSolenoid1 = new Solenoid(RobotMap.intakeSolenoid1);
-  private Solenoid intakeSolenoid2 = new Solenoid(RobotMap.intakeSolenoid2);
-  private TalonSRX intakeTalon = new TalonSRX(RobotMap.intakeTalon);
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
+
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class Intake extends SubsystemBase {
+  private Solenoid solenoid = new Solenoid(RobotMap.intakeSolenoid);
+  private TalonSRX talon = new TalonSRX(RobotMap.intakeTalon);
+
+  public Intake(){
+    talon.enableVoltageCompensation(true);
+    disableBrakeMode();
+  }
 
   @Override
-  public void initDefaultCommand() {
+  public void periodic() {
+    setDefaultCommand(new IntakeGamepadControl());
   }
 
   public void extendIntake(){
-    intakeSolenoid1.set(true);
-    intakeSolenoid2.set(true);
+    solenoid.set(true);
   }
 
   public void retractIntake(){
-    intakeSolenoid1.set(false);
-    intakeSolenoid2.set(false);
+    solenoid.set(false);
   }
 
   public void setRoller(double value){
-    intakeTalon.set(ControlMode.PercentOutput,value);
+    talon.set(ControlMode.PercentOutput, value);
   }
 
-  //Brake Mode
-  public void enableBrakeModeIntake(){
-    intakeTalon.setNeutralMode(NeutralMode.Brake);
+  public void enableBrakeMode(){
+    talon.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void disableBrakeModeIntake(){
-    intakeTalon.setNeutralMode(NeutralMode.Coast);
+  public void disableBrakeMode(){
+    talon.setNeutralMode(NeutralMode.Coast);
   }
-  
 }

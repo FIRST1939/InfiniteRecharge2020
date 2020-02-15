@@ -10,19 +10,20 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ShooterGamepadControl extends Command {
+public class ShooterGamepadControl extends CommandBase {
   
   public ShooterGamepadControl() {
-    requires(Robot.shooter);
+    addRequirements(Robot.shooter);
   }
 
   @Override
-  protected void initialize() {
+  public void initialize() {
   }
 
   @Override
-  protected void execute() {
+  public void execute() {
     double speedShooter = Robot.shooter.getSpeed();
     double temperatureShooter = Robot.shooter.getTemperature();
  
@@ -41,10 +42,6 @@ public class ShooterGamepadControl extends Command {
    if(Robot.oi.gamepad.x.get()){
      //Robot.shooter.set(.90);
      Robot.shooter.hoodMiddleLow();
-   }
-
-   if(Robot.oi.gamepad.leftButton.get()){
-     Robot.shooter.set(0);
    }
 
     // LONG - 36 FEET
@@ -98,15 +95,11 @@ else {
   }
 
   @Override
-  protected boolean isFinished() {
+  public void end(boolean interrupted) {
+  }
+
+  @Override
+  public boolean isFinished() {
     return false;
-  }
-
-  @Override
-  protected void end() {
-  }
-
-  @Override
-  protected void interrupted() {
   }
 }

@@ -8,6 +8,7 @@
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -17,10 +18,16 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepa
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Climber extends SubsystemBase{
+public class Climber extends SubsystemBase {
 
   private TalonFX climberTalon = new TalonFX(RobotMap.climberFalcon);
   private TalonSRX gondolaTalon = new TalonSRX(RobotMap.gondolaTalon);
+
+  public Climber(){
+    climberTalon.enableVoltageCompensation(true);
+    climberTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    gondolaTalon.enableVoltageCompensation(true);
+  }
 
   @Override
   public void periodic() {

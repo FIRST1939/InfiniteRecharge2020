@@ -13,5 +13,4 @@ public class OI {
   public final Joystick left = new Joystick(0);
   public final Joystick right = new Joystick(1);
   public final Gamepad gamepad = new Gamepad(2);
-
 }

@@ -14,15 +14,19 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class Turret extends Subsystem {
+public class Turret extends SubsystemBase {
 
   private TalonSRX talon = new TalonSRX(RobotMap.turretTalon);
 
+  public Turret(){
+    talon.enableVoltageCompensation(true);
+  }
+
   @Override
-  public void initDefaultCommand() {
+  public void periodic() {
     setDefaultCommand(new TurretGamepadControl());
   }
 
@@ -30,11 +34,11 @@ public class Turret extends Subsystem {
     talon.set(ControlMode.PercentOutput, value);
   }
 
-  public void enableBrakeModeTurret(){
+  public void enableBrakeMode(){
     talon.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void disableBrakeModeTurret(){
+  public void disableBrakeMode(){
     talon.setNeutralMode(NeutralMode.Coast);
   }
 }

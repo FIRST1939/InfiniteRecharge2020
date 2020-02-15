@@ -7,32 +7,36 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
 
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class IntakeGamepadControl extends CommandBase {
-  /**
-   * Creates a new IntakeGamepadControl.
-   */
+
   public IntakeGamepadControl() {
-    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.intake);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (Robot.oi.gamepad.leftTrigger.get()){
+      Robot.intake.extendIntake();
+      Robot.intake.setRoller(0.5);
+    }
+    else {
+      Robot.intake.retractIntake();
+      Robot.intake.setRoller(0);
+    }
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

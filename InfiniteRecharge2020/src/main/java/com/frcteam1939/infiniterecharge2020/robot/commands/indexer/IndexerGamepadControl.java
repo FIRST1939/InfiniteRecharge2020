@@ -23,6 +23,10 @@ public class IndexerGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
+    double verticalValue = Robot.oi.gamepad.getRightY();
+    double horizontalValue = Robot.oi.gamepad.getRightX();
+    Robot.indexer.setVertical(verticalValue);
+    Robot.indexer.setHorizontal(horizontalValue);
   }
 
   @Override

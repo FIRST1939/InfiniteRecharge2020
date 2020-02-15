@@ -90,6 +90,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    Robot.climber.enableBrakeModeClimber();
+    Robot.climber.enableBrakeModeGondola();
+    Robot.controlPanelManipulator.enableBrakeMode();
+    Robot.drivetrain.enableBrakeMode();
+    Robot.indexer.enableBrakeMode();
+    Robot.turret.enableBrakeMode();
     // m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     // System.out.println("Auto selected: " + m_autoSelected);
@@ -111,11 +117,31 @@ public class Robot extends TimedRobot {
     }*/
   }
 
+  @Override
+  public void teleopInit() {
+    Robot.climber.enableBrakeModeClimber();
+    Robot.climber.enableBrakeModeGondola();
+    Robot.controlPanelManipulator.enableBrakeMode();
+    Robot.drivetrain.enableBrakeMode();
+    Robot.indexer.enableBrakeMode();
+    Robot.turret.enableBrakeMode();
+  }
+
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
+  }
+
+  @Override
+  public void disabledInit() {
+    Robot.climber.disableBrakeModeClimber();
+    Robot.climber.disableBrakeModeGondola();
+    Robot.controlPanelManipulator.disableBrakeMode();
+    Robot.drivetrain.disableBrakeMode();
+    Robot.indexer.disableBrakeMode();
+    Robot.turret.disableBrakeMode();
   }
 
   /**

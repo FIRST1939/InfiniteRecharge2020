@@ -10,35 +10,31 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class TurretGamepadControl extends Command {
+public class TurretGamepadControl extends CommandBase {
 
     public TurretGamepadControl() {
-      requires(Robot.turret);
+      addRequirements(Robot.turret);
     }
   
     @Override
-    protected void initialize() {
+    public void initialize() {
     }
   
     @Override
-    protected void execute() {
-      //double value = Robot.oi.xboxController.getLeftStickY();
-      double value = Robot.oi.gamepad.getLeftY();
-      Robot.turret.set(value);
+    public void execute() {
+      // double value = Robot.oi.gamepad.getLeftY();
+      // Robot.turret.set(value);
     }
   
     @Override
-    protected boolean isFinished() {
+    public void end(boolean interrupted) {
+    }
+  
+    @Override
+    public boolean isFinished() {
       return false;
-    }
-  
-    @Override
-    protected void end() {
-    }
-  
-    @Override
-    protected void interrupted() {
     }
   }
   

@@ -12,7 +12,6 @@ import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.ColorMatch;
@@ -24,7 +23,7 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ControlPanelManipulator extends SubsystemBase{
+public class ControlPanelManipulator extends SubsystemBase {
 
   private TalonSRX talon = new TalonSRX(RobotMap.controlPanelTalon);
 
@@ -41,12 +40,8 @@ public class ControlPanelManipulator extends SubsystemBase{
   String gameData;
 
   public ControlPanelManipulator(){
-    talon.configNominalOutputForward(+0);
-		talon.configNominalOutputReverse(-0);
-		talon.configPeakOutputForward(+1);
-    talon.configPeakOutputReverse(-1);
     talon.enableVoltageCompensation(true);
-    talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute); // Need to check
+    // talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute); // Need to check
   }
 
   @Override

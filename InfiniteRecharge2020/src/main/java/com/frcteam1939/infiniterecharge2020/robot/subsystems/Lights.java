@@ -7,7 +7,6 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Lights extends SubsystemBase {

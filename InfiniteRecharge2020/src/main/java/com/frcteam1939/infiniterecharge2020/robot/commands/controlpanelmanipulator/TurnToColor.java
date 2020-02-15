@@ -10,37 +10,33 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipula
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class TurnToColor extends Command {
+public class TurnToColor extends CommandBase {
 
   String desiredColor;
 
   public TurnToColor() {
-    requires(Robot.controlPanelManipulator);
+    addRequirements(Robot.controlPanelManipulator);
   }
 
   @Override
-  protected void initialize() {
+  public void initialize() {
   }
 
   @Override
-  protected void execute() {
+  public void execute() {
     //desiredColor = new ControlPanelManipulator.colorFromFMS(); // Input from FMS
     Robot.controlPanelManipulator.set(0.3);
   }
 
   @Override
-  protected boolean isFinished() {
-    return Robot.controlPanelManipulator.colorIsAligned(desiredColor);
+  public void end(boolean interrupted) {
+    Robot.controlPanelManipulator.stop();
   }
 
   @Override
-  protected void end() {
-    Robot.controlPanelManipulator.set(0);
-  }
-
-  @Override
-  protected void interrupted() {
-    Robot.controlPanelManipulator.set(0);
+  public boolean isFinished() {
+    return (Robot.controlPanelManipulator.colorIsAligned(desiredColor));
   }
 }

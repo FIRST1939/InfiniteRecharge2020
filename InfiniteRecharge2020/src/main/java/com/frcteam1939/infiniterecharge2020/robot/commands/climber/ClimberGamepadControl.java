@@ -23,6 +23,10 @@ public class ClimberGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
+    double climberValue = Robot.oi.gamepad.getLeftY();
+    double gondolaValue = Robot.oi.gamepad.getLeftX();
+    Robot.climber.setClimber(climberValue);
+    Robot.climber.setGondola(gondolaValue);
   }
 
   @Override
