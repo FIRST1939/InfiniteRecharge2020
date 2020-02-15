@@ -27,9 +27,9 @@ public class DriveByJoystick extends CommandBase {
   @Override
   public void execute() {
     double move = Robot.oi.left.getY();
-		double rotate = Robot.oi.right.getX();
+	double rotate = Robot.oi.right.getX();
 
-		boolean slowDown = Robot.oi.left.getRawButton(1) || Robot.oi.right.getRawButton(1);
+	boolean slowDown = Robot.oi.left.getRawButton(1) || Robot.oi.right.getRawButton(1);
 
     if (Math.abs(move) < DEAD_BAND) {
 			move = 0;

@@ -16,12 +16,15 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
 
   private TalonFX climberTalon = new TalonFX(RobotMap.climberFalcon);
   private TalonSRX gondolaTalon = new TalonSRX(RobotMap.gondolaTalon);
+
+  private DoubleSolenoid climberBrake = new DoubleSolenoid(RobotMap.climberBrakeSolenoidForward, RobotMap.climberBrakeSolenoidReverse);
 
   public Climber(){
     climberTalon.enableVoltageCompensation(true);
@@ -40,6 +43,14 @@ public class Climber extends SubsystemBase {
 
   public void setGondola(double value){
     gondolaTalon.set(ControlMode.PercentOutput, value);
+  }
+
+  public void climberBrakeExtend(){
+    climberBrake.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void climberBrakeRetract(){
+    climberBrake.set(DoubleSolenoid.Value.kReverse);
   }
 
   public void enableBrakeModeClimber(){

@@ -27,6 +27,14 @@ public class ClimberGamepadControl extends CommandBase {
     double gondolaValue = Robot.oi.gamepad.getLeftX();
     Robot.climber.setClimber(climberValue);
     Robot.climber.setGondola(gondolaValue);
+
+    if (Robot.oi.gamepad.start.get()){
+      Robot.climber.climberBrakeExtend();
+    }
+
+    if (Robot.oi.gamepad.back.get()){
+      Robot.climber.climberBrakeRetract();
+    }
   }
 
   @Override
