@@ -39,6 +39,6 @@ public class PowerCellShoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.indexer.getDistanceVert() >= DistanceConstants.DEFUALT_VERT_DISTANCE;
+    return Robot.indexer.getDistanceVertical() >= DistanceConstants.DEFUALT_VERT_DISTANCE;
   }
 }

@@ -24,12 +24,12 @@ public class PowerCellForward extends CommandBase {
 
   @Override
   public void initialize() {
-    currentDistance = Robot.indexer.getDistanceHorz();
+    currentDistance = Robot.indexer.getDistanceHorizontal();
   }
 
   @Override
   public void execute() {
-    if(Robot.indexer.getDistanceHorz()< currentDistance + DIST_ONE_BALL){
+    if(Robot.indexer.getDistanceHorizontal()< currentDistance + DIST_ONE_BALL){
       Robot.indexer.set(1);
     }
     else{

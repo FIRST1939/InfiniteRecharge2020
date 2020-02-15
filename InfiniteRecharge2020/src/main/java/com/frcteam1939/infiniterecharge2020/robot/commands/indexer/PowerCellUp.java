@@ -24,13 +24,13 @@ public class PowerCellUp extends CommandBase {
 
   @Override
   public void initialize() {
-    currentDistance = Robot.indexer.getDistanceVert();
+    currentDistance = Robot.indexer.getDistanceVertical();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.indexer.getDistanceVert()< currentDistance + DIST_ONE_BALL){
+    if(Robot.indexer.getDistanceVertical()< currentDistance + DIST_ONE_BALL){
       Robot.indexer.set(1);
     }
     else{
