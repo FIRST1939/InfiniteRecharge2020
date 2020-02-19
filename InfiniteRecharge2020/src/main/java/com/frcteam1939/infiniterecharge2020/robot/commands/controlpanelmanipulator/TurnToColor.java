@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TurnToColor extends Command {
 
   String desiredColor;
+  boolean isColorRed;
+  boolean done;
 
   public TurnToColor() {
     requires(Robot.controlPanelManipulator);
@@ -21,17 +23,43 @@ public class TurnToColor extends Command {
 
   @Override
   protected void initialize() {
+    while (Robot.controlPanelManipulator.getColor() != "Red"){
+      Robot.controlPanelManipulator.set(0.3);
+    }
+    isColorRed = true;
   }
 
   @Override
   protected void execute() {
-    //desiredColor = new ControlPanelManipulator.colorFromFMS(); // Input from FMS
-    Robot.controlPanelManipulator.set(0.3);
-  }
+    desiredColor = Robot.controlPanelManipulator.colorFromFMS(); // Input from FMS
+    Robot.controlPanelManipulator.resetEncoder();
+    if (isColorRed){
+      if (desiredColor == "Blue"){
+        while (Robot.controlPanelManipulator.getRotations() < 0.21){
+          Robot.controlPanelManipulator.set(0.2);
+          }
+          done = true;
+        }
+
+      if (desiredColor == "Yellow"){
+        while (Robot.controlPanelManipulator.getRotations() < 0.09){
+          Robot.controlPanelManipulator.set(0.2);
+        }
+        done = true;
+      }
+
+      if (desiredColor == "Green"){
+        while (Robot.controlPanelManipulator.getRotations() < 0.35){
+          Robot.controlPanelManipulator.set(0.2);
+        }
+        done = true;
+      }
+      }  
+    }
 
   @Override
   protected boolean isFinished() {
-    return Robot.controlPanelManipulator.colorIsAligned(desiredColor);
+    return done;
   }
 
   @Override

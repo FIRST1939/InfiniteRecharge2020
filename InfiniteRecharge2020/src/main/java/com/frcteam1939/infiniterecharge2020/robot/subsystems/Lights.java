@@ -7,13 +7,14 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
  */
 public class Lights extends Subsystem {
-  
+  private DigitalOutput lights1 = new DigitalOutput(Robotmap.)
 
   @Override
   public void initDefaultCommand() {

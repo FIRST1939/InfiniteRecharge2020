@@ -35,6 +35,29 @@ public class ControlPanelManipulator extends Subsystem {
 
   private final ColorMatch m_colorMatcher = new ColorMatch();
 
+  /*
+  private double Blue_r = 0.143;
+  private double Blue_g = 0.427;
+  private double Blue_b = 0.429;
+
+  private double Green_r = 0.197;
+  private double Green_g = 0.561;
+  private double Green_b = 0.240;
+
+  private double Red_r = 0.561;
+  private double Red_g = 0.232;
+  private double Red_b = 0.114;
+
+  private double Yellow_r = 0.361;
+  private double Yellow_g = 0.524;
+  private double Yellow_b = 0.113;
+
+  private final Color kBlueTarget = ColorMatch.makeColor(Blue_r, Blue_g, Blue_b);
+  private final Color kGreenTarget = ColorMatch.makeColor(Green_r, Green_g, Green_b);
+  private final Color kRedTarget = ColorMatch.makeColor(Red_r, Red_g, Red_b);
+  private final Color kYellowTarget = ColorMatch.makeColor(Yellow_r, Yellow_g, Yellow_b);
+  */
+
   private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
@@ -72,6 +95,10 @@ public class ControlPanelManipulator extends Subsystem {
     return encoder.getPositionOffset();
   }
   
+  public void resetEncoder(){
+    encoder.reset();
+  }
+
   public void enableBrakeMode(){
     talon.setNeutralMode(NeutralMode.Brake);
   }
@@ -136,4 +163,9 @@ public class ControlPanelManipulator extends Subsystem {
       return "Unknown";
     }
   }
+
+  public void calibrateColorValues(){
+    
+  }
+
 }
