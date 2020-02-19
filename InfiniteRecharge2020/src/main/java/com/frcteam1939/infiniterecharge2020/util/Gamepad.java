@@ -7,7 +7,7 @@
 
 package com.frcteam1939.infiniterecharge2020.util;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class Gamepad extends Joystick {
 

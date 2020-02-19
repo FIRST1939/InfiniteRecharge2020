@@ -6,22 +6,55 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
 
-public class Climber extends Subsystem {
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-  private TalonSRX climberTalon = new TalonSRX(RobotMap.climberFalcon);
+public class Climber extends SubsystemBase {
+
+  private TalonFX climberTalon = new TalonFX(RobotMap.climberFalcon);
   private TalonSRX gondolaTalon = new TalonSRX(RobotMap.gondolaTalon);
 
-  @Override
-  public void initDefaultCommand() {
+  private DoubleSolenoid climberBrake = new DoubleSolenoid(RobotMap.climberBrakeSolenoidForward, RobotMap.climberBrakeSolenoidReverse);
 
+  public Climber(){
+    climberTalon.enableVoltageCompensation(true);
+    climberTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    climberTalon.setInverted(true);
+    gondolaTalon.enableVoltageCompensation(true);
   }
 
-  //Brake Mode
+  @Override
+  public void periodic() {
+  }
+
+  // Positive is up
+  public void setClimber(double value){
+    climberTalon.set(ControlMode.PercentOutput, value);
+  }
+
+  // Positive is left
+  public void setGondola(double value){
+    gondolaTalon.set(ControlMode.PercentOutput, value);
+  }
+
+  public void climberBrakeExtend(){
+    climberBrake.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void climberBrakeRetract(){
+    climberBrake.set(DoubleSolenoid.Value.kReverse);
+  }
+
   public void enableBrakeModeClimber(){
     climberTalon.setNeutralMode(NeutralMode.Brake);
   }

@@ -10,37 +10,48 @@ package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
 
-public class Shooter extends Subsystem {
+public class Shooter extends SubsystemBase {
   
-  private TalonFX shooterTalon1 = new TalonFX(0);
-  private TalonFX shooterTalon2 = new TalonFX(0);
+  private TalonFX shooterTalon1 = new TalonFX(RobotMap.shooterFalcon1);
+  private TalonFX shooterTalon2 = new TalonFX(RobotMap.shooterFalcon2);
 
-  private DoubleSolenoid solenoid1 = new DoubleSolenoid(2, 3);
-  private DoubleSolenoid solenoid2 = new DoubleSolenoid(4, 5);
+  private Solenoid bigSolenoid = new Solenoid(RobotMap.shooterHoodBigSolenoid);
+  private Solenoid smallSolenoid = new Solenoid(RobotMap.shooterHoodSmallSolenoid);
   
   public Shooter(){
+    shooterTalon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    shooterTalon2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    shooterTalon1.enableVoltageCompensation(true);
+    shooterTalon2.enableVoltageCompensation(true);
+
+    shooterTalon1.setInverted(true);
+    shooterTalon2.setInverted(true);
+
     shooterTalon2.follow(shooterTalon1);
     disableBrakeMode();
   }
 
   @Override
-  public void initDefaultCommand() {
-    setDefaultCommand(new ShooterGamepadControl());
+  public void periodic() {
   }
 
+  // Positive is out
   public void set(double value){
     shooterTalon1.set(ControlMode.PercentOutput, value);
   }
 
   public double getSpeed(){
-    return shooterTalon1.getSelectedSensorVelocity();
+    double speed1 = shooterTalon1.getSelectedSensorVelocity();
+    double speed2 = shooterTalon2.getSelectedSensorVelocity();
+    return (speed1 + speed2) / 2;
   }
 
   public double getTemperature(){
@@ -52,23 +63,23 @@ public class Shooter extends Subsystem {
   }
 
   public void hoodUp(){
-    solenoid1.set(DoubleSolenoid.Value.kForward);
-    solenoid2.set(DoubleSolenoid.Value.kForward);
+    bigSolenoid.set(true);
+    smallSolenoid.set(true);
   }
 
   public void hoodDown(){
-    solenoid1.set(DoubleSolenoid.Value.kReverse);
-    solenoid2.set(DoubleSolenoid.Value.kForward);
+    bigSolenoid.set(false);
+    smallSolenoid.set(false);
   }
 
   public void hoodMiddleLow(){
-    solenoid1.set(DoubleSolenoid.Value.kForward);
-    solenoid2.set(DoubleSolenoid.Value.kReverse);
+    bigSolenoid.set(false);
+    smallSolenoid.set(true);
   }
 
   public void hoodMiddleHigh(){
-    solenoid1.set(DoubleSolenoid.Value.kReverse);
-    solenoid2.set(DoubleSolenoid.Value.kReverse);
+    bigSolenoid.set(true);
+    smallSolenoid.set(false);
   }
     
   public void enableBrakeMode(){

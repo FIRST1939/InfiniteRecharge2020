@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
+
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
@@ -17,18 +18,13 @@ import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
-
-public class ControlPanelManipulator extends Subsystem {
+public class ControlPanelManipulator extends SubsystemBase {
 
   private TalonSRX talon = new TalonSRX(RobotMap.controlPanelTalon);
-  private DutyCycleEncoder encoder = new DutyCycleEncoder(RobotMap.controlPanelEncoder);
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
@@ -63,36 +59,28 @@ public class ControlPanelManipulator extends Subsystem {
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  double spinP = 0;
-  double spinI = 0;
-  double spinD = 0;
-  
   String gameData;
 
-  PIDController spinPID = new PIDController(spinP, spinI, spinD);
-
   public ControlPanelManipulator(){
-    //spinPID.enableContinuousInput(minimumInput, maximumInput);
+    talon.enableVoltageCompensation(true);
+    // talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute); // Need to check
   }
 
   @Override
-  public void initDefaultCommand() {
+  public void periodic() {
   }
 
+  // Positive is clockwise
   public void set(double value){
     talon.set(ControlMode.PercentOutput, value);
   }
 
+  public void stop(){
+    set(0);
+  }
+
   public double getRotations(){
-    return encoder.get();
-  }
-
-  public double getDistance(){
-    return encoder.getDistance();
-  }
-
-  public double getOffset(){
-    return encoder.getPositionOffset();
+    return talon.getSelectedSensorPosition();
   }
   
   public void resetEncoder(){
@@ -108,7 +96,7 @@ public class ControlPanelManipulator extends Subsystem {
   }
 
   public String getColor(){
-
+    
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
@@ -131,15 +119,14 @@ public class ControlPanelManipulator extends Subsystem {
     } else {
       colorString = "Unknown";
     }
-
     return colorString;
-  }
+    }
 
   public boolean colorIsAligned(String color){
     if (Robot.controlPanelManipulator.getColor() == color){
       return true;
     }
-    else{
+    else {
       return false;
     }
   }

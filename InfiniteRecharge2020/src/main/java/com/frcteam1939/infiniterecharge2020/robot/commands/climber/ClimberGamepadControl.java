@@ -5,37 +5,44 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerCellForward extends CommandBase {
+public class ClimberGamepadControl extends CommandBase {
 
-  public PowerCellForward() {
-    addRequirements(Robot.indexer);
+  public ClimberGamepadControl() {
+    addRequirements(Robot.climber);
   }
 
   @Override
   public void initialize() {
-
   }
 
   @Override
   public void execute() {
-      Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
+    // double climberValue = Robot.oi.gamepad.getLeftY();
+    // double gondolaValue = Robot.oi.gamepad.getLeftX();
+    // Robot.climber.setClimber(climberValue);
+    // Robot.climber.setGondola(gondolaValue);
+
+    /*if (Robot.oi.gamepad.start.get()){
+      Robot.climber.climberBrakeExtend();
+    }
+
+    if (Robot.oi.gamepad.back.get()){
+      Robot.climber.climberBrakeRetract();
+    }*/
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getDistanceBottom() == Robot.indexer.DIST_ONE_BALL);
+    return false;
   }
 }

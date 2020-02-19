@@ -5,37 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
-
-import com.frcteam1939.infiniterecharge2020.robot.Robot;
+package com.frcteam1939.infiniterecharge2020.util;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerCellForward extends CommandBase {
+public class DoNothing extends CommandBase {
 
-  public PowerCellForward() {
-    addRequirements(Robot.indexer);
+  public DoNothing() {
   }
 
   @Override
   public void initialize() {
-
   }
 
   @Override
   public void execute() {
-      Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getDistanceBottom() == Robot.indexer.DIST_ONE_BALL);
+    return true;
   }
 }

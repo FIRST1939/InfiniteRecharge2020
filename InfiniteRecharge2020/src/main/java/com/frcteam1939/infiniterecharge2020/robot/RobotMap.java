@@ -7,46 +7,41 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frcteam1939.infiniterecharge2020.robot;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.I2C;
 
 public class RobotMap {
   
   // Talons/Victors
-    public static final int intakeTalon = 0;
-    public static final int indexTalon1 = 0;
-    public static final int indexTalon2 = 0;
-    public static final int leftBackFalcon = 0;
-    public static final int leftFrontFalcon = 0;
-    public static final int rightBackFalcon = 0;
-    public static final int rightFrontFalcon = 0;
-    public static final int turretTalon = 0;
-    public static final int shooterFalcon1 = 0;
-    public static final int shooterFalcon2 = 0;
-    public static final int controlPanelTalon = 0;
-    public static final int climberFalcon = 0;
-    public static final int gondolaTalon = 0;
+    public static final int intakeTalon = 19;
+    public static final int indexerVerticalTalon = 17;
+    public static final int indexerHorizontalTalon = 20;
+    public static final int leftBackFalcon = 41;
+    public static final int leftFrontFalcon = 44;
+    public static final int rightBackFalcon = 42;
+    public static final int rightFrontFalcon = 43;
+    public static final int turretTalon = 39;
+    public static final int shooterFalcon1 = 37;
+    public static final int shooterFalcon2 = 36;
+    public static final int controlPanelTalon = 38;
+    public static final int climberFalcon = 40;
+    public static final int gondolaTalon = 28;
 
-  //Solenoids
+  // Solenoids
     public static final int PCM = 0;
-    public static final int intakeSolenoid1 = 0;
-    public static final int intakeSolenoid2= 0;
-    public static final int drivetrainSolenoid = 0;
-    public static final int shooterSolenoid1 = 0;
-    public static final int shooterSolenoid2 = 0;
+    public static final int intakeSolenoid = 6;
+    public static final int climberBrakeSolenoidForward = 4;
+    public static final int climberBrakeSolenoidReverse = 5;
+    public static final int shooterHoodBigSolenoid = 0;
+    public static final int shooterHoodSmallSolenoid = 1;
 
-  // Analog Input
-    public static final int indexDistanceSensor1 = 0;
-    public static final int indexDistanceSensor2 = 0;
-    public static final int turretEncoder = 0;
-    public static final int climberEncoder = 0;
-    public static final int controlPanelEncoder = 0;
+  // Distance Sensors
+    public static final int indexerBottomDistanceSensor = 0;
+    public static final int indexerTopDistanceSensor = 1;
 
   // Digital Input
-    public static final int turretHallEffect = 0;
-
-  // Other
-    public static final SPI.Port navX = SPI.Port.kMXP;
-    public static final I2C.Port colorSensor = I2C.Port.kOnboard;
-
+    public static final int turretClimberHallEffect = 1;
+    public static final int turretClockwiseStopHallEffect = 8;
+    public static final int turretCounterclockwiseStopHallEffect = 9;
+    public static final int indexerBannerSensor = 5;
+    public static final int turretThroughBoreEncoder = 6;
+    public static final int indexerVerticalThroughBoreEncoder = 7;
 }

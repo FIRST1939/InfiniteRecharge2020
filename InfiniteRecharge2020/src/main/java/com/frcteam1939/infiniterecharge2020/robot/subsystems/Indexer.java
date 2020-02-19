@@ -1,6 +1,3 @@
-
-
-
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -14,62 +11,93 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
 import com.playingwithfusion.TimeOfFlight;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Indexer extends SubsystemBase {
   
-  private TalonSRX talonHorz = new TalonSRX(RobotMap.indexTalon1);
-  private TalonSRX talonVert = new TalonSRX(RobotMap.indexTalon2);
+  private TalonSRX talonHorizontal = new TalonSRX(RobotMap.indexerHorizontalTalon);
+  private TalonSRX talonVertical = new TalonSRX(RobotMap.indexerVerticalTalon);
 
-  private TimeOfFlight distanceSensorHorz = new TimeOfFlight(RobotMap.indexDistanceSensor1);
-  private TimeOfFlight distanceSensorVert = new TimeOfFlight(RobotMap.indexDistanceSensor2);
-  
-  /**
-   * Creates a new Indexer.
-   */
+  private DutyCycleEncoder encoder = new DutyCycleEncoder(RobotMap.indexerVerticalThroughBoreEncoder);
+  // Banner sensor, through bore encoder
+
+  private TimeOfFlight distanceSensorTop = new TimeOfFlight(RobotMap.indexerTopDistanceSensor);
+  private TimeOfFlight distanceSensorBottom = new TimeOfFlight(RobotMap.indexerBottomDistanceSensor);
+  public DigitalInput banner = new DigitalInput(RobotMap.indexerBannerSensor);
+
+  int numBalls;
+
+  public final double INDEXER_SHOOT_SPEED = 1.0;
+  public final double INDEXER_HORIONTAL_SPEED = 0.8;
+  public final double INDEXER_VERTICAL_SPEED = 0.5;
+
+  public final double DIST_ONE_BALL = .1;
+  public final double DIST_DEFAULT = .1;
+  public final double DIST_THIRD_BALL = .1;
+
   public Indexer() {
-
+    talonHorizontal.enableVoltageCompensation(true);
+    talonVertical.enableVoltageCompensation(true);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 
   public void set(double value){
-    talonVert.set(ControlMode.PercentOutput,value);
-    talonHorz.set(ControlMode.PercentOutput,value);
+    talonVertical.set(ControlMode.PercentOutput,value);
+    talonHorizontal.set(ControlMode.PercentOutput,value);
   }
   public void stop(){
-    talonVert.set(ControlMode.PercentOutput,0);
-    talonHorz.set(ControlMode.PercentOutput,0);
+    talonVertical.set(ControlMode.PercentOutput,0);
+    talonHorizontal.set(ControlMode.PercentOutput,0);
   }
 
-  public void setHorz(double value){
-    talonHorz.set(ControlMode.PercentOutput,value);
+  // Positive is in
+  public void setHorizontal(double value){
+    talonHorizontal.set(ControlMode.PercentOutput,value);
   }
 
-  public void setVert(double value){
-    talonVert.set(ControlMode.PercentOutput,value);
+  // Positive is up
+  public void setVertical(double value){
+    talonVertical.set(ControlMode.PercentOutput,value);
   }
 
   public void enableBrakeMode(){
-    talonVert.setNeutralMode(NeutralMode.Brake);
-    talonHorz.setNeutralMode(NeutralMode.Brake);
+    talonVertical.setNeutralMode(NeutralMode.Brake);
+    talonHorizontal.setNeutralMode(NeutralMode.Brake);
   }
 
   public void disableBrakeMode(){
-    talonVert.setNeutralMode(NeutralMode.Coast);
-    talonHorz.setNeutralMode(NeutralMode.Coast);
+    talonVertical.setNeutralMode(NeutralMode.Coast);
+    talonHorizontal.setNeutralMode(NeutralMode.Coast);
   }
 
-  public double getDistanceVert(){
-    return distanceSensorVert.getRange();
+  public double getDistanceTop(){
+    return distanceSensorTop.getRange();
   }
 
-  public double getDistanceHorz(){
-    return distanceSensorHorz.getRange();
+  public double getDistanceBottom(){
+    return distanceSensorBottom.getRange();
+  }
+
+  public boolean getBanner(){
+    return !banner.get();
+  }
+
+  public void addOneBall(){
+    numBalls++;
+  }
+  public int getBalls(){
+    return numBalls;
+  }
+
+  public double getPosition(){
+    return encoder.getDistance();
   }
 }

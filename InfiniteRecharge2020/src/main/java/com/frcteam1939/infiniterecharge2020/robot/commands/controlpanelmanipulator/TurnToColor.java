@@ -10,15 +10,16 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipula
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class TurnToColor extends Command {
+public class TurnToColor extends CommandBase {
 
   String desiredColor;
   boolean isColorRed;
   boolean done;
 
   public TurnToColor() {
-    requires(Robot.controlPanelManipulator);
+    // addRequirements(Robot.controlPanelManipulator);
   }
 
   @Override
@@ -60,15 +61,5 @@ public class TurnToColor extends Command {
   @Override
   protected boolean isFinished() {
     return done;
-  }
-
-  @Override
-  protected void end() {
-    Robot.controlPanelManipulator.set(0);
-  }
-
-  @Override
-  protected void interrupted() {
-    Robot.controlPanelManipulator.set(0);
   }
 }

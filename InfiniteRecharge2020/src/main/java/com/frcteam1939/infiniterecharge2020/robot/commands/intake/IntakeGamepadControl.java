@@ -5,37 +5,45 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerCellForward extends CommandBase {
+public class IntakeGamepadControl extends CommandBase {
 
-  public PowerCellForward() {
-    addRequirements(Robot.indexer);
+  public IntakeGamepadControl() {
+    addRequirements(Robot.intake);
   }
 
   @Override
   public void initialize() {
-
   }
 
   @Override
   public void execute() {
-      Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
+    if (Robot.oi.gamepad.leftTrigger.get()){
+      Robot.intake.setRoller(0.8);
+    }
+    else {
+      Robot.intake.setRoller(0);
+    }
+    if (Robot.oi.gamepad.start.get()){
+      Robot.intake.extendIntake();
+    }
+
+    if (Robot.oi.gamepad.back.get()){
+      Robot.intake.retractIntake();
+    }
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getDistanceBottom() == Robot.indexer.DIST_ONE_BALL);
+    return false;
   }
 }

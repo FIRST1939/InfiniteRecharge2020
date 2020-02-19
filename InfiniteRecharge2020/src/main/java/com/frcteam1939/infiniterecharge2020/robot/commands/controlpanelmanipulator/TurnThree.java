@@ -9,34 +9,30 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipula
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class TurnThree extends Command {
+public class TurnThree extends CommandBase {
   
   public TurnThree() {
-    requires(Robot.controlPanelManipulator);
+    addRequirements(Robot.controlPanelManipulator);
   }
 
   @Override
-  protected void initialize() {
+  public void initialize() {
   }
 
   @Override
-  protected void execute() {
-    Robot.controlPanelManipulator.set(.5);
+  public void execute() {
+    Robot.controlPanelManipulator.set(0.5);
   }
 
   @Override
-  protected boolean isFinished() {
+  public void end(boolean interrupted) {
+    Robot.controlPanelManipulator.stop();
+  }
+
+  @Override
+  public boolean isFinished() {
     return (Robot.controlPanelManipulator.getRotations() == 3.5);
-  }
-
-  @Override
-  protected void end() {
-    Robot.controlPanelManipulator.set(0);
-  }
-
-  @Override
-  protected void interrupted() {
   }
 }

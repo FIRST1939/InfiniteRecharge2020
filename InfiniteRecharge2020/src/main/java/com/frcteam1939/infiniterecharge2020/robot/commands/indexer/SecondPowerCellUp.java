@@ -11,31 +11,28 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerCellForward extends CommandBase {
+public class SecondPowerCellUp extends CommandBase {
 
-  public PowerCellForward() {
+  public SecondPowerCellUp() {
     addRequirements(Robot.indexer);
   }
 
   @Override
   public void initialize() {
-
   }
 
   @Override
   public void execute() {
-      Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
+    Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getDistanceBottom() == Robot.indexer.DIST_ONE_BALL);
+    return ((Robot.indexer.getDistanceBottom() != Robot.indexer.DIST_ONE_BALL) && (Robot.indexer.getDistanceTop() == Robot.indexer.DIST_ONE_BALL));
   }
 }

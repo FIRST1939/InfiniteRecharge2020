@@ -7,6 +7,13 @@
 
 package com.frcteam1939.infiniterecharge2020.robot;
 
+import com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain.DriveByJoystick;
+import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Drivetrain;
@@ -18,6 +25,7 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,10 +46,10 @@ public class Robot extends TimedRobot {
   public static Turret turret;
   public static OI oi;
 
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  // private static final String kDefaultAuto = "Default";
+  // private static final String kCustomAuto = "My Auto";
+  // private String m_autoSelected;
+  // private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   static {
 		try {
@@ -60,10 +68,9 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
-    //test
+    // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    // m_chooser.addOption("My Auto", kCustomAuto);
+    // SmartDashboard.putData("Auto choices", m_chooser);
   }
 
   /**
@@ -76,7 +83,23 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator, new ControlPanelManipulatorGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new ShooterGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.drivetrain, new DriveByJoystick());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.indexer, new IndexerGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.climber, new ClimberGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.intake, new IntakeGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.turret, new TurretGamepadControl());
+
+    CommandScheduler.getInstance().run();
+
+    SmartDashboard.putNumber("Indexer Encoder", Robot.indexer.getPosition());
+    SmartDashboard.putNumber("Turret Encoder", Robot.turret.getPosition());
+    SmartDashboard.putString("Color", Robot.controlPanelManipulator.getColor());
+    SmartDashboard.putBoolean("Hall Effect - Clockwise", Robot.turret.isAtClockwiseLimit());
+    SmartDashboard.putBoolean("Hall Effect - Counter Clockwise", Robot.turret.isAtCounterClockwiseLimit());
   }
+
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -91,9 +114,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
+    Robot.climber.enableBrakeModeClimber();
+    Robot.climber.enableBrakeModeGondola();
+    Robot.controlPanelManipulator.enableBrakeMode();
+    Robot.drivetrain.enableBrakeMode();
+    Robot.indexer.enableBrakeMode();
+    Robot.turret.enableBrakeMode();
+    // m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    // System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /**
@@ -101,7 +130,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
+    /*switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
         break;
@@ -109,7 +138,18 @@ public class Robot extends TimedRobot {
       default:
         // Put default auto code here
         break;
-    }
+    }*/
+  }
+
+  @Override
+  public void teleopInit() {
+    Robot.climber.enableBrakeModeClimber();
+    Robot.climber.enableBrakeModeGondola();
+    Robot.controlPanelManipulator.enableBrakeMode();
+    Robot.drivetrain.enableBrakeMode();
+    Robot.indexer.enableBrakeMode();
+    Robot.turret.enableBrakeMode();
+
   }
 
   /**
@@ -119,11 +159,20 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
   }
 
+  @Override
+  public void disabledInit() {
+    Robot.climber.disableBrakeModeClimber();
+    Robot.climber.disableBrakeModeGondola();
+    Robot.controlPanelManipulator.disableBrakeMode();
+    Robot.drivetrain.disableBrakeMode();
+    Robot.indexer.disableBrakeMode();
+    Robot.turret.disableBrakeMode();
+  }
+
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
   }
-
 }
