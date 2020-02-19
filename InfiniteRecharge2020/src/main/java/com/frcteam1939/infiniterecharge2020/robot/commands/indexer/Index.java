@@ -7,16 +7,43 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+import com.frcteam1939.infiniterecharge2020.util.DoNothing;
+
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Index extends ParallelCommandGroup {
- 
+public class Index extends SequentialCommandGroup {
+
   public Index() {
-    super(new PowerCellForward(), new PowerCellUp());
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());super();
+    if (Robot.indexer.getBalls() == 0){
+      addCommands(new PowerCellForward());
+      addCommands(new SetIndexer(0));
+      addCommands(new PowerCellUp());
+      Robot.indexer.addOneBall();
+    }
+
+    else if (Robot.indexer.getBalls() == 1){
+      addCommands(new PowerCellForward());
+      addCommands(new SetIndexer(0));
+      addCommands(new SecondPowerCellUp());
+      Robot.indexer.addOneBall();
+    }
+
+    else if (Robot.indexer.getBalls() == 2){
+      addCommands(new PowerCellForward());
+      addCommands(new SetIndexer(0));
+      addCommands(new ThirdPowerCellUp());
+      Robot.indexer.addOneBall();
+    }
+
+    else if (Robot.indexer.getBalls() == 3){
+      addCommands(new RunIndexerUntilBanner());
+      Robot.indexer.addOneBall();
+    }
   }
 }

@@ -23,6 +23,7 @@ public class Intake extends SubsystemBase {
 
   public Intake(){
     talon.enableVoltageCompensation(true);
+    talon.setInverted(true);
     disableBrakeMode();
   }
 
@@ -38,7 +39,7 @@ public class Intake extends SubsystemBase {
     solenoid.set(false);
   }
 
-  // Negative is in
+  // Positive is in
   public void setRoller(double value){
     talon.set(ControlMode.PercentOutput, value);
   }

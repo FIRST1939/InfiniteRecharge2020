@@ -29,6 +29,7 @@ public class Climber extends SubsystemBase {
   public Climber(){
     climberTalon.enableVoltageCompensation(true);
     climberTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    climberTalon.setInverted(true);
     gondolaTalon.enableVoltageCompensation(true);
   }
 
@@ -36,6 +37,7 @@ public class Climber extends SubsystemBase {
   public void periodic() {
   }
 
+  // Positive is up
   public void setClimber(double value){
     climberTalon.set(ControlMode.PercentOutput, value);
   }

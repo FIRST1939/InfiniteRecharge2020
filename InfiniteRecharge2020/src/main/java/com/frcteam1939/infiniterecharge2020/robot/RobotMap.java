@@ -27,20 +27,21 @@ public class RobotMap {
 
   // Solenoids
     public static final int PCM = 0;
-    public static final int intakeSolenoid = 7;
-    public static final int parkingBrakeSolenoid = 6;
+    public static final int intakeSolenoid = 6;
     public static final int climberBrakeSolenoidForward = 4;
     public static final int climberBrakeSolenoidReverse = 5;
     public static final int shooterHoodBigSolenoid = 0;
     public static final int shooterHoodSmallSolenoid = 1;
 
-  // Analog Input
-    public static final int indexerVerticalDistanceSensor = 0;
-    public static final int indexerHorizontalDistanceSensor = 0;
-    public static final int turretThroughBoreEncoder = 0;
-    public static final int indexerVerticalThroughBoreEncoder = 0;
+  // Distance Sensors
+    public static final int indexerBottomDistanceSensor = 0;
+    public static final int indexerTopDistanceSensor = 1;
 
   // Digital Input
-    public static final int turretHallEffect = 0;
-    public static final int indexerBannerSensor = 0;
+    public static final int turretClimberHallEffect = 1;
+    public static final int turretClockwiseStopHallEffect = 8;
+    public static final int turretCounterclockwiseStopHallEffect = 9;
+    public static final int indexerBannerSensor = 5;
+    public static final int turretThroughBoreEncoder = 6;
+    public static final int indexerVerticalThroughBoreEncoder = 7;
 }

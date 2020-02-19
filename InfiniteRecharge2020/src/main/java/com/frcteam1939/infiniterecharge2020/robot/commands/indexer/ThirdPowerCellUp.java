@@ -8,19 +8,15 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.util.DistanceConstants;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerCellShoot extends CommandBase {
+public class ThirdPowerCellUp extends CommandBase {
 
-  private final double FIRE_SPEED = 1;
-  
-  public PowerCellShoot() {
+  public ThirdPowerCellUp() {
     addRequirements(Robot.indexer);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -28,17 +24,18 @@ public class PowerCellShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.indexer.set(FIRE_SPEED);
+    Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.indexer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.indexer.getDistanceVertical() >= DistanceConstants.DEFUALT_VERT_DISTANCE;
+    return Robot.indexer.getPosition() == Robot.indexer.DIST_THIRD_BALL;
   }
 }

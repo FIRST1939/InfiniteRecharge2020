@@ -8,6 +8,7 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
+import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -27,6 +28,8 @@ public class IndexerGamepadControl extends CommandBase {
     double horizontalValue = Robot.oi.gamepad.getRightX();
     Robot.indexer.setVertical(verticalValue);
     Robot.indexer.setHorizontal(horizontalValue);
+
+    Robot.oi.gamepad.a.whenPressed(new Index());
   }
 
   @Override

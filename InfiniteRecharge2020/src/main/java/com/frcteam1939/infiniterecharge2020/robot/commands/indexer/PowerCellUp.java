@@ -13,40 +13,29 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class PowerCellUp extends CommandBase {
 
-  private final double DIST_ONE_BALL = .1;
-
-  private boolean end = false;
-  private double currentDistance;
-
   public PowerCellUp() {
     addRequirements(Robot.indexer);
   }
 
   @Override
   public void initialize() {
-    currentDistance = Robot.indexer.getDistanceVertical();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.indexer.getDistanceVertical()< currentDistance + DIST_ONE_BALL){
-      Robot.indexer.set(1);
-    }
-    else{
-      Robot.indexer.stop();
-      end = true;
-    }
+    Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.indexer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return end;
+    return Robot.indexer.getDistanceTop() == Robot.indexer.DIST_ONE_BALL;
   }
 }

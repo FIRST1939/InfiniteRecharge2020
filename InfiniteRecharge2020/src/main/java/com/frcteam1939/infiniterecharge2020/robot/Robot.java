@@ -7,7 +7,7 @@
 
 package com.frcteam1939.infiniterecharge2020.robot;
 
-import com.frcteam1939.infiniterecharge2020.robot.commands.DriveByJoystick;
+import com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain.DriveByJoystick;
 import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
@@ -23,7 +23,6 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.Shooter;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -84,15 +83,21 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator,new ControlPanelManipulatorGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter,new ShooterGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.drivetrain,new DriveByJoystick());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.indexer,new IndexerGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.climber,new ClimberGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.intake,new IntakeGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.turret,new TurretGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator, new ControlPanelManipulatorGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new ShooterGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.drivetrain, new DriveByJoystick());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.indexer, new IndexerGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.climber, new ClimberGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.intake, new IntakeGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.turret, new TurretGamepadControl());
 
     CommandScheduler.getInstance().run();
+
+    SmartDashboard.putNumber("Indexer Encoder", Robot.indexer.getPosition());
+    SmartDashboard.putNumber("Turret Encoder", Robot.turret.getPosition());
+    SmartDashboard.putString("Color", Robot.controlPanelManipulator.getColor());
+    SmartDashboard.putBoolean("Hall Effect - Clockwise", Robot.turret.isAtClockwiseLimit());
+    SmartDashboard.putBoolean("Hall Effect - Counter Clockwise", Robot.turret.isAtCounterClockwiseLimit());
   }
 
 
@@ -125,7 +130,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
     /*switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
@@ -153,7 +157,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
   }
 
   @Override

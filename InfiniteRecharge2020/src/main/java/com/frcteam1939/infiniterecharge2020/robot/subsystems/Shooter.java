@@ -31,6 +31,10 @@ public class Shooter extends SubsystemBase {
     shooterTalon2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     shooterTalon1.enableVoltageCompensation(true);
     shooterTalon2.enableVoltageCompensation(true);
+
+    shooterTalon1.setInverted(true);
+    shooterTalon2.setInverted(true);
+
     shooterTalon2.follow(shooterTalon1);
     disableBrakeMode();
   }
@@ -39,7 +43,7 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
   }
 
-  // Negative is out
+  // Positive is out
   public void set(double value){
     shooterTalon1.set(ControlMode.PercentOutput, value);
   }

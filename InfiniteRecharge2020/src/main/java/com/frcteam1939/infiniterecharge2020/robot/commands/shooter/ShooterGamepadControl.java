@@ -10,6 +10,7 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ShooterGamepadControl extends CommandBase {
@@ -26,6 +27,8 @@ public class ShooterGamepadControl extends CommandBase {
   public void execute() {
     double speedShooter = Robot.shooter.getSpeed();
     double temperatureShooter = Robot.shooter.getTemperature();
+
+    SmartDashboard.putNumber("Speed Shooter", speedShooter);
  
     if(Robot.oi.gamepad.x.get()){
       // Robot.shooter.set(.9);
@@ -63,13 +66,13 @@ public class ShooterGamepadControl extends CommandBase {
 // SHORT - 10 FEET
 if (Robot.oi.gamepad.rightButton.get()){
     if (speedShooter < 9000){
-      Robot.shooter.set(-1);
+      Robot.shooter.set(1);
     } 
     else if (speedShooter > 9000 && speedShooter < 11000){
-      Robot.shooter.set(-0.5);
+      Robot.shooter.set(0.5);
     }
     else {
-      Robot.shooter.set(-0.4);
+      Robot.shooter.set(0.4);
     } 
   }
  else {
