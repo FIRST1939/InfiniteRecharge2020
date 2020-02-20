@@ -44,4 +44,10 @@ public class RobotMap {
     public static final int indexerBannerSensor = 5;
     public static final int turretThroughBoreEncoder = 6;
     public static final int indexerVerticalThroughBoreEncoder = 7;
+  
+  //Digital Inputs NavX
+    public static final int ledStrip1 = 0;
+    public static final int ledStrip2 = 1;
+    public static final int ledStrip3 = 2;
+    public static final int ledStrip4 = 4;
 }

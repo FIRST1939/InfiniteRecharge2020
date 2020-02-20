@@ -84,7 +84,7 @@ public class ControlPanelManipulator extends SubsystemBase {
   }
   
   public void resetEncoder(){
-    encoder.reset();
+    //encoder.reset();
   }
 
   public void enableBrakeMode(){
@@ -149,10 +149,6 @@ public class ControlPanelManipulator extends SubsystemBase {
   }   else {
       return "Unknown";
     }
-  }
-
-  public void calibrateColorValues(){
-    
   }
 
 }
