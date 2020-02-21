@@ -10,6 +10,7 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class IndexerGamepadControl extends CommandBase {
@@ -30,6 +31,13 @@ public class IndexerGamepadControl extends CommandBase {
     Robot.indexer.setHorizontal(horizontalValue);
 
     Robot.oi.gamepad.a.whenPressed(new Index());
+    SmartDashboard.putNumber("Top Distance Sensor", Robot.indexer.getDistanceTop());
+    SmartDashboard.putNumber("Bottom Distance Sensor", Robot.indexer.getDistanceBottom());
+    SmartDashboard.putNumber("Indexer Encoder", Robot.indexer.getPosition());
+    SmartDashboard.putNumber("Number of Power Cells", Robot.indexer.getBalls());
+    SmartDashboard.putBoolean("Banner Sensor", Robot.indexer.getBanner());
+
+    SmartDashboard.putNumber("Intake Current", Robot.intake.getCurrent());
   }
 
   @Override

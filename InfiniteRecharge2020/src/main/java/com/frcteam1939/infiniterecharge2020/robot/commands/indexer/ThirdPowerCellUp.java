@@ -12,18 +12,25 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ThirdPowerCellUp extends CommandBase {
-
+  double encoderPos;
+  int excecuteCount;
   public ThirdPowerCellUp() {
     addRequirements(Robot.indexer);
   }
 
   @Override
   public void initialize() {
+    encoderPos = Robot.indexer.getPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(excecuteCount ==0){
+      Robot.indexer.zeroEncoder();
+     // currentPos = Math.abs(Robot.indexer.getPosition());
+      excecuteCount = 1;
+    }
     Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
   }
 
@@ -36,6 +43,7 @@ public class ThirdPowerCellUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.indexer.getPosition() == Robot.indexer.DIST_THIRD_BALL;
+    return (Robot.indexer.getPosition())>.25;
+    //return ((Robot.indexer.getPosition() < encoderPos-.55) || (Robot.indexer.getPosition() < encoderPos-.55));
   }
 }

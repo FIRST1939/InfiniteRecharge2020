@@ -41,7 +41,7 @@ public class RobotMap {
     public static final int turretClimberHallEffect = 1;
     public static final int turretClockwiseStopHallEffect = 8;
     public static final int turretCounterclockwiseStopHallEffect = 9;
-    public static final int indexerBannerSensor = 5;
+    public static final int indexerBannerSensor = 0;
     public static final int turretThroughBoreEncoder = 6;
     public static final int indexerVerticalThroughBoreEncoder = 7;
 }

@@ -38,10 +38,10 @@ public class ShooterGamepadControl extends CommandBase {
      // Robot.shooter.set(.7);
      Robot.shooter.hoodMiddleHigh();;
    }
-   if(Robot.oi.gamepad.a.get()){
+   /*if(Robot.oi.gamepad.a.get()){
      // Robot.shooter.set(.);
      Robot.shooter.hoodUp();
-   }
+   }*/
    if(Robot.oi.gamepad.y.get()){
      // Robot.shooter.set(.90);
      Robot.shooter.hoodMiddleLow();

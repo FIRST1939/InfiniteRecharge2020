@@ -13,6 +13,7 @@ import com.frcteam1939.infiniterecharge2020.util.DoNothing;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,30 +21,41 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class Index extends SequentialCommandGroup {
 
   public Index() {
-    if (Robot.indexer.getBalls() == 0){
+    Robot.indexer.setBalls(0);
+   
+   // if (Robot.indexer.getBalls() == 0){
       addCommands(new PowerCellForward());
       addCommands(new SetIndexer(0));
       addCommands(new PowerCellUp());
-      Robot.indexer.addOneBall();
-    }
+      addCommands(new WaitCommand(1));
+      addCommands(new SetIndexer(0));
 
-    else if (Robot.indexer.getBalls() == 1){
-      addCommands(new PowerCellForward());
+     // Robot.indexer.addOneBall();
+   // }
+  
+     //if (Robot.indexer.getBalls() == 1){
+      addCommands(new SecondPowerCellForward());
       addCommands(new SetIndexer(0));
       addCommands(new SecondPowerCellUp());
-      Robot.indexer.addOneBall();
-    }
+      addCommands(new WaitCommand(1));
 
-    else if (Robot.indexer.getBalls() == 2){
-      addCommands(new PowerCellForward());
-      addCommands(new SetIndexer(0));
+     // Robot.indexer.addOneBall();
+
+  //  }
+  
+
+
+    // if (Robot.indexer.getBalls() == 2){
+      addCommands(new ThirdPowerCellForward());
       addCommands(new ThirdPowerCellUp());
-      Robot.indexer.addOneBall();
-    }
+     // Robot.indexer.addOneBall();
+ //   }
 
-    else if (Robot.indexer.getBalls() == 3){
+/*
+    if (Robot.indexer.getBalls() == 3){
       addCommands(new RunIndexerUntilBanner());
       Robot.indexer.addOneBall();
     }
+    */
   }
 }

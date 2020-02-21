@@ -83,6 +83,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    //System.out.println("Banner: "+ Robot.indexer.getBanner());
     CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator, new ControlPanelManipulatorGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new ShooterGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.drivetrain, new DriveByJoystick());
@@ -93,7 +94,10 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().run();
 
+    //System.out.println("Ball Count"+ Robot.indexer.numBalls);
     SmartDashboard.putNumber("Indexer Encoder", Robot.indexer.getPosition());
+    SmartDashboard.putNumber("Indexer Encoder Offset", Robot.indexer.getPositionChange());
+    SmartDashboard.putNumber("Ball count :", Robot.indexer.getBalls());
     SmartDashboard.putNumber("Turret Encoder", Robot.turret.getPosition());
     SmartDashboard.putString("Color", Robot.controlPanelManipulator.getColor());
     SmartDashboard.putBoolean("Hall Effect - Clockwise", Robot.turret.isAtClockwiseLimit());
