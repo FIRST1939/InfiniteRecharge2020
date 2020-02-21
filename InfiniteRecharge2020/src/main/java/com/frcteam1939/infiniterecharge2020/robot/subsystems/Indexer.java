@@ -39,8 +39,9 @@ public class Indexer extends SubsystemBase {
   public final double DIST_ONE_BALL = 80;// ranges from 30-130
   public final double DIST_DEFAULT_TOP = 200;
   public final double DIST_DEFAULT_BOTTOM = 250;
-
   public final double DIST_THIRD_BALL = .25;//changes from current position by .25 encoder ticks
+
+  public final double BALL_CURRENT = 200;
 
   public Indexer() {
     talonHorizontal.enableVoltageCompensation(true);
@@ -111,5 +112,12 @@ public class Indexer extends SubsystemBase {
   }
   public double getPositionChange(){
     return encoder.getPositionOffset();
+  }
+
+  public double getHorzCurrentDraw(){
+    return talonHorizontal.getStatorCurrent();
+  }
+  public double getVertCurrentDraw(){
+    return talonVertical.getStatorCurrent();
   }
 }

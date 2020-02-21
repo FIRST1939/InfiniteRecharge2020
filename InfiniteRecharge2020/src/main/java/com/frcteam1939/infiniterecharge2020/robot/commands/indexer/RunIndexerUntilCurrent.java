@@ -11,9 +11,9 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunIndexerUntilBanner extends CommandBase {
+public class RunIndexerUntilCurrent extends CommandBase {
 
-  public RunIndexerUntilBanner() {
+  public RunIndexerUntilCurrent() {
     addRequirements(Robot.indexer);
   }
 
@@ -35,6 +35,6 @@ public class RunIndexerUntilBanner extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Robot.indexer.getBanner();
+    return Robot.indexer.getHorzCurrentDraw() > Robot.indexer.BALL_CURRENT;
   }
 }
