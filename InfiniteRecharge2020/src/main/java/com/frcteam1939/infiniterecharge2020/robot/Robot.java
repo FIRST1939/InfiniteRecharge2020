@@ -13,6 +13,7 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulat
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.smartdashboard.SmartDashboardUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
@@ -21,10 +22,10 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.Indexer;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Intake;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Shooter;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.SmartDashboardSubsystem;
+import com.frcteam1939.infiniterecharge2020.util.Limelight;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
@@ -45,6 +46,10 @@ public class Robot extends TimedRobot {
   public static Shooter shooter;
   public static Turret turret;
   public static OI oi;
+  public static SmartDashboardSubsystem smartDashboardSubsystem;
+
+  public static Limelight limelightTurret;
+  public static Limelight limelightBase;
 
   // private static final String kDefaultAuto = "Default";
   // private static final String kCustomAuto = "My Auto";
@@ -61,6 +66,9 @@ public class Robot extends TimedRobot {
       shooter = new Shooter();
       turret = new Turret();
       oi = new OI();
+      smartDashboardSubsystem = new SmartDashboardSubsystem();
+      limelightTurret = new Limelight("limelight-turret");
+      limelightBase = new Limelight("limelight-base");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,6 +76,8 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
+    Robot.climber.zeroEncoder();
+    Robot.climber.climberBrakeRetract();
     // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     // m_chooser.addOption("My Auto", kCustomAuto);
     // SmartDashboard.putData("Auto choices", m_chooser);
@@ -91,17 +101,9 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().setDefaultCommand(Robot.climber, new ClimberGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.intake, new IntakeGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.turret, new TurretGamepadControl());
+    CommandScheduler.getInstance().setDefaultCommand(Robot.smartDashboardSubsystem, new SmartDashboardUpdater().perpetually());
 
     CommandScheduler.getInstance().run();
-
-    //System.out.println("Ball Count"+ Robot.indexer.numBalls);
-    SmartDashboard.putNumber("Indexer Encoder", Robot.indexer.getPosition());
-    SmartDashboard.putNumber("Indexer Encoder Offset", Robot.indexer.getPositionChange());
-    SmartDashboard.putNumber("Ball count :", Robot.indexer.getBalls());
-    SmartDashboard.putNumber("Turret Encoder", Robot.turret.getPosition());
-    SmartDashboard.putString("Color", Robot.controlPanelManipulator.getColor());
-    SmartDashboard.putBoolean("Hall Effect - Clockwise", Robot.turret.isAtClockwiseLimit());
-    SmartDashboard.putBoolean("Hall Effect - Counter Clockwise", Robot.turret.isAtCounterClockwiseLimit());
   }
 
 
@@ -119,7 +121,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     Robot.climber.enableBrakeModeClimber();
-    Robot.climber.enableBrakeModeGondola();
+    //Robot.climber.enableBrakeModeGondola();
     Robot.controlPanelManipulator.enableBrakeMode();
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
@@ -148,12 +150,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     Robot.climber.enableBrakeModeClimber();
-    Robot.climber.enableBrakeModeGondola();
+    //Robot.climber.enableBrakeModeGondola();
     Robot.controlPanelManipulator.enableBrakeMode();
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
-
+    Robot.climber.zeroEncoder();
+    Robot.climber.climberBrakeRetract();
   }
 
   /**
@@ -166,11 +169,12 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     Robot.climber.disableBrakeModeClimber();
-    Robot.climber.disableBrakeModeGondola();
+   // Robot.climber.disableBrakeModeGondola();
     Robot.controlPanelManipulator.disableBrakeMode();
     Robot.drivetrain.disableBrakeMode();
     Robot.indexer.disableBrakeMode();
     Robot.turret.disableBrakeMode();
+    Robot.climber.climberBrakeExtend();
   }
 
   /**

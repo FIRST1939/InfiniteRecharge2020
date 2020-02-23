@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Solenoid;
 
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
 
 public class Shooter extends SubsystemBase {
   

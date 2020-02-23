@@ -25,17 +25,14 @@ public class IntakeGamepadControl extends CommandBase {
   public void execute() {
     if (Robot.oi.gamepad.leftTrigger.get()){
       Robot.intake.setRoller(0.8);
-    }
-    else {
-      Robot.intake.setRoller(0);
-    }
-    if (Robot.oi.gamepad.start.get()){
       Robot.intake.extendIntake();
     }
-
-    if (Robot.oi.gamepad.back.get()){
+    else {
       Robot.intake.retractIntake();
+      Robot.intake.setRoller(0);
     }
+
+    Robot.oi.gamepad.leftTrigger.whenReleased(new SetIntakeForTime(0.5));
   }
 
   @Override

@@ -12,32 +12,49 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Turret extends SubsystemBase {
+  
+  private double P = 0.05;
+  private double I = 0.05;
+  private double D = 0.0005;
 
   private TalonSRX talon = new TalonSRX(RobotMap.turretTalon);
+  
+  public PIDController anglePID = new PIDController(P, I, D);
 
   private DutyCycleEncoder encoder = new DutyCycleEncoder(RobotMap.turretThroughBoreEncoder);
 
   private DigitalInput hallEffectClockwise = new DigitalInput(RobotMap.turretClockwiseStopHallEffect);
   private DigitalInput hallEffectCounterClockwise = new DigitalInput(RobotMap.turretCounterclockwiseStopHallEffect);
+  private DigitalInput hallEffectClimber = new DigitalInput(RobotMap.turretClimberHallEffect);
 
   public Turret(){
     talon.enableVoltageCompensation(true);
+    // anglePID.setTolerance(.5);
   }
 
   @Override
   public void periodic() {
+
   }
 
   // Positive is clockwise
   public void set(double value){
+    if (isAtClockwiseLimit() && value > 0){
+      value = 0;
+    }
+
+    if (isAtCounterClockwiseLimit() && value < 0){
+      value = 0;
+    }
+
     talon.set(ControlMode.PercentOutput, value);
   }
 
@@ -49,15 +66,27 @@ public class Turret extends SubsystemBase {
     talon.setNeutralMode(NeutralMode.Coast);
   }
 
+  public void zeroEncoder(){
+    encoder.reset();
+  }
+
   public double getPosition(){
     return encoder.getDistance();
   }
 
   public boolean isAtClockwiseLimit(){
-    return hallEffectClockwise.get();
+    return !hallEffectClockwise.get();
   }
 
   public boolean isAtCounterClockwiseLimit(){
-    return hallEffectCounterClockwise.get();
+    return !hallEffectCounterClockwise.get();
+  }
+
+  public boolean isAtClimberPosition(){
+    return !hallEffectClimber.get();
+  }
+
+  public double getMotorOutput(){
+    return talon.getMotorOutputPercent();
   }
 }

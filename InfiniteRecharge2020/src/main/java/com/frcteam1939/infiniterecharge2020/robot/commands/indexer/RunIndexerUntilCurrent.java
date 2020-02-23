@@ -25,7 +25,7 @@ public class RunIndexerUntilCurrent extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.indexer.set(Robot.indexer.INDEXER_HORIONTAL_SPEED);
+    Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
   }
 
   @Override

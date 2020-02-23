@@ -5,32 +5,48 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IndexerGamepadControl extends CommandBase {
+public class TurnToTarget extends CommandBase {
 
-  public IndexerGamepadControl() {
-    addRequirements(Robot.indexer);
+  boolean done = false;
+
+  public TurnToTarget() {
+    addRequirements(Robot.turret);
   }
 
   @Override
   public void initialize() {
+    Robot.limelightTurret.setPipeline(0);
+    Robot.turret.anglePID.reset();
+    Robot.turret.anglePID.setSetpoint(0);
   }
 
   @Override
   public void execute() {
-    double verticalValue = -Robot.oi.gamepad.getRightY();
-    double horizontalValue = Robot.oi.gamepad.getRightX();
-    Robot.indexer.setVertical(verticalValue);
-    Robot.indexer.setHorizontal(horizontalValue);
 
-    Robot.oi.gamepad.leftButton.whenPressed(new Index());
+    double output;
+    
+    /*if (Robot.turret.anglePID.atSetpoint()){
+      output = 0;
+      done = true;
+    }
+    else {
+      output = Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
+    }*/
+
+    output = -Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
+
+    SmartDashboard.putNumber("Turret PID Output", output);
+    System.out.println("Turret PID Output: " + output);
+
+    Robot.turret.set(output);
+    
   }
 
   @Override
@@ -39,6 +55,6 @@ public class IndexerGamepadControl extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return done;
   }
 }

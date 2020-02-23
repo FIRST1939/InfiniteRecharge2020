@@ -9,6 +9,7 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClimberGamepadControl extends CommandBase {
@@ -23,18 +24,28 @@ public class ClimberGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
-    // double climberValue = Robot.oi.gamepad.getLeftY();
-    // double gondolaValue = Robot.oi.gamepad.getLeftX();
-    // Robot.climber.setClimber(climberValue);
-    // Robot.climber.setGondola(gondolaValue);
-
-    /*if (Robot.oi.gamepad.start.get()){
+    boolean climberUp = Robot.oi.left.getRawButton(3);
+    boolean climberDown = Robot.oi.left.getRawButton(2);
+    
+    boolean brakeExtend = Robot.oi.left.getRawButton(5);
+  
+    if (climberUp){
+      Robot.climber.setClimber(1);
+      Robot.climber.climberBrakeRetract();
+    }
+  
+    if (climberDown){
+      Robot.climber.setClimber(-1);
+      Robot.climber.climberBrakeRetract();
+    }
+  
+    if (!climberUp && !climberDown){
+      Robot.climber.setClimber(0);
+    }
+  
+    if (brakeExtend){
       Robot.climber.climberBrakeExtend();
     }
-
-    if (Robot.oi.gamepad.back.get()){
-      Robot.climber.climberBrakeRetract();
-    }*/
   }
 
   @Override

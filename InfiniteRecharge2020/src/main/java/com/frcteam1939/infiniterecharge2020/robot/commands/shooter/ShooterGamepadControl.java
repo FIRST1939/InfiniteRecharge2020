@@ -25,10 +25,10 @@ public class ShooterGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
+    
     double speedShooter = Robot.shooter.getSpeed();
     double temperatureShooter = Robot.shooter.getTemperature();
 
-    SmartDashboard.putNumber("Speed Shooter", speedShooter);
  
     if(Robot.oi.gamepad.x.get()){
       // Robot.shooter.set(.9);
@@ -38,10 +38,11 @@ public class ShooterGamepadControl extends CommandBase {
      // Robot.shooter.set(.7);
      Robot.shooter.hoodMiddleHigh();;
    }
-   /*if(Robot.oi.gamepad.a.get()){
+   if(Robot.oi.gamepad.a.get()){
      // Robot.shooter.set(.);
      Robot.shooter.hoodUp();
-   }*/
+   }
+   
    if(Robot.oi.gamepad.y.get()){
      // Robot.shooter.set(.90);
      Robot.shooter.hoodMiddleLow();
@@ -64,6 +65,7 @@ public class ShooterGamepadControl extends CommandBase {
  }*/
 
 // SHORT - 10 FEET
+/*
 if (Robot.oi.gamepad.rightButton.get()){
     if (speedShooter < 9000){
       Robot.shooter.set(1);
@@ -79,7 +81,8 @@ if (Robot.oi.gamepad.rightButton.get()){
     Robot.shooter.set(0);
  }
 
- /* MEDIUM - 20 FEET
+ /// MEDIUM - 20 FEET
+ */
  if (Robot.oi.gamepad.rightButton.get()){
   if (speedShooter < 13500){
     Robot.shooter.set(1);
@@ -89,8 +92,11 @@ if (Robot.oi.gamepad.rightButton.get()){
   }
   else {
     Robot.shooter.set(0.5);
-  }*/ 
-//}
+  }
+}
+else{
+  Robot.shooter.set(0);
+}
 
   }
 

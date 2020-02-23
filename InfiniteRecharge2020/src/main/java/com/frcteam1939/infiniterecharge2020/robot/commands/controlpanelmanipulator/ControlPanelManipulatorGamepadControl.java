@@ -23,12 +23,12 @@ public class ControlPanelManipulatorGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
-    if (Robot.oi.gamepad.rightTrigger.get()){
+    /*if (Robot.oi.gamepad.rightTrigger.get()){
       Robot.controlPanelManipulator.set(0.5);
     }
     else {
       Robot.controlPanelManipulator.stop();
-    }
+    }*/
   }
 
   @Override

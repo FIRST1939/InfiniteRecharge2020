@@ -5,32 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IndexerGamepadControl extends CommandBase {
+public class SetIntake extends CommandBase {
 
-  public IndexerGamepadControl() {
-    addRequirements(Robot.indexer);
+  double value;
+
+  public SetIntake(double value) {
+    this.value = value;
+    addRequirements(Robot.intake);
   }
 
   @Override
   public void initialize() {
+    Robot.intake.setRoller(value);
   }
 
   @Override
   public void execute() {
-    double verticalValue = -Robot.oi.gamepad.getRightY();
-    double horizontalValue = Robot.oi.gamepad.getRightX();
-    Robot.indexer.setVertical(verticalValue);
-    Robot.indexer.setHorizontal(horizontalValue);
-
-    Robot.oi.gamepad.leftButton.whenPressed(new Index());
   }
 
   @Override
@@ -39,6 +35,6 @@ public class IndexerGamepadControl extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
