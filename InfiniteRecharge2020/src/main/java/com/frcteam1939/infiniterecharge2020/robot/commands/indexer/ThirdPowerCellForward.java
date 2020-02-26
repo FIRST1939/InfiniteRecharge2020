@@ -11,43 +11,34 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class SecondPowerCellUp extends CommandBase {
+public class ThirdPowerCellForward extends CommandBase {
   double currentPos;
-  boolean tooFar;
-  int excecuteCount = 0;
-  public SecondPowerCellUp() {
+  public ThirdPowerCellForward() {
     addRequirements(Robot.indexer);
   }
+  
 
   @Override
   public void initialize() {
-   // Robot.indexer.zeroEncoder();
+    currentPos = Robot.indexer.getPosition();
   }
 
   @Override
   public void execute() {
-
-    if(excecuteCount ==0){
-      Robot.indexer.zeroEncoder();
-     // currentPos = Math.abs(Robot.indexer.getPosition());
-      excecuteCount = 1;
-    }
-    Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
-    if((Robot.indexer.getPosition()>currentPos+1.35)||(Robot.indexer.getPosition()<currentPos+1.35)){
-      tooFar = false;
-    }
-
+      Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.stop();
+   // Robot.indexer.setBalls(1);
+
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getPosition())>1;
-    //return (((!((Robot.indexer.getDistanceBottom() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceBottom() > Robot.indexer.DIST_ONE_BALL - 60))) && ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60)))|| Robot.indexer.getPosition()>currentPos+1);
+    return (((Robot.indexer.getDistanceBottom() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceBottom() > Robot.indexer.DIST_ONE_BALL - 60))|| Robot.indexer.getPosition()>currentPos+1.35);
   }
-  
 }

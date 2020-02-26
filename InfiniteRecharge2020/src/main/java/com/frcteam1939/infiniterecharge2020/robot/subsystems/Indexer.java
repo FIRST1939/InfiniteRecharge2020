@@ -28,17 +28,17 @@ public class Indexer extends SubsystemBase {
 
   private TimeOfFlight distanceSensorTop = new TimeOfFlight(RobotMap.indexerTopDistanceSensor);
   private TimeOfFlight distanceSensorBottom = new TimeOfFlight(RobotMap.indexerBottomDistanceSensor);
-  public DigitalInput banner = new DigitalInput(RobotMap.indexerBannerSensor);
-
-  int numBalls;
 
   public final double INDEXER_SHOOT_SPEED = 1.0;
-  public final double INDEXER_HORIONTAL_SPEED = 0.8;
-  public final double INDEXER_VERTICAL_SPEED = 0.5;
+  public final double INDEXER_HORIONTAL_SPEED = 0.7;
+  public final double INDEXER_VERTICAL_SPEED = 0.4;
 
-  public final double DIST_ONE_BALL = .1;
-  public final double DIST_DEFAULT = .1;
-  public final double DIST_THIRD_BALL = .1;
+  public final double DIST_ONE_BALL = 80;// ranges from 30-130
+  public final double DIST_DEFAULT_TOP = 200;
+  public final double DIST_DEFAULT_BOTTOM = 250;
+  public final double DIST_THIRD_BALL = .25;//changes from current position by .25 encoder ticks
+
+  public final double BALL_CURRENT = 40;
 
   public Indexer() {
     talonHorizontal.enableVoltageCompensation(true);
@@ -86,18 +86,21 @@ public class Indexer extends SubsystemBase {
     return distanceSensorBottom.getRange();
   }
 
-  public boolean getBanner(){
-    return !banner.get();
-  }
-
-  public void addOneBall(){
-    numBalls++;
-  }
-  public int getBalls(){
-    return numBalls;
-  }
-
   public double getPosition(){
     return encoder.getDistance();
+  }
+
+  public void zeroEncoder(){
+    encoder.reset();
+  }
+  public double getPositionChange(){
+    return encoder.getPositionOffset();
+  }
+
+  public double getHorzCurrentDraw(){
+    return talonHorizontal.getStatorCurrent();
+  }
+  public double getVertCurrentDraw(){
+    return talonVertical.getStatorCurrent();
   }
 }

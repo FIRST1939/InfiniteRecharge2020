@@ -5,36 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunIndexerUntilBanner extends CommandBase {
-
-  public RunIndexerUntilBanner() {
-    addRequirements(Robot.indexer);
+public class HoodMiddleLow extends CommandBase {
+  /**
+   * Creates a new HoodMiddleLow.
+   */
+  public HoodMiddleLow() {
+    addRequirements(Robot.shooter);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.shooter.hoodMiddleLow();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.indexer.set(Robot.indexer.INDEXER_HORIONTAL_SPEED);
   }
 
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
   }
 
   @Override
   public boolean isFinished() {
-    return Robot.indexer.getBanner();
+    return true;
   }
 }

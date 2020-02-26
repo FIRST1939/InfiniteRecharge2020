@@ -5,39 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerCellForward extends CommandBase {
-
-  public PowerCellForward() {
-    addRequirements(Robot.indexer);
+public class IntakeIn extends CommandBase {
+  /**
+   * Creates a new IntakeIn.
+   */
+  public IntakeIn() {
+    addRequirements(Robot.intake);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    Robot.intake.retractIntake();
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
-   // Robot.indexer.setBalls(1);
-
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return ((Robot.indexer.getDistanceBottom() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceBottom() > Robot.indexer.DIST_ONE_BALL - 60));
+    return true;
   }
 }

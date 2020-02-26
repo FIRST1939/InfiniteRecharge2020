@@ -9,45 +9,57 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class SecondPowerCellUp extends CommandBase {
-  double currentPos;
-  boolean tooFar;
-  int excecuteCount = 0;
-  public SecondPowerCellUp() {
+public class ShootClose extends CommandBase {
+  /**
+   * Creates a new ShootClose.
+   */
+
+  boolean wasWait = false;
+  
+  public ShootClose() {
     addRequirements(Robot.indexer);
+    addRequirements(Robot.intake);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   // Robot.indexer.zeroEncoder();
+    Robot.intake.extendIntake();
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if(excecuteCount ==0){
-      Robot.indexer.zeroEncoder();
-     // currentPos = Math.abs(Robot.indexer.getPosition());
-      excecuteCount = 1;
+    if(!wasWait){
+      Robot.intake.extendIntake();
+      Robot.indexer.set(.5);
+      Timer.delay(.5);
+      Robot.intake.setRoller(.5);
+      wasWait= true;
     }
-    Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
-    if((Robot.indexer.getPosition()>currentPos+1.35)||(Robot.indexer.getPosition()<currentPos+1.35)){
-      tooFar = false;
+    else{
+      Robot.intake.extendIntake();
+      Robot.indexer.set(.5);
+      Robot.intake.setRoller(.5);
     }
-
+    
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.stop();
+    Robot.intake.retractIntake();
+    Robot.intake.setRoller(0);
+    wasWait = false;
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getPosition())>1;
-    //return (((!((Robot.indexer.getDistanceBottom() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceBottom() > Robot.indexer.DIST_ONE_BALL - 60))) && ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60)))|| Robot.indexer.getPosition()>currentPos+1);
+    return false;
   }
-  
 }

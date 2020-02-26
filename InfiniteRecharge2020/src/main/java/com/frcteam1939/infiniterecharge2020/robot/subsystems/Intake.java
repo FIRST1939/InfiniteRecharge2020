@@ -51,4 +51,8 @@ public class Intake extends SubsystemBase {
   public void disableBrakeMode(){
     talon.setNeutralMode(NeutralMode.Coast);
   }
+
+  public double getCurrent(){
+    return talon.getSupplyCurrent();
+  }
 }

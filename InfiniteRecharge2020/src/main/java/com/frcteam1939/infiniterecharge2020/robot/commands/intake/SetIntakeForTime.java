@@ -5,39 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.util.DoNothing;
 
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Index extends SequentialCommandGroup {
+public class SetIntakeForTime extends SequentialCommandGroup {
 
-  public Index() {
-    
-    addCommands(new PowerCellForward());
-    addCommands(new SetIndexer(0));
-    addCommands(new PowerCellUp());
-    addCommands(new WaitCommand(.5));
-    addCommands(new SetIndexer(0));
-
-    addCommands(new SecondPowerCellForward());
-    addCommands(new SetIndexer(0));
-    addCommands(new SecondPowerCellUp());
-    addCommands(new WaitCommand(1));
-
-    addCommands(new ThirdPowerCellForward());
-    addCommands(new ThirdPowerCellUp());
-
-    addCommands(new WaitCommand(.5));
-    addCommands(new RunIndexerUntilDistance());
-
+  public SetIntakeForTime(double time) {
+    addCommands(new SetIntake(0.8));
+    addCommands(new WaitCommand(time));
+    addCommands(new SetIntake(0));
   }
 }

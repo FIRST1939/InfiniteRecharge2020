@@ -5,39 +5,44 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerCellForward extends CommandBase {
+public class TurnToTargetTeleop extends CommandBase {
 
-  public PowerCellForward() {
-    addRequirements(Robot.indexer);
+  int pipeline;
+
+  public TurnToTargetTeleop(int pipeline) {
+    this.pipeline = pipeline;
+    addRequirements(Robot.turret);
   }
 
   @Override
   public void initialize() {
-
+    Robot.limelightTurret.setPipeline(pipeline);
+    Robot.turret.anglePID.reset();
+    Robot.turret.anglePID.setSetpoint(0);
   }
 
   @Override
   public void execute() {
-      Robot.indexer.setHorizontal(Robot.indexer.INDEXER_HORIONTAL_SPEED);
+
+    double output = -Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
+    
+    Robot.turret.set(output);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
-   // Robot.indexer.setBalls(1);
-
+    Robot.turret.set(0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return ((Robot.indexer.getDistanceBottom() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceBottom() > Robot.indexer.DIST_ONE_BALL - 60));
+    return Math.abs(Robot.oi.xboxController.getLeftStickX()) > 0.5 ;
   }
 }

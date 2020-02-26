@@ -12,6 +12,7 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class PowerCellUp extends CommandBase {
+  double currentPos;
 
   public PowerCellUp() {
     addRequirements(Robot.indexer);
@@ -19,6 +20,7 @@ public class PowerCellUp extends CommandBase {
 
   @Override
   public void initialize() {
+   currentPos = Robot.indexer.getPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,11 +33,13 @@ public class PowerCellUp extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.stop();
+    //Robot.indexer.addOneBall();
+
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
-    return Robot.indexer.getDistanceTop() == Robot.indexer.DIST_ONE_BALL;
+  public boolean isFinished() { //< >
+    return (((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60)) || Robot.indexer.getPosition()>currentPos+1.35);
   }
 }

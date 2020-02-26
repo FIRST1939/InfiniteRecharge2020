@@ -5,45 +5,64 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ThirdPowerCellUp extends CommandBase {
-  double encoderPos;
-  int excecuteCount;
-  public ThirdPowerCellUp() {
-    addRequirements(Robot.indexer);
+public class ZeroTurret extends CommandBase {
+  /**
+   * Creates a new ZeroTurret.
+   */
+  boolean done;
+  public ZeroTurret() {
+    addRequirements(Robot.turret);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    encoderPos = Robot.indexer.getPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(excecuteCount ==0){
-      Robot.indexer.zeroEncoder();
-     // currentPos = Math.abs(Robot.indexer.getPosition());
-      excecuteCount = 1;
+    if(!Robot.turret.isAtClockwiseLimit()&& !Robot.turret.isAtClimberPosition() && !Robot.turret.isAtCounterClockwiseLimit()){
+      Robot.turret.setInitial(.5);
+      done = false;
     }
-    Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
+  
+    if(Robot.turret.isAtClockwiseLimit()){
+      if(!Robot.turret.isAtClimberPosition()){
+          Robot.turret.setInitial(-.5);
+      }
+        else{
+          done = true;
+          Robot.turret.zeroEncoder();
+        }
+    }
+
+    if(Robot.turret.isAtCounterClockwiseLimit()){
+      if(!Robot.turret.isAtClimberPosition()){
+        Robot.turret.setInitial(.5);
+      }
+      else{
+       done = true;
+        Robot.turret.zeroEncoder();
+      }
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
+    Robot.turret.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getPosition())>.25;
-    //return ((Robot.indexer.getPosition() < encoderPos-.55) || (Robot.indexer.getPosition() < encoderPos-.55));
+    return done;
   }
 }

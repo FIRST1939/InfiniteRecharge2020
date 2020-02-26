@@ -9,10 +9,13 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 
 public class IntakeGamepadControl extends CommandBase {
 
+  boolean wasWait = false;
   public IntakeGamepadControl() {
     addRequirements(Robot.intake);
   }
@@ -23,19 +26,26 @@ public class IntakeGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
-    if (Robot.oi.gamepad.leftTrigger.get()){
-      Robot.intake.setRoller(0.8);
+    if (Robot.oi.xboxController.getLeftTriggerButton()){
+      if(!wasWait){
+        Robot.intake.extendIntake();
+        Timer.delay(.5);
+        Robot.intake.setRoller(.6);
+        wasWait = true;
+      }
+      else{
+        Robot.intake.setRoller(.6);
+        Robot.intake.extendIntake();
+
+      }
     }
     else {
+      wasWait = false;
+      Robot.intake.retractIntake();
       Robot.intake.setRoller(0);
     }
-    if (Robot.oi.gamepad.start.get()){
-      Robot.intake.extendIntake();
-    }
 
-    if (Robot.oi.gamepad.back.get()){
-      Robot.intake.retractIntake();
-    }
+    //Robot.oi.xboxController.leftTrigger.whenActive(new IntakePowerCell());
   }
 
   @Override

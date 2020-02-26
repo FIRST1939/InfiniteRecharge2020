@@ -16,16 +16,15 @@ public class Limelight {
 
     private double DISTANCE_CONSTANT = 44.01;
     public static final double CAM_HEIGHT = 0.0;
-    public static final double TARGET_HEIGHT = 0.0;
-    public static final double CAM_ANGLE = 0.0;
+    public static final double TARGET_HEIGHT = 2.305;//meters
+    public static final double CAM_ANGLE = 20.0;
     public static final double CAM_CALIBRATION = 0.0;
-
-    public Limelight(){
-      table = NetworkTableInstance.getDefault().getTable("limelight");
+    
+    public Limelight(String name){
+      table = NetworkTableInstance.getDefault().getTable(name);
     }
 
     // Set Methods
-
     // 0 is Vision
     // 1 is Driver Station Camera
     public void setCamMode(double value){
@@ -51,6 +50,7 @@ public class Limelight {
     public void setPipeline(double value){
         table.getEntry("pipeline").setNumber(value);
     }
+
 
     // Get Methods
 

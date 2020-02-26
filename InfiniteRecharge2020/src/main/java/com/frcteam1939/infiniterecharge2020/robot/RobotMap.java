@@ -38,10 +38,9 @@ public class RobotMap {
     public static final int indexerTopDistanceSensor = 1;
 
   // Digital Input
-    public static final int turretClimberHallEffect = 1;
+    public static final int turretClimberHallEffect = 5;
     public static final int turretClockwiseStopHallEffect = 8;
     public static final int turretCounterclockwiseStopHallEffect = 9;
-    public static final int indexerBannerSensor = 5;
     public static final int turretThroughBoreEncoder = 6;
     public static final int indexerVerticalThroughBoreEncoder = 7;
   
@@ -50,4 +49,12 @@ public class RobotMap {
     public static final int ledStrip2 = 1;
     public static final int ledStrip3 = 2;
     public static final int ledStrip4 = 4;
+
+  // Pipelines
+    public static final int turretFarPipeline = 0;
+    public static final int turretMidPipeline = 1;
+    public static final int turretClosePipeline = 2;
+    public static final int turretOffPipeline = 3;
+    
+    public static final int baseDriverPipeline = 0;
 }

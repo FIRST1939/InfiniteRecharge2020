@@ -5,45 +5,59 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ThirdPowerCellUp extends CommandBase {
-  double encoderPos;
-  int excecuteCount;
-  public ThirdPowerCellUp() {
-    addRequirements(Robot.indexer);
+public class SetShooterFar extends CommandBase {
+  /**
+   * Creates a new SetShooterFar.
+   */
+  public SetShooterFar() {
+    addRequirements(Robot.shooter);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    encoderPos = Robot.indexer.getPosition();
+    Robot.shooter.close = false;
+    Robot.shooter.mid = false;
+    Robot.shooter.far = true;
+    Robot.shooter.hoodMiddleHigh();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(excecuteCount ==0){
-      Robot.indexer.zeroEncoder();
-     // currentPos = Math.abs(Robot.indexer.getPosition());
-      excecuteCount = 1;
-    }
-    Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
+
+    double speedShooter = Robot.shooter.getSpeed();
+
+      if (speedShooter < 15500){
+        Robot.shooter.set(1);
+        Robot.shooter.setReady(false);
+      } 
+      else if (speedShooter > 15500 && speedShooter < 17000){
+        Robot.shooter.set(0.75);
+        Robot.shooter.setReady(true);
+
+      }
+      else {
+        Robot.shooter.set(0.6);
+        Robot.shooter.setReady(false);
+      } 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
+    Robot.shooter.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getPosition())>.25;
-    //return ((Robot.indexer.getPosition() < encoderPos-.55) || (Robot.indexer.getPosition() < encoderPos-.55));
+    return false;
   }
 }

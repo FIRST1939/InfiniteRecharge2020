@@ -22,11 +22,11 @@ public class SetIndexer extends CommandBase {
 
   @Override
   public void initialize() {
+    Robot.indexer.set(value);
   }
 
   @Override
   public void execute() {
-    Robot.indexer.set(value);
   }
 
   // Called once the command ends or is interrupted.
@@ -37,6 +37,6 @@ public class SetIndexer extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
