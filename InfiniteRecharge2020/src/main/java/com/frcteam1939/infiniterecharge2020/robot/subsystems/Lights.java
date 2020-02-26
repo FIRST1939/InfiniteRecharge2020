@@ -27,11 +27,11 @@ public class Lights extends SubsystemBase {
   private DigitalOutput lights1 = new DigitalOutput(getChannelFromPin(PinType.DigitalIO, RobotMap.ledStrip1));
   private DigitalOutput lights2 = new DigitalOutput(getChannelFromPin(PinType.DigitalIO, RobotMap.ledStrip2));
   private DigitalOutput lights3 = new DigitalOutput(getChannelFromPin(PinType.DigitalIO, RobotMap.ledStrip3));
-  private DigitalOutput lights4 = new DigitalOutput(getChannelFromPin(PinType.DigitalIO, RobotMap.ledStrip3));
+  private DigitalOutput lights4 = new DigitalOutput(getChannelFromPin(PinType.DigitalIO, RobotMap.ledStrip4));
 
   public enum PinType {DigitalIO, PWM, AnalogIn, AnalogOut};
 
-  public int getChannelFromPin(PinType type, int io_pin_number) p{
+  public int getChannelFromPin(PinType type, int io_pin_number) {
     if ( io_pin_number < 0 ) {
       throw new IllegalArgumentException("Error:  navX MXP I/O Pin #");
     }

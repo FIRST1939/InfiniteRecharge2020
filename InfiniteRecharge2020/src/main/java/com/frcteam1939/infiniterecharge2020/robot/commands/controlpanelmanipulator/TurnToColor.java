@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -9,21 +9,19 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipula
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TurnToColor extends CommandBase {
-
   String desiredColor;
   boolean isColorRed;
   boolean done;
 
   public TurnToColor() {
-    // addRequirements(Robot.controlPanelManipulator);
+    addRequirements(Robot.controlPanelManipulator);
   }
 
   @Override
-  protected void initialize() {
+  public void initialize() {
     while (Robot.controlPanelManipulator.getColor() != "Red"){
       Robot.controlPanelManipulator.set(0.3);
     }
@@ -31,7 +29,7 @@ public class TurnToColor extends CommandBase {
   }
 
   @Override
-  protected void execute() {
+  public void execute() {
     desiredColor = Robot.controlPanelManipulator.colorFromFMS(); // Input from FMS
     Robot.controlPanelManipulator.resetEncoder();
     if (isColorRed){
@@ -56,10 +54,15 @@ public class TurnToColor extends CommandBase {
         done = true;
       }
       }  
-    }
+  }
+  
+  @Override
+  public void end(boolean interrupted) {
+  }
 
   @Override
-  protected boolean isFinished() {
-    return done;
+  public boolean isFinished() {
+   return done;
+
   }
 }
