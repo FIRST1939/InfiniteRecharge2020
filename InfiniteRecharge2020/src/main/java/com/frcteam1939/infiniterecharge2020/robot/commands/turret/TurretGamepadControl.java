@@ -27,13 +27,12 @@ public class TurretGamepadControl extends CommandBase {
     @Override
     public void execute() {
 
-      Robot.oi.gamepad.rightTrigger.whenPressed(new Test());
-
+      Robot.oi.xboxController.rightJoystick.whenPressed(new ZeroTurret());
       if (Robot.turret.isAtClimberPosition()){
         Robot.turret.zeroEncoder();
       }
 
-      double value = Robot.oi.gamepad.getLeftX() * .75;
+      double value = Robot.oi.xboxController.getLeftStickX() * .75;
       Robot.turret.set(value);
     }
   

@@ -8,9 +8,8 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
+import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ShooterGamepadControl extends CommandBase {
@@ -25,29 +24,23 @@ public class ShooterGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
-    
-    double speedShooter = Robot.shooter.getSpeed();
-    double temperatureShooter = Robot.shooter.getTemperature();
+  
+   Robot.oi.xboxController.y.whenPressed(new InitiationLineShooterSetup());
+   Robot.oi.xboxController.a.whenPressed(new LongShooterSetup());
 
- 
-    if(Robot.oi.gamepad.x.get()){
-      // Robot.shooter.set(.9);
-      Robot.shooter.hoodDown();;
+    /*if(Robot.oi.xboxController.y.get()){
+      Robot.shooter.hoodUp();
     }
-    if(Robot.oi.gamepad.b.get()){
-     // Robot.shooter.set(.7);
-     Robot.shooter.hoodMiddleHigh();;
-   }
-   if(Robot.oi.gamepad.a.get()){
-     // Robot.shooter.set(.);
-     Robot.shooter.hoodUp();
-   }
-   
-   if(Robot.oi.gamepad.y.get()){
-     // Robot.shooter.set(.90);
-     Robot.shooter.hoodMiddleLow();
-   }
-
+    if(Robot.oi.xboxController.b.get()){
+      Robot.shooter.hoodMiddleHigh();//mid low
+    }
+    if(Robot.oi.xboxController.a.get()){//mid high
+      Robot.shooter.hoodMiddleLow();
+    }
+    if(Robot.oi.xboxController.x.get()){
+      Robot.shooter.hoodDown();
+    }
+    */
     // LONG - 36 FEET
   /*if (Robot.oi.gamepad.rightButton.get()){
     if (speedShooter < 21000){
@@ -83,7 +76,12 @@ if (Robot.oi.gamepad.rightButton.get()){
 
  /// MEDIUM - 20 FEET
  */
- if (Robot.oi.gamepad.rightButton.get()){
+
+ /*if (Robot.oi.xboxController.getLeftTriggerButton()){
+   Robot.shooter.set(0.5);
+ }
+
+ if (Robot.oi.xboxController.rightButton.get()){
   if (speedShooter < 13500){
     Robot.shooter.set(1);
   } 
@@ -96,7 +94,7 @@ if (Robot.oi.gamepad.rightButton.get()){
 }
 else{
   Robot.shooter.set(0);
-}
+}*/
 
   }
 

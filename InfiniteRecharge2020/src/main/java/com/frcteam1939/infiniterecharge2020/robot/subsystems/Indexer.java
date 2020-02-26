@@ -38,7 +38,7 @@ public class Indexer extends SubsystemBase {
   public final double DIST_DEFAULT_BOTTOM = 250;
   public final double DIST_THIRD_BALL = .25;//changes from current position by .25 encoder ticks
 
-  public final double BALL_CURRENT = 30;
+  public final double BALL_CURRENT = 40;
 
   public Indexer() {
     talonHorizontal.enableVoltageCompensation(true);

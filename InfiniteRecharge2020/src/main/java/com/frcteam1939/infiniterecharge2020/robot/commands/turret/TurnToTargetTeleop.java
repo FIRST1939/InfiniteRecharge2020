@@ -12,17 +12,18 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class TurnToTarget extends CommandBase {
+public class TurnToTargetTeleop extends CommandBase {
 
-  boolean done = false;
+  int pipeline;
 
-  public TurnToTarget() {
+  public TurnToTargetTeleop(int pipeline) {
+    this.pipeline = pipeline;
     addRequirements(Robot.turret);
   }
 
   @Override
   public void initialize() {
-    Robot.limelightTurret.setPipeline(0);
+    Robot.limelightTurret.setPipeline(pipeline);
     Robot.turret.anglePID.reset();
     Robot.turret.anglePID.setSetpoint(0);
   }
@@ -30,31 +31,18 @@ public class TurnToTarget extends CommandBase {
   @Override
   public void execute() {
 
-    double output;
+    double output = -Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
     
-    /*if (Robot.turret.anglePID.atSetpoint()){
-      output = 0;
-      done = true;
-    }
-    else {
-      output = Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
-    }*/
-
-    output = -Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
-
-    SmartDashboard.putNumber("Turret PID Output", output);
-    System.out.println("Turret PID Output: " + output);
-
     Robot.turret.set(output);
-    
   }
 
   @Override
   public void end(boolean interrupted) {
+    Robot.turret.set(0);
   }
 
   @Override
   public boolean isFinished() {
-    return done;
+    return Math.abs(Robot.oi.xboxController.getLeftStickX()) > 0.5 ;
   }
 }

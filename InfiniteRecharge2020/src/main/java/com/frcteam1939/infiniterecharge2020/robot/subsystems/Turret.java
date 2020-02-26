@@ -21,8 +21,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
   
-  private double P = 0.05;
-  private double I = 0.05;
+  private double P = 0.0425;//.05
+  private double I = 0.065;//.05
   private double D = 0.0005;
 
   private TalonSRX talon = new TalonSRX(RobotMap.turretTalon);
@@ -34,6 +34,9 @@ public class Turret extends SubsystemBase {
   private DigitalInput hallEffectClockwise = new DigitalInput(RobotMap.turretClockwiseStopHallEffect);
   private DigitalInput hallEffectCounterClockwise = new DigitalInput(RobotMap.turretCounterclockwiseStopHallEffect);
   private DigitalInput hallEffectClimber = new DigitalInput(RobotMap.turretClimberHallEffect);
+
+  public static final double POSITIVE_LIMIT = 2.35; // Clockwise Hall Effect
+  public static final double NEGATIVE_LIMIT = -2.60; // Counterclockwise Hall Effect
 
   public Turret(){
     talon.enableVoltageCompensation(true);
@@ -47,14 +50,18 @@ public class Turret extends SubsystemBase {
 
   // Positive is clockwise
   public void set(double value){
-    if (isAtClockwiseLimit() && value > 0){
+    if ((isAtClockwiseLimit() || getPosition() > POSITIVE_LIMIT) && value > 0){
       value = 0;
     }
 
-    if (isAtCounterClockwiseLimit() && value < 0){
+    if ((isAtCounterClockwiseLimit() || getPosition() < NEGATIVE_LIMIT) && value < 0){
       value = 0;
     }
 
+    talon.set(ControlMode.PercentOutput, value);
+  }
+
+  public void setInitial(double value){
     talon.set(ControlMode.PercentOutput, value);
   }
 

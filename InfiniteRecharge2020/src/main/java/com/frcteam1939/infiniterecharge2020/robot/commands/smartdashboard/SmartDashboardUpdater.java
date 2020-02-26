@@ -37,6 +37,7 @@ public class SmartDashboardUpdater extends CommandBase {
     SmartDashboard.putNumber("Intake Current", Robot.intake.getCurrent());
 
     SmartDashboard.putNumber("Speed Shooter", Robot.shooter.getSpeed());
+    SmartDashboard.putBoolean("Shooter is Ready", Robot.shooter.isReady());
 
     SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.getLeftPosition());
     SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.getRightPosition());

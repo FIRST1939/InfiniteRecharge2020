@@ -5,19 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
+package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooter;
-import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurnToTarget;
+import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurnToTargetTeleop;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Test extends ParallelCommandGroup {
-
-  public Test() {
-    super(new TurnToTarget(), new SetShooter(.775));
+public class InitiationLineShooterSetup extends ParallelDeadlineGroup {
+  /**
+   * Creates a new InitiationLineShooterSetup.
+   */
+  public InitiationLineShooterSetup() {
+    // Add your commands in the super() call.  Add the deadline first.
+    super(
+        new TurnToTargetTeleop(RobotMap.turretClosePipeline),
+        new SetShooterClose()
+    );
   }
 }

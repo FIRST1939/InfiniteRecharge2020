@@ -37,7 +37,7 @@ public class Index extends SequentialCommandGroup {
     addCommands(new ThirdPowerCellUp());
 
     addCommands(new WaitCommand(.5));
-    addCommands(new RunIndexerUntilCurrent());
+    addCommands(new RunIndexerUntilDistance());
 
   }
 }

@@ -5,53 +5,59 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
+package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 
-public class IntakeGamepadControl extends CommandBase {
+public class ShootClose extends CommandBase {
+  /**
+   * Creates a new ShootClose.
+   */
 
   boolean wasWait = false;
-  public IntakeGamepadControl() {
+  
+  public ShootClose() {
+    addRequirements(Robot.indexer);
     addRequirements(Robot.intake);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.intake.extendIntake();
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Robot.oi.xboxController.getLeftTriggerButton()){
-      if(!wasWait){
-        Robot.intake.extendIntake();
-        Timer.delay(.5);
-        Robot.intake.setRoller(.6);
-        wasWait = true;
-      }
-      else{
-        Robot.intake.setRoller(.6);
-        Robot.intake.extendIntake();
-
-      }
+    if(!wasWait){
+      Robot.intake.extendIntake();
+      Robot.indexer.set(.5);
+      Timer.delay(.5);
+      Robot.intake.setRoller(.5);
+      wasWait= true;
     }
-    else {
-      wasWait = false;
-      Robot.intake.retractIntake();
-      Robot.intake.setRoller(0);
+    else{
+      Robot.intake.extendIntake();
+      Robot.indexer.set(.5);
+      Robot.intake.setRoller(.5);
     }
-
-    //Robot.oi.xboxController.leftTrigger.whenActive(new IntakePowerCell());
+    
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.indexer.stop();
+    Robot.intake.retractIntake();
+    Robot.intake.setRoller(0);
+    wasWait = false;
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

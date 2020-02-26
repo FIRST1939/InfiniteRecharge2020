@@ -18,6 +18,12 @@ import edu.wpi.first.wpilibj.Solenoid;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
 public class Shooter extends SubsystemBase {
+
+  public boolean close = false;
+  public boolean mid = false;
+  public boolean far = false;
+
+  private boolean ready;
   
   private TalonFX shooterTalon1 = new TalonFX(RobotMap.shooterFalcon1);
   private TalonFX shooterTalon2 = new TalonFX(RobotMap.shooterFalcon2);
@@ -71,12 +77,12 @@ public class Shooter extends SubsystemBase {
     smallSolenoid.set(false);
   }
 
-  public void hoodMiddleLow(){
+  public void hoodMiddleHigh(){
     bigSolenoid.set(false);
     smallSolenoid.set(true);
   }
 
-  public void hoodMiddleHigh(){
+  public void hoodMiddleLow(){
     bigSolenoid.set(true);
     smallSolenoid.set(false);
   }
@@ -90,4 +96,12 @@ public class Shooter extends SubsystemBase {
     shooterTalon1.setNeutralMode(NeutralMode.Coast);
     shooterTalon2.setNeutralMode(NeutralMode.Coast);
   } 
+
+  public boolean isReady(){
+    return ready;
+  }
+
+  public void setReady(boolean status){
+    ready = status;
+  }
 }

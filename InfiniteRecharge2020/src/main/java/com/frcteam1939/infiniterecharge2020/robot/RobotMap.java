@@ -43,4 +43,12 @@ public class RobotMap {
     public static final int turretCounterclockwiseStopHallEffect = 9;
     public static final int turretThroughBoreEncoder = 6;
     public static final int indexerVerticalThroughBoreEncoder = 7;
+
+  // Pipelines
+    public static final int turretFarPipeline = 0;
+    public static final int turretMidPipeline = 1;
+    public static final int turretClosePipeline = 2;
+    public static final int turretOffPipeline = 3;
+    
+    public static final int baseDriverPipeline = 0;
 }

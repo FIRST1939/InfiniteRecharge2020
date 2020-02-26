@@ -8,14 +8,15 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IndexerGamepadControl extends CommandBase {
-
-  public IndexerGamepadControl() {
+public class RunIndexerUntilDistance extends CommandBase {
+  /**
+   * Creates a new RunIndexerUntilDistance.
+   */
+  
+  public RunIndexerUntilDistance() {
     addRequirements(Robot.indexer);
   }
 
@@ -23,29 +24,21 @@ public class IndexerGamepadControl extends CommandBase {
   public void initialize() {
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double verticalValue = -Robot.oi.xboxController.getRightStickY()/2;
-    double horizontalValue = Robot.oi.xboxController.getRightStickX()/2;
-    Robot.indexer.setVertical(verticalValue);
-    Robot.indexer.setHorizontal(horizontalValue);
+    Robot.indexer.setHorizontal(.25);
 
-    Robot.oi.xboxController.leftButton.whenPressed(new Index());
-
-    if (Robot.shooter.close){
-      Robot.oi.xboxController.rightButton.whenHeld(new ShootClose());
-    }
-    else if (Robot.shooter.far){
-      Robot.oi.xboxController.rightButton.whenHeld(new ShootFar());
-    }
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return  ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60));
   }
 }
