@@ -27,6 +27,8 @@ public class PowerCellUp extends CommandBase {
   @Override
   public void execute() {
     Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
+    Robot.indexer.setHorizontal(-Robot.indexer.INDEXER_VERTICAL_SPEED);
+
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +42,6 @@ public class PowerCellUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() { //< >
-    return (Robot.indexer.getPosition()>currentPos+1.35);
+    return (Robot.indexer.getPosition()>currentPos+1.26);//1.25
   }
 }

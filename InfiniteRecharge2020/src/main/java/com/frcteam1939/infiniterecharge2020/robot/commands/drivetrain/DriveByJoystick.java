@@ -49,7 +49,7 @@ public class DriveByJoystick extends CommandBase {
 			if (slowDown) {
 				rotate = map(rotate, 0, 0.4);
 			} else {
-				rotate = map(rotate, 0, 0.8);
+				rotate = map(rotate, 0, 0.6);
 			}
 		}
 

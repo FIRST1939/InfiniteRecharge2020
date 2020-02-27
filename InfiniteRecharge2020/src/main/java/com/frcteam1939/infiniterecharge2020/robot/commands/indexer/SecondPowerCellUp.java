@@ -46,7 +46,7 @@ public class SecondPowerCellUp extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getPosition())>1;
+    return (Robot.indexer.getPosition())>1.2;
     //return (((!((Robot.indexer.getDistanceBottom() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceBottom() > Robot.indexer.DIST_ONE_BALL - 60))) && ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60)))|| Robot.indexer.getPosition()>currentPos+1);
   }
   

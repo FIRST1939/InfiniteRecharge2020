@@ -5,39 +5,52 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
+package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeOut extends CommandBase {
+public class ShootMid extends CommandBase {
   /**
-   * Creates a new IntakeOut.
+   * Creates a new ShootMid.
    */
-  public IntakeOut() {
+  boolean wasWait = false;
+  public ShootMid() {
+    addRequirements(Robot.indexer);
     addRequirements(Robot.intake);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.intake.extendIntake();
-    //Robot.intake.setRoller(.6);
   }
-
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    if(!wasWait){
+      Robot.intake.extendIntake();
+      Robot.indexer.setVertical(.5);
+      Timer.delay(.5);
+      Robot.indexer.setHorizontal(.3);
+      Robot.intake.setRoller(.5);
+      wasWait= true;
+    }
+    else{
+      Robot.intake.extendIntake();
+      Robot.indexer.setVertical(.5);
+      Robot.indexer.setHorizontal(.3);
+      Robot.intake.setRoller(.5);
+    }
   }
+
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-   // Robot.intake.setRoller(0);
-    Robot.intake.retractIntake();
   }
 
   // Returns true when the command should end.

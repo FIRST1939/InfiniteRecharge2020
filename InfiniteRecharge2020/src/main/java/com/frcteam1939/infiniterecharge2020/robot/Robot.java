@@ -124,6 +124,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    limelightTurret.setPipeline(RobotMap.turretOffPipeline);
+    limelightBase.setPipeline(RobotMap.baseDriverPipeline);
+
     Robot.climber.enableBrakeModeClimber();
     //Robot.climber.enableBrakeModeGondola();
     Robot.controlPanelManipulator.enableBrakeMode();
@@ -157,6 +160,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    limelightTurret.setPipeline(RobotMap.turretOffPipeline);
+    limelightBase.setPipeline(RobotMap.baseDriverPipeline);
     Robot.climber.enableBrakeModeClimber();
     //Robot.climber.enableBrakeModeGondola();
     Robot.controlPanelManipulator.enableBrakeMode();

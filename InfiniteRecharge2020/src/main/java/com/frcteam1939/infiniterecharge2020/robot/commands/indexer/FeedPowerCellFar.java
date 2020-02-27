@@ -9,12 +9,14 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class FeedPowerCellFar extends CommandBase {
   /**
    * Creates a new FeedPowerCellFar.
    */
+  boolean wasWait = false;
   double currentPos;
   public FeedPowerCellFar() {
     addRequirements(Robot.indexer);
@@ -31,7 +33,17 @@ public class FeedPowerCellFar extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.indexer.set(.4);
+   // if(!wasWait){
+    Robot.indexer.setVertical(.4);
+   // Timer.delay(.5);
+    Robot.indexer.setHorizontal(.4);
+   // wasWait = true;
+   // }
+    /*else{
+      Robot.indexer.setVertical(.4);
+      Robot.indexer.setHorizontal(.3);
+    }
+*/
   }
 
   // Called once the command ends or is interrupted.
@@ -43,6 +55,6 @@ public class FeedPowerCellFar extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getPosition()>currentPos+1.35);
+    return (Robot.indexer.getPosition()>currentPos+1.5);
   }
 }
