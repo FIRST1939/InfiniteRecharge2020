@@ -31,7 +31,7 @@ public class TurnToColor extends CommandBase {
   @Override
   public void execute() {
     desiredColor = Robot.controlPanelManipulator.colorFromFMS(); // Input from FMS
-    Robot.controlPanelManipulator.resetEncoder();
+    //Robot.controlPanelManipulator.resetEncoder();
     if (isColorRed){
       if (desiredColor == "Blue"){
         while (Robot.controlPanelManipulator.getRotations() < 0.21){
@@ -55,7 +55,7 @@ public class TurnToColor extends CommandBase {
       }
       }  
   }
-  
+
   @Override
   public void end(boolean interrupted) {
   }

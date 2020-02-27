@@ -42,54 +42,119 @@ public class Lights extends SubsystemBase {
     return roborio_channel;
   }
 
-  public void powerUp(){
+  public void fire(){ //1
+    lights1.set(true);
+    lights2.set(true);
+    lights3.set(true);
+    lights4.set(true);
+  }
+
+  public void meteorRain(){ //2
     lights1.set(true);
     lights2.set(true);
     lights3.set(true);
     lights4.set(false);
   }
 
-  public void setGreen(){
+  public void racingLights(){ //3
     lights1.set(true);
     lights2.set(true);
     lights3.set(false);
     lights4.set(true);
   }
 
-  public void greenFade(){
+  public void theaterCase(){ //4
     lights1.set(true);
     lights2.set(false);
     lights3.set(true);
     lights4.set(true);
   }
 
-  public void shooty(){
+  public void rainbowCycle(){ //5
     lights1.set(false);
     lights2.set(true);
     lights3.set(true);
     lights4.set(true);
   }
 
-  public void strobe(){
+  public void strobeGreen(){ //6
     lights1.set(false);
     lights2.set(false);
     lights3.set(true);
     lights4.set(true);
   }
 
-  public void theaterChase(){
+  public void twinkle(){ //7
     lights1.set(true);
     lights2.set(true);
     lights3.set(false);
     lights4.set(false);
   }
-
-  public void runningLights(){
+  
+  public void fadeGreen(){ //8
     lights1.set(true);
     lights2.set(false);
     lights3.set(false);
     lights4.set(true);
   }
+
+  public void green(){ //9
+    lights1.set(false);
+    lights2.set(true);
+    lights3.set(true);
+    lights4.set(false);
+  }
+
+  public void yellow(){ //10
+    lights1.set(true);
+    lights2.set(false);
+    lights3.set(true);
+    lights4.set(true);
+  }
+
+  public void red(){ //11
+    lights1.set(false);
+    lights2.set(true);
+    lights3.set(false);
+    lights4.set(true);
+  }
+
+  public void blue(){ //12
+    lights1.set(false);
+    lights2.set(false);
+    lights3.set(false);
+    lights4.set(true);
+  }
+
+  public void pink(){ //13
+    lights1.set(false);
+    lights2.set(false);
+    lights3.set(true);
+    lights4.set(false);
+  }
+
+  public void purple(){ //14
+    lights1.set(false);
+    lights2.set(true);
+    lights3.set(false);
+    lights4.set(false);
+  }
+
+  public void strobeYellow(){ //15
+    lights1.set(true);
+    lights2.set(false);
+    lights3.set(false);
+    lights4.set(false);
+  }
+
+  public void strobePurple(){ //16
+    lights1.set(false);
+    lights2.set(false);
+    lights3.set(false);
+    lights4.set(false);
+  }
+
+
 
   @Override
   public void periodic() {
