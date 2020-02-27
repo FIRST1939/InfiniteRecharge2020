@@ -5,44 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
+package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeOut extends CommandBase {
+public class TurretCounterclockwiseToClimber extends CommandBase {
   /**
-   * Creates a new IntakeOut.
+   * Creates a new TurretCounterclockwiseToClimb.
    */
-  public IntakeOut() {
-    addRequirements(Robot.intake);
+  public TurretCounterclockwiseToClimber() {
+    addRequirements(Robot.turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.intake.extendIntake();
-    Robot.intake.setRoller(.6);
   }
-
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    Robot.turret.set(-.3);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.intake.setRoller(0);
-    Robot.intake.retractIntake();
+    Robot.turret.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Robot.turret.isAtClimberPosition();
   }
 }

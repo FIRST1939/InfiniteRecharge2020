@@ -34,12 +34,12 @@ public class SetShooterFar extends CommandBase {
 
     double speedShooter = Robot.shooter.getSpeed();
 
-      if (speedShooter < 15500){
+      if (speedShooter < 15000){
         Robot.shooter.set(1);
         Robot.shooter.setReady(false);
       } 
-      else if (speedShooter > 15500 && speedShooter < 17000){
-        Robot.shooter.set(0.75);
+      else if (speedShooter > 15000 && speedShooter < 16500){
+        Robot.shooter.set(0.73);
         Robot.shooter.setReady(true);
 
       }

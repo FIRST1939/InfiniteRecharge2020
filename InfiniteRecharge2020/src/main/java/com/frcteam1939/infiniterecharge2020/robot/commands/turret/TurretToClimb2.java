@@ -11,12 +11,14 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ZeroTurret extends CommandBase {
+public class TurretToClimb2 extends CommandBase {
   /**
-   * Creates a new ZeroTurret.
+   * Creates a new TurretToClimb2.
    */
-  boolean done;
-  public ZeroTurret() {
+
+  private boolean done;
+
+  public TurretToClimb2() {
     addRequirements(Robot.turret);
   }
 
@@ -28,29 +30,17 @@ public class ZeroTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!Robot.turret.isAtClockwiseLimit()&& !Robot.turret.isAtClimberPosition() && !Robot.turret.isAtCounterClockwiseLimit()){
-      Robot.turret.setInitial(.5);
+    if (Robot.turret.getPosition() > 0.1){
+      Robot.turret.set(-.2);
       done = false;
     }
-  
-    if(Robot.turret.isAtClockwiseLimit()){
-      if(!Robot.turret.isAtClimberPosition()){
-          Robot.turret.setInitial(-.5);
-      }
-        else{
-          done = true;
-          Robot.turret.zeroEncoder();
-        }
+    else if (Robot.turret.getPosition() < -0.1){
+      Robot.turret.set(.2);
+      done = false;
     }
-
-    if(Robot.turret.isAtCounterClockwiseLimit()){
-      if(!Robot.turret.isAtClimberPosition()){
-        Robot.turret.setInitial(.5);
-      }
-      else{
-       done = true;
-        Robot.turret.zeroEncoder();
-      }
+    else if (Robot.turret.isAtClimberPosition()){
+      Robot.turret.set(0);
+      done = true;
     }
   }
 

@@ -40,6 +40,6 @@ public class PowerCellUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() { //< >
-    return (((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60)) || Robot.indexer.getPosition()>currentPos+1.35);
+    return (Robot.indexer.getPosition()>currentPos+1.35);
   }
 }
