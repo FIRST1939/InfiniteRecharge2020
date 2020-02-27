@@ -8,6 +8,7 @@
 package com.frcteam1939.infiniterecharge2020.robot;
 
 import com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain.DriveByJoystick;
+import com.frcteam1939.infiniterecharge2020.robot.commands.auto.InitiationLineBackUp;
 import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
@@ -26,6 +27,7 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.SmartDashboardSubsy
 import com.frcteam1939.infiniterecharge2020.util.Limelight;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
@@ -55,6 +57,8 @@ public class Robot extends TimedRobot {
   // private static final String kCustomAuto = "My Auto";
   // private String m_autoSelected;
   // private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+  private CommandBase autonomousCommand;
 
   static {
 		try {
@@ -126,6 +130,10 @@ public class Robot extends TimedRobot {
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
+
+    autonomousCommand = new InitiationLineBackUp();
+
+    autonomousCommand.schedule();
     // m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     // System.out.println("Auto selected: " + m_autoSelected);

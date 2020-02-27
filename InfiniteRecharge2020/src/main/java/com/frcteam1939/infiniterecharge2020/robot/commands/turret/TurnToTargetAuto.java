@@ -5,44 +5,43 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
+package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeOut extends CommandBase {
-  /**
-   * Creates a new IntakeOut.
-   */
-  public IntakeOut() {
-    addRequirements(Robot.intake);
+public class TurnToTargetAuto extends CommandBase {
+
+  int pipeline;
+
+  public TurnToTargetAuto(int pipeline) {
+    this.pipeline = pipeline;
+    addRequirements(Robot.turret);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.intake.extendIntake();
-    Robot.intake.setRoller(.6);
+    Robot.limelightTurret.setPipeline(pipeline);
+    Robot.turret.anglePID.reset();
+    Robot.turret.anglePID.setSetpoint(0);
   }
 
-
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
+    double output = -Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
+    
+    Robot.turret.set(output);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.intake.setRoller(0);
-    Robot.intake.retractIntake();
+    Robot.turret.set(0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Math.abs(Robot.oi.xboxController.getLeftStickX()) > 0.5 ;
   }
 }

@@ -34,6 +34,7 @@ public class ShootFar extends CommandBase {
   @Override
   public void execute() {
     
+    
     if(!wasWait && Robot.shooter.isReady()){
       Robot.intake.extendIntake();
       Robot.indexer.set(.5);
