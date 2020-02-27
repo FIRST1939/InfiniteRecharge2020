@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Solenoid;
 
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
 public class Shooter extends SubsystemBase {
@@ -51,6 +52,7 @@ public class Shooter extends SubsystemBase {
   // Positive is out
   public void set(double value){
     shooterTalon1.set(ControlMode.PercentOutput, value);
+    Robot.lights.strobeGreen();
   }
 
   public double getSpeed(){

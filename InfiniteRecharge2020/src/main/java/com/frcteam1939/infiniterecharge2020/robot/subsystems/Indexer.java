@@ -10,6 +10,7 @@ package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
 import com.playingwithfusion.TimeOfFlight;
@@ -40,6 +41,8 @@ public class Indexer extends SubsystemBase {
 
   public final double BALL_CURRENT = 40;
 
+  public boolean isIndexing;
+
   public Indexer() {
     talonHorizontal.enableVoltageCompensation(true);
     talonVertical.enableVoltageCompensation(true);
@@ -52,10 +55,14 @@ public class Indexer extends SubsystemBase {
   public void set(double value){
     talonVertical.set(ControlMode.PercentOutput,value);
     talonHorizontal.set(ControlMode.PercentOutput,value);
+    isIndexing = true;
+    Robot.lights.yellow();
   }
   public void stop(){
     talonVertical.set(ControlMode.PercentOutput,0);
     talonHorizontal.set(ControlMode.PercentOutput,0);
+    isIndexing = false;
+    Robot.lights.green();
   }
 
   // Positive is in

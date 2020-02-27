@@ -42,32 +42,34 @@ public class Lights extends SubsystemBase {
     return roborio_channel;
   }
 
-  public void fire(){ //1
+  public void fire(){ //Disabled
     lights1.set(true);
     lights2.set(true);
     lights3.set(true);
     lights4.set(true);
   }
 
-  public void meteorRain(){ //2
+  public void meteorRain(){ //
     lights1.set(true);
     lights2.set(true);
     lights3.set(true);
     lights4.set(false);
   }
 
-  public void racingLights(){ //3
+  public void racingLights(){ // Autonomous
     lights1.set(true);
     lights2.set(true);
     lights3.set(false);
     lights4.set(true);
   }
 
-  public void theaterCase(){ //4
-    lights1.set(true);
-    lights2.set(false);
-    lights3.set(true);
-    lights4.set(true);
+  public void theaterCase(){ //Indexing/Climbing
+    if (!Robot.shooter.isReady() && Robot.isAutoRunning){
+      lights1.set(true);
+      lights2.set(false);
+      lights3.set(true);
+      lights4.set(true);
+    }
   }
 
   public void rainbowCycle(){ //5
@@ -77,11 +79,13 @@ public class Lights extends SubsystemBase {
     lights4.set(true);
   }
 
-  public void strobeGreen(){ //6
-    lights1.set(false);
-    lights2.set(false);
-    lights3.set(true);
-    lights4.set(true);
+  public void strobeGreen(){ //Shooting
+    if (Robot.isAutoRunning){
+      lights1.set(false);
+      lights2.set(false);
+      lights3.set(true);
+      lights4.set(true);
+    }
   }
 
   public void twinkle(){ //7
@@ -91,21 +95,21 @@ public class Lights extends SubsystemBase {
     lights4.set(false);
   }
   
-  public void fadeGreen(){ //8
+  public void fadeGreen(){ //
     lights1.set(true);
     lights2.set(false);
     lights3.set(false);
     lights4.set(true);
   }
 
-  public void green(){ //9
+  public void green(){ //9 CP Manipulator/Indexing Done
     lights1.set(false);
     lights2.set(true);
     lights3.set(true);
     lights4.set(false);
   }
 
-  public void yellow(){ //10
+  public void yellow(){ //10 CP Manip/Indexing is running
     lights1.set(true);
     lights2.set(false);
     lights3.set(true);
@@ -147,14 +151,12 @@ public class Lights extends SubsystemBase {
     lights4.set(false);
   }
 
-  public void strobePurple(){ //16
+  public void strobeRed(){ //16 - Control Panel Manipulator Turning
     lights1.set(false);
     lights2.set(false);
     lights3.set(false);
     lights4.set(false);
   }
-
-
 
   @Override
   public void periodic() {

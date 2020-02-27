@@ -21,7 +21,7 @@ public class RobotMap {
     public static final int turretTalon = 39;
     public static final int shooterFalcon1 = 37;
     public static final int shooterFalcon2 = 36;
-    public static final int controlPanelTalon = 38;
+    public static final int controlPanelSpark = 5;
     public static final int climberFalcon = 40;
     public static final int gondolaTalon = 28;
 
