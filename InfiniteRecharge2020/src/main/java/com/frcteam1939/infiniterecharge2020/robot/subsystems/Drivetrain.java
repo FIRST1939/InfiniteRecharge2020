@@ -238,5 +238,8 @@ public class Drivetrain extends SubsystemBase {
     frontLeft.configMotionAcceleration(MOTION_MAGIC_ACCELERATION);
     frontRight.configMotionCruiseVelocity(MOTION_MAGIC_CRUISE_VELOCITY);
     frontRight.configMotionAcceleration(MOTION_MAGIC_ACCELERATION);
+    frontLeft.configOpenloopRamp(.2);
+    frontRight.configOpenloopRamp(.2);
+
   }
 }

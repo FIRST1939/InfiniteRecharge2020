@@ -27,6 +27,8 @@ public class ShooterGamepadControl extends CommandBase {
   
    Robot.oi.xboxController.y.whenPressed(new InitiationLineShooterSetup());
    Robot.oi.xboxController.a.whenPressed(new LongShooterSetup());
+   Robot.oi.xboxController.b.whenPressed(new FrontTrenchShooterSetup());
+
 
     /*if(Robot.oi.xboxController.y.get()){
       Robot.shooter.hoodUp();

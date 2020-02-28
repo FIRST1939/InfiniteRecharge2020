@@ -44,7 +44,7 @@ public class SetShooterFar extends CommandBase {
 
       }
       else {
-        Robot.shooter.set(0.6);
+        Robot.shooter.set(0.63);
         Robot.shooter.setReady(false);
       } 
   }

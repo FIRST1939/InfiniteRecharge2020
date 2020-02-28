@@ -25,7 +25,7 @@ public class Index extends SequentialCommandGroup {
     addCommands(new PowerCellForward());
     addCommands(new SetIndexer(0));
     addCommands(new PowerCellUp());
-    addCommands(new WaitCommand(.5));
+    addCommands(new WaitCommand(.6));
     addCommands(new SetIndexer(0));
 
     addCommands(new SecondPowerCellForward());
