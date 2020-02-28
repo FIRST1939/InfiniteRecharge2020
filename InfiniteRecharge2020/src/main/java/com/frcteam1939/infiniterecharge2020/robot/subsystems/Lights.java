@@ -42,28 +42,28 @@ public class Lights extends SubsystemBase {
     return roborio_channel;
   }
 
-  public void fireBlue(){ //Disabled
+  public void fireBlue(){ //Disabled and Blue Alliance Default
     lights1.set(true);
     lights2.set(true);
     lights3.set(true);
     lights4.set(true);
   }
 
-  public void meteorRain(){ //
+  public void meteorRain(){ //Auto
     lights1.set(true);
     lights2.set(true);
     lights3.set(true);
     lights4.set(false);
   }
 
-  public void KITT(){ // Autonomous
+  public void KITT(){ //
     lights1.set(true);
     lights2.set(true);
     lights3.set(false);
     lights4.set(true);
   }
 
-  public void theaterCase(){ //Indexing/Climbing
+  public void theaterCase(){ //Climbing
     lights1.set(true);
     lights2.set(false);
     lights3.set(true);
@@ -77,7 +77,7 @@ public class Lights extends SubsystemBase {
     lights4.set(true);
   }
 
-  public void strobeGreen(){ //Shooting
+  public void strobeGreen(){ //
     lights1.set(false);
     lights2.set(false);
     lights3.set(true);
@@ -98,14 +98,14 @@ public class Lights extends SubsystemBase {
     lights4.set(true);
   }
 
-  public void green(){ //9 CP Manipulator/Indexing Done
+  public void green(){ //9 Done Indexing
     lights1.set(false);
     lights2.set(true);
     lights3.set(true);
     lights4.set(false);
   }
 
-  public void yellow(){ //10 CP Manip/Indexing is running
+  public void yellow(){ //10 Indexing
     lights1.set(true);
     lights2.set(false);
     lights3.set(true);
@@ -126,14 +126,14 @@ public class Lights extends SubsystemBase {
     lights4.set(true);
   }
 
-  public void runningLights(){ //13
+  public void runningLights(){ //13 Shooter Ready and Limelight found target
     lights1.set(false);
     lights2.set(false);
     lights3.set(true);
     lights4.set(false);
   }
 
-  public void fireRed(){ //14
+  public void fireRed(){ //14 Red Alliance Default
     lights1.set(false);
     lights2.set(true);
     lights3.set(false);
@@ -147,7 +147,7 @@ public class Lights extends SubsystemBase {
     lights4.set(false);
   }
 
-  public void strobeRed(){ //16 - Control Panel Manipulator Turning
+  public void strobeRed(){ //16 
     lights1.set(false);
     lights2.set(false);
     lights3.set(false);
