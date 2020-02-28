@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 public class Index extends SequentialCommandGroup {
 
   public Index() {
-    
+    Robot.indexer.isIndexing = true;
     addCommands(new PowerCellForward());
     addCommands(new SetIndexer(0));
     addCommands(new PowerCellUp());
@@ -38,6 +38,8 @@ public class Index extends SequentialCommandGroup {
 
     addCommands(new WaitCommand(.5));
     addCommands(new RunIndexerUntilDistance());
+    Robot.indexer.isIndexing = false ;
+    Robot.indexer.isDoneIndexing = true;
 
   }
 }

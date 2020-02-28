@@ -13,6 +13,7 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepa
 import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
+import com.frcteam1939.infiniterecharge2020.robot.commands.lights.LightsUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.smartdashboard.SmartDashboardUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
@@ -27,7 +28,9 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.Lights;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.SmartDashboardSubsystem;
 import com.frcteam1939.infiniterecharge2020.util.Limelight;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -51,6 +54,8 @@ public class Robot extends TimedRobot {
   public static Lights lights;
   public static OI oi;
   public static SmartDashboardSubsystem smartDashboardSubsystem;
+  public static DriverStation driverStation;
+
 
   public static Limelight limelightTurret;
   public static Limelight limelightBase;
@@ -66,6 +71,7 @@ public class Robot extends TimedRobot {
 
   static {
 		try {
+      driverStation = DriverStation.getInstance();
       climber = new Climber();
       controlPanelManipulator = new ControlPanelManipulator();
       drivetrain = new Drivetrain();
@@ -101,7 +107,7 @@ public class Robot extends TimedRobot {
     intake.setDefaultCommand(new IntakeGamepadControl());
     turret.setDefaultCommand(new TurretGamepadControl());
     smartDashboardSubsystem.setDefaultCommand(new SmartDashboardUpdater().perpetually());
-
+    lights.setDefaultCommand(new LightsUpdater().perpetually());
   }
 
   /**
@@ -147,7 +153,7 @@ public class Robot extends TimedRobot {
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
-    Robot.lights.theaterCase();
+    //Robot.lights.theaterCase();
 
     autonomousCommand = new InitiationLineBackUp();
 
@@ -207,13 +213,19 @@ public class Robot extends TimedRobot {
     Robot.indexer.disableBrakeMode();
     Robot.turret.disableBrakeMode();
     Robot.climber.climberBrakeExtend();
-    Robot.lights.fire();
   }
-
-  /**
-   * This function is called periodically during test mode.
-   */
   @Override
   public void testPeriodic() {
+  }
+
+  //Returns true when the alliance is Red and return False when Alliance is Blue
+  public static boolean getAllianceColor(){
+    if(driverStation.getAlliance() == Alliance.Blue){
+      return true;
+    }
+    else{
+      return false;
+    }
+    
   }
 }

@@ -41,7 +41,8 @@ public class Indexer extends SubsystemBase {
 
   public final double BALL_CURRENT = 40;
 
-  public boolean isIndexing;
+  public boolean isIndexing = false;
+  public boolean isDoneIndexing = false;
 
   public Indexer() {
     talonHorizontal.enableVoltageCompensation(true);
@@ -55,8 +56,6 @@ public class Indexer extends SubsystemBase {
   public void set(double value){
     talonVertical.set(ControlMode.PercentOutput,value);
     talonHorizontal.set(ControlMode.PercentOutput,value);
-    isIndexing = true;
-    Robot.lights.yellow();
   }
   public void stop(){
     talonVertical.set(ControlMode.PercentOutput,0);
@@ -109,5 +108,12 @@ public class Indexer extends SubsystemBase {
   }
   public double getVertCurrentDraw(){
     return talonVertical.getStatorCurrent();
+  }
+  
+  public boolean getIsDoneIndexing(){
+    return isDoneIndexing;
+  }
+  public boolean getIsIndexing(){
+    return isIndexing;
   }
 }

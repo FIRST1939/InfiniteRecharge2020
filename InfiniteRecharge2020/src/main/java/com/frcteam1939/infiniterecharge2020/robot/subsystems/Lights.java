@@ -42,7 +42,7 @@ public class Lights extends SubsystemBase {
     return roborio_channel;
   }
 
-  public void fire(){ //Disabled
+  public void fireBlue(){ //Disabled
     lights1.set(true);
     lights2.set(true);
     lights3.set(true);
@@ -56,7 +56,7 @@ public class Lights extends SubsystemBase {
     lights4.set(false);
   }
 
-  public void racingLights(){ // Autonomous
+  public void KITT(){ // Autonomous
     lights1.set(true);
     lights2.set(true);
     lights3.set(false);
@@ -130,14 +130,14 @@ public class Lights extends SubsystemBase {
     lights4.set(true);
   }
 
-  public void pink(){ //13
+  public void runningLights(){ //13
     lights1.set(false);
     lights2.set(false);
     lights3.set(true);
     lights4.set(false);
   }
 
-  public void purple(){ //14
+  public void fireRed(){ //14
     lights1.set(false);
     lights2.set(true);
     lights3.set(false);

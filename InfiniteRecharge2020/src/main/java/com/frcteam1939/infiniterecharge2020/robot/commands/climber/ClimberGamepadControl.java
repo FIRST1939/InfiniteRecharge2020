@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClimberGamepadControl extends CommandBase {
 
+  boolean isClimbing = false;
   public ClimberGamepadControl() {
     addRequirements(Robot.climber);
   }
@@ -26,6 +27,7 @@ public class ClimberGamepadControl extends CommandBase {
   public void execute() {
     boolean climberUp = Robot.oi.left.getRawButton(3);
     boolean climberDown = Robot.oi.left.getRawButton(2);
+
     
     boolean brakeExtend = Robot.oi.left.getRawButton(5);
   

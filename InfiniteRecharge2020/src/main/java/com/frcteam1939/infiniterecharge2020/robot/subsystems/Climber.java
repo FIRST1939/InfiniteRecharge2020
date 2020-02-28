@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
 
+  public boolean isClimbing = false;
   private TalonFX climberTalon = new TalonFX(RobotMap.climberFalcon);
   //private TalonSRX gondolaTalon = new TalonSRX(RobotMap.gondolaTalon);
 
@@ -40,7 +41,7 @@ public class Climber extends SubsystemBase {
 
   // Positive is up
   public void setClimber(double value){
-
+    isClimbing = true;
     if (Robot.climber.getPosition() < 70000 && value < 0){
       value = 0;
     }
