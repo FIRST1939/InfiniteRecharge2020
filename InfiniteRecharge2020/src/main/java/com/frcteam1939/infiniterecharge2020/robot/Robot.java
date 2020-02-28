@@ -80,11 +80,22 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
+
+    limelightTurret.setPipeline(RobotMap.turretOffPipeline);
+    limelightBase.setPipeline(RobotMap.baseDriverPipeline);
+
     Robot.climber.zeroEncoder();
     Robot.climber.climberBrakeRetract();
-    // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    // m_chooser.addOption("My Auto", kCustomAuto);
-    // SmartDashboard.putData("Auto choices", m_chooser);
+    Robot.climber.climberBrakeRetract(); // This doesn't do anything when you're disabled, except maybe scare you when you enable
+    
+    controlPanelManipulator.setDefaultCommand(new ControlPanelManipulatorGamepadControl());
+    shooter.setDefaultCommand(new ShooterGamepadControl());
+    drivetrain.setDefaultCommand(new DriveByJoystick());
+    indexer.setDefaultCommand(new IndexerGamepadControl());
+    climber.setDefaultCommand(new ClimberGamepadControl());
+    intake.setDefaultCommand(new IntakeGamepadControl());
+    turret.setDefaultCommand(new TurretGamepadControl());
+    smartDashboardSubsystem.setDefaultCommand(new SmartDashboardUpdater().perpetually());
   }
 
   /**
@@ -97,8 +108,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    //System.out.println("Banner: "+ Robot.indexer.getBanner());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator, new ControlPanelManipulatorGamepadControl());
+    /*CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator, new ControlPanelManipulatorGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new ShooterGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.drivetrain, new DriveByJoystick());
     CommandScheduler.getInstance().setDefaultCommand(Robot.indexer, new IndexerGamepadControl());
@@ -106,9 +116,10 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().setDefaultCommand(Robot.intake, new IntakeGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.turret, new TurretGamepadControl());
     CommandScheduler.getInstance().setDefaultCommand(Robot.smartDashboardSubsystem, new SmartDashboardUpdater().perpetually());
-
+    */
     CommandScheduler.getInstance().run();
   }
+
 
 
   /**
@@ -124,11 +135,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    limelightTurret.setPipeline(RobotMap.turretOffPipeline);
-    limelightBase.setPipeline(RobotMap.baseDriverPipeline);
 
     Robot.climber.enableBrakeModeClimber();
-    //Robot.climber.enableBrakeModeGondola();
     Robot.controlPanelManipulator.enableBrakeMode();
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
@@ -163,7 +171,6 @@ public class Robot extends TimedRobot {
     limelightTurret.setPipeline(RobotMap.turretOffPipeline);
     limelightBase.setPipeline(RobotMap.baseDriverPipeline);
     Robot.climber.enableBrakeModeClimber();
-    //Robot.climber.enableBrakeModeGondola();
     Robot.controlPanelManipulator.enableBrakeMode();
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
@@ -181,8 +188,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    limelightTurret.setPipeline(RobotMap.turretOffPipeline);
+    limelightBase.setPipeline(RobotMap.baseDriverPipeline);
     Robot.climber.disableBrakeModeClimber();
-   // Robot.climber.disableBrakeModeGondola();
     Robot.controlPanelManipulator.disableBrakeMode();
     Robot.drivetrain.disableBrakeMode();
     Robot.indexer.disableBrakeMode();
