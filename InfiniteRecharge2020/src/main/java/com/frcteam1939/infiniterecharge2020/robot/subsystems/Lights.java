@@ -64,12 +64,10 @@ public class Lights extends SubsystemBase {
   }
 
   public void theaterCase(){ //Indexing/Climbing
-    if (!Robot.shooter.isReady() && Robot.isAutoRunning){
-      lights1.set(true);
-      lights2.set(false);
-      lights3.set(true);
-      lights4.set(true);
-    }
+    lights1.set(true);
+    lights2.set(false);
+    lights3.set(true);
+    lights4.set(true);
   }
 
   public void rainbowCycle(){ //5
@@ -80,12 +78,10 @@ public class Lights extends SubsystemBase {
   }
 
   public void strobeGreen(){ //Shooting
-    if (Robot.isAutoRunning){
-      lights1.set(false);
-      lights2.set(false);
-      lights3.set(true);
-      lights4.set(true);
-    }
+    lights1.set(false);
+    lights2.set(false);
+    lights3.set(true);
+    lights4.set(true);
   }
 
   public void twinkle(){ //7
