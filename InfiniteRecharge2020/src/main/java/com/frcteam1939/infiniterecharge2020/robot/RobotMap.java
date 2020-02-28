@@ -21,7 +21,7 @@ public class RobotMap {
     public static final int turretTalon = 39;
     public static final int shooterFalcon1 = 37;
     public static final int shooterFalcon2 = 36;
-    public static final int controlPanelTalon = 38;
+    public static final int controlPanelSpark = 5;
     public static final int climberFalcon = 40;
     public static final int gondolaTalon = 28;
 
@@ -43,6 +43,12 @@ public class RobotMap {
     public static final int turretCounterclockwiseStopHallEffect = 9;
     public static final int turretThroughBoreEncoder = 6;
     public static final int indexerVerticalThroughBoreEncoder = 7;
+  
+  //Digital Inputs NavX
+    public static final int ledStrip1 = 0;
+    public static final int ledStrip2 = 1;
+    public static final int ledStrip3 = 2;
+    public static final int ledStrip4 = 4;
 
   // Pipelines
     public static final int turretFarPipeline = 0;

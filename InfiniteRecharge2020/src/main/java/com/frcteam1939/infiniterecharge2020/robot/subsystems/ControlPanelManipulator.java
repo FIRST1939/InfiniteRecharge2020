@@ -11,11 +11,17 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.MotorCommutation;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
@@ -24,12 +30,38 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ControlPanelManipulator extends SubsystemBase {
 
-  private TalonSRX talon = new TalonSRX(RobotMap.controlPanelTalon);
+  private CANSparkMax spark = new CANSparkMax(RobotMap.controlPanelSpark, MotorType.kBrushless);
+  public CANEncoder sparkEncoder = spark.getEncoder();
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
   private final ColorMatch m_colorMatcher = new ColorMatch();
+  
+
+
+  /*
+  private double Blue_r = 0.143;
+  private double Blue_g = 0.427;
+  private double Blue_b = 0.429;
+
+  private double Green_r = 0.197;
+  private double Green_g = 0.561;
+  private double Green_b = 0.240;
+
+  private double Red_r = 0.561;
+  private double Red_g = 0.232;
+  private double Red_b = 0.114;
+
+  private double Yellow_r = 0.361;
+  private double Yellow_g = 0.524;
+  private double Yellow_b = 0.113;
+
+  private final Color kBlueTarget = ColorMatch.makeColor(Blue_r, Blue_g, Blue_b);
+  private final Color kGreenTarget = ColorMatch.makeColor(Green_r, Green_g, Green_b);
+  private final Color kRedTarget = ColorMatch.makeColor(Red_r, Red_g, Red_b);
+  private final Color kYellowTarget = ColorMatch.makeColor(Yellow_r, Yellow_g, Yellow_b);
+  */
 
   private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
@@ -39,7 +71,8 @@ public class ControlPanelManipulator extends SubsystemBase {
   String gameData;
 
   public ControlPanelManipulator(){
-    talon.enableVoltageCompensation(true);
+    
+    //talon.enableVoltageCompensation(true);
     // talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute); // Need to check
   }
 
@@ -48,8 +81,8 @@ public class ControlPanelManipulator extends SubsystemBase {
   }
 
   // Positive is clockwise
-  public void set(double value){
-    talon.set(ControlMode.PercentOutput, value);
+  public void set(double value) { 
+    spark.set(value);
   }
 
   public void stop(){
@@ -57,17 +90,22 @@ public class ControlPanelManipulator extends SubsystemBase {
   }
 
   public double getRotations(){
-    return talon.getSelectedSensorPosition();
+    return sparkEncoder.getPosition();
   }
   
-  public void enableBrakeMode(){
-    talon.setNeutralMode(NeutralMode.Brake);
+  /*
+  public void resetEncoder(){
+    spark.();
   }
+  */
 
-  public void disableBrakeMode(){
-    talon.setNeutralMode(NeutralMode.Coast);
+  public void enableBrakeMode() {
+    spark.setIdleMode(IdleMode.kBrake);
+	}
+
+	public void disableBrakeMode() {
+    spark.setIdleMode(IdleMode.kCoast);
   }
-
   public String getColor(){
     
     m_colorMatcher.addColorMatch(kBlueTarget);
@@ -123,4 +161,5 @@ public class ControlPanelManipulator extends SubsystemBase {
       return "Unknown";
     }
   }
+
 }

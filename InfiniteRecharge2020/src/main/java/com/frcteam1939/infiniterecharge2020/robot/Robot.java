@@ -23,6 +23,7 @@ import com.frcteam1939.infiniterecharge2020.robot.subsystems.Indexer;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Intake;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Shooter;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Turret;
+import com.frcteam1939.infiniterecharge2020.robot.subsystems.Lights;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.SmartDashboardSubsystem;
 import com.frcteam1939.infiniterecharge2020.util.Limelight;
 
@@ -47,11 +48,14 @@ public class Robot extends TimedRobot {
   public static Indexer indexer;
   public static Shooter shooter;
   public static Turret turret;
+  public static Lights lights;
   public static OI oi;
   public static SmartDashboardSubsystem smartDashboardSubsystem;
 
   public static Limelight limelightTurret;
   public static Limelight limelightBase;
+
+  public static boolean isAutoRunning;
 
   // private static final String kDefaultAuto = "Default";
   // private static final String kCustomAuto = "My Auto";
@@ -70,6 +74,7 @@ public class Robot extends TimedRobot {
       shooter = new Shooter();
       turret = new Turret();
       oi = new OI();
+      lights = new Lights();
       smartDashboardSubsystem = new SmartDashboardSubsystem();
       limelightTurret = new Limelight("limelight-turret");
       limelightBase = new Limelight("limelight-base");
@@ -80,14 +85,14 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
-
+    
     limelightTurret.setPipeline(RobotMap.turretOffPipeline);
     limelightBase.setPipeline(RobotMap.baseDriverPipeline);
 
     Robot.climber.zeroEncoder();
     Robot.climber.climberBrakeRetract();
-    Robot.climber.climberBrakeRetract(); // This doesn't do anything when you're disabled, except maybe scare you when you enable
     
+
     controlPanelManipulator.setDefaultCommand(new ControlPanelManipulatorGamepadControl());
     shooter.setDefaultCommand(new ShooterGamepadControl());
     drivetrain.setDefaultCommand(new DriveByJoystick());
@@ -96,6 +101,7 @@ public class Robot extends TimedRobot {
     intake.setDefaultCommand(new IntakeGamepadControl());
     turret.setDefaultCommand(new TurretGamepadControl());
     smartDashboardSubsystem.setDefaultCommand(new SmartDashboardUpdater().perpetually());
+
   }
 
   /**
@@ -141,10 +147,12 @@ public class Robot extends TimedRobot {
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
+    Robot.lights.theaterCase();
 
     autonomousCommand = new InitiationLineBackUp();
 
     autonomousCommand.schedule();
+    isAutoRunning = true;
     // m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     // System.out.println("Auto selected: " + m_autoSelected);
@@ -168,8 +176,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    isAutoRunning = false;
+    
     limelightTurret.setPipeline(RobotMap.turretOffPipeline);
     limelightBase.setPipeline(RobotMap.baseDriverPipeline);
+    
     Robot.climber.enableBrakeModeClimber();
     Robot.controlPanelManipulator.enableBrakeMode();
     Robot.drivetrain.enableBrakeMode();
@@ -196,6 +207,7 @@ public class Robot extends TimedRobot {
     Robot.indexer.disableBrakeMode();
     Robot.turret.disableBrakeMode();
     Robot.climber.climberBrakeExtend();
+    Robot.lights.fire();
   }
 
   /**
