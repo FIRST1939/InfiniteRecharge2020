@@ -24,9 +24,15 @@ public class TurretGamepadControl extends CommandBase {
   
     @Override
     public void execute() {
-  ///Add Slow mode on shooter
-      double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
-      Robot.turret.set(value);
+      if(Robot.shooter.getIsShooting()){
+        double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X)*.2;
+        Robot.turret.set(value);
+      }
+      else{
+        double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
+        Robot.turret.set(value);
+      }
+     
     }
   
     @Override

@@ -23,6 +23,8 @@ public class Shooter extends SubsystemBase {
   public boolean close = false;
   public boolean mid = false;
   public boolean far = false;
+  
+  private boolean isShooting = false;
 
   private boolean ready;
   
@@ -51,6 +53,12 @@ public class Shooter extends SubsystemBase {
 
   // Positive is out
   public void set(double value){
+    if((value>0)||value<0){
+      isShooting = true;
+    }
+    else{
+      isShooting = false;
+    }
     shooterTalon1.set(ControlMode.PercentOutput, value);
     Robot.lights.strobeGreen();
   }
@@ -88,6 +96,10 @@ public class Shooter extends SubsystemBase {
     bigSolenoid.set(true);
     smallSolenoid.set(false);
   }
+
+  public void stop(){
+    set(0);
+  }
     
   public void enableBrakeMode(){
     shooterTalon1.setNeutralMode(NeutralMode.Brake);
@@ -105,5 +117,10 @@ public class Shooter extends SubsystemBase {
 
   public void setReady(boolean status){
     ready = status;
+  }
+
+  public boolean getIsShooting()
+  {
+    return isShooting;
   }
 }
