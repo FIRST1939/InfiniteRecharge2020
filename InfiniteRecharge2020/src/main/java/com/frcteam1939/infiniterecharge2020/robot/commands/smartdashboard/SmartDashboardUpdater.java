@@ -24,6 +24,11 @@ public class SmartDashboardUpdater extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("Far Shot", Robot.shooter.far);
+    SmartDashboard.putBoolean("Mid Shot", Robot.shooter.mid);
+    SmartDashboard.putBoolean("Close Shot", Robot.shooter.close);
+
+
     SmartDashboard.putNumber("Indexer Current", Robot.indexer.getHorzCurrentDraw());
     SmartDashboard.putNumber("Indexer Encoder", Robot.indexer.getPosition());
 

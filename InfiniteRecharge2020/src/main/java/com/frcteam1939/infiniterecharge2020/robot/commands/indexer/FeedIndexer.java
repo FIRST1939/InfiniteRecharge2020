@@ -5,59 +5,43 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
+package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class SetShooterClose extends CommandBase {
-
-  public SetShooterClose() {
-    addRequirements(Robot.shooter);
+public class FeedIndexer extends CommandBase {
+  /**
+   * Creates a new FeedIndexer.
+   */
+  public FeedIndexer() {
+    addRequirements(Robot.indexer);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.close = true;
-    Robot.shooter.mid = false;
-    Robot.shooter.far = false;
-    Robot.shooter.hoodMiddleLow();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
-    Robot.turret.set(value);
+    if(Robot.shooter.isReady()){
+      Robot.indexer.set(Robot.indexer.INDEXER_SHOOT_SPEED);
+    }
+    else{
+      Robot.indexer.stop();
+    }
 
-    double speedShooter = Robot.shooter.getSpeed();
-
-      if (speedShooter < 9163){
-        Robot.shooter.set(1);
-        Robot.shooter.setReady(false);
-      } 
-      else if (speedShooter > 9163 && speedShooter < 10829){
-        Robot.shooter.set(0.5);
-        Robot.shooter.setReady(true);
-
-      }
-      else {
-        Robot.shooter.set(0.45);
-        Robot.shooter.setReady(false);
-
-      } 
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.shooter.set(0);
+    Robot.indexer.stop();
   }
 
   // Returns true when the command should end.

@@ -34,7 +34,6 @@ public class ShootMid extends CommandBase {
     if(!wasWait){
       Robot.intake.extendIntake();
       Robot.indexer.setVertical(.5);
-      Timer.delay(.5);
       Robot.indexer.setHorizontal(.3);
       Robot.intake.setRoller(.5);
       wasWait= true;
@@ -51,6 +50,11 @@ public class ShootMid extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.indexer.stop();
+    Robot.intake.setRoller(0);
+    Robot.intake.retractIntake();
+
+
   }
 
   // Returns true when the command should end.

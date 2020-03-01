@@ -5,22 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
+package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
 
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class InitiationLineBackUp extends SequentialCommandGroup {
+public class IntakeOut2 extends InstantCommand {
+  public IntakeOut2() {
+    addRequirements(Robot.intake);
+  }
 
-  public InitiationLineBackUp() {
-   // addCommands(new PanLeftUntilVision(RobotMap.turretClosePipeline));
-    addCommands(new InitiationLineShooterSetupAuto());
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    Robot.intake.extendIntake();
   }
 }

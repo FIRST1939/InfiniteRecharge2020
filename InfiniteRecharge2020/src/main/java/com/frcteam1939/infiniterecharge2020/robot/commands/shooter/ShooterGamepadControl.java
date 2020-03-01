@@ -25,9 +25,10 @@ public class ShooterGamepadControl extends CommandBase {
   @Override
   public void execute() {
   
-   Robot.oi.xboxController.y.whenPressed(new InitiationLineShooterSetup());
+   /*Robot.oi.xboxController.y.whenPressed(new InitiationLineShooterSetup());
    Robot.oi.xboxController.a.whenPressed(new LongShooterSetup());
    Robot.oi.xboxController.b.whenPressed(new FrontTrenchShooterSetup());
+   */
 
 
     /*if(Robot.oi.xboxController.y.get()){

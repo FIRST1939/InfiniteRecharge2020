@@ -8,6 +8,7 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
+import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -28,7 +29,8 @@ public class SetShooterMid extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
+    Robot.turret.set(value);
     double speedShooter = Robot.shooter.getSpeed();
 
     if (speedShooter < 13500){

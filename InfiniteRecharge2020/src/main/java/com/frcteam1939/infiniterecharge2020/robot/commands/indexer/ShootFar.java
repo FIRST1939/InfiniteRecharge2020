@@ -38,7 +38,6 @@ public class ShootFar extends CommandBase {
     if(!wasWait && Robot.shooter.isReady()){
       Robot.intake.extendIntake();
       Robot.indexer.set(.5);
-      Timer.delay(.5);
       Robot.intake.setRoller(.5);
       wasWait= true;
     }

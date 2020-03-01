@@ -12,13 +12,17 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TurnThree extends CommandBase {
+
+  double currentPos;
   
   public TurnThree() {
     addRequirements(Robot.controlPanelManipulator);
+
   }
 
   @Override
   public void initialize() {
+    currentPos = Robot.controlPanelManipulator.getRotations();
   }
 
   @Override
@@ -33,6 +37,6 @@ public class TurnThree extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (Robot.controlPanelManipulator.getRotations() == 3.5);
+    return (Robot.controlPanelManipulator.getRotations() > currentPos+600);
   }
 }

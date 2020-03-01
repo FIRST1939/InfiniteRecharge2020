@@ -20,6 +20,7 @@ public class FeedPowerCellFar extends CommandBase {
   double currentPos;
   public FeedPowerCellFar() {
     addRequirements(Robot.indexer);
+    addRequirements(Robot.indexer);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -50,6 +51,9 @@ public class FeedPowerCellFar extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.set(0);
+    Robot.intake.retractIntake();
+    Robot.intake.setRoller(0);
+
   }
 
   // Returns true when the command should end.

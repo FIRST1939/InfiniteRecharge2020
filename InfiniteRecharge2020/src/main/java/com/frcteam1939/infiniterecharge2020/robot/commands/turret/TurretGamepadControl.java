@@ -9,6 +9,7 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooter;
+import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,13 +27,8 @@ public class TurretGamepadControl extends CommandBase {
   
     @Override
     public void execute() {
-
-      Robot.oi.xboxController.rightJoystick.whenPressed(new TurretToClimb2());
-      if (Robot.turret.isAtClimberPosition()){
-        Robot.turret.zeroEncoder();
-      }
-
-      double value = Robot.oi.xboxController.getLeftStickX() * .75;
+  ///Add Slow mode on shooter
+      double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
       Robot.turret.set(value);
     }
   

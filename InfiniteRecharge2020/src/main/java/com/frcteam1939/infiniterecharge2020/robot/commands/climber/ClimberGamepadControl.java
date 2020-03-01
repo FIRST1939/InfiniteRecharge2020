@@ -25,6 +25,7 @@ public class ClimberGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
+    
     boolean climberUp = Robot.oi.left.getRawButton(3);
     boolean climberDown = Robot.oi.left.getRawButton(2);
 

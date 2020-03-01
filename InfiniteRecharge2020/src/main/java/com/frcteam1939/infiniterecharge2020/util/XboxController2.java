@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
-public class XboxController extends Joystick {
+public class XboxController2 extends Joystick {
     
     public static final int A_BUTTON = 1;
     public static final int B_BUTTON= 2;
@@ -35,7 +35,7 @@ public class XboxController extends Joystick {
     public static final int RIGHT_X = 4;
     public static final int RIGHT_Y = 5;
     
-    public XboxController(int port) {
+    public XboxController2(int port) {
         super(port);
     }
     public final JoystickButton x = new JoystickButton(this, X_BUTTON);

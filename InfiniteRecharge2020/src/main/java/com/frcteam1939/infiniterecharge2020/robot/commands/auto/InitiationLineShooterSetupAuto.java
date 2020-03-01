@@ -26,7 +26,7 @@ public class InitiationLineShooterSetupAuto extends ParallelDeadlineGroup {
   public InitiationLineShooterSetupAuto() {
     // Add your commands in the super() call.  Add the deadline first.
     super(
-        new TurnToTargetTeleop(RobotMap.turretClosePipeline),
+        //new TurnToTargetTeleop(RobotMap.turretClosePipeline),
         new SetShooterClose(),
         new ShootCloseWait(),
         new DriveBackwardWait()

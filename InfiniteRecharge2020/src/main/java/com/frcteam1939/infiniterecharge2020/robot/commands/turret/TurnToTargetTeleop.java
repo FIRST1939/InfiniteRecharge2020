@@ -39,12 +39,12 @@ public class TurnToTargetTeleop extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    Robot.limelightTurret.setPipeline(RobotMap.turretOffPipeline);
+    Robot.limelightTurret.setPipeline(5);
     Robot.turret.set(0);
   }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(Robot.oi.xboxController.getLeftStickX()) > 0.5 ;
+    return Robot.oi.xboxController.getStartButtonPressed();
   }
 }

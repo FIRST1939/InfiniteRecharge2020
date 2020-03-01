@@ -5,22 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
+package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
-
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class InitiationLineBackUp extends SequentialCommandGroup {
-
-  public InitiationLineBackUp() {
-   // addCommands(new PanLeftUntilVision(RobotMap.turretClosePipeline));
-    addCommands(new InitiationLineShooterSetupAuto());
+public class ShootClose2 extends SequentialCommandGroup {
+  /**
+   * Creates a new ShootClose2.
+   */
+  public ShootClose2() {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());
+    super();
   }
 }

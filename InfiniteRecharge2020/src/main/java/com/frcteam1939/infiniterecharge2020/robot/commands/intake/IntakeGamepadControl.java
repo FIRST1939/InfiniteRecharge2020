@@ -26,7 +26,7 @@ public class IntakeGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
-    if (Robot.oi.xboxController.getLeftTriggerButton()){
+    /*if (Robot.oi.xboxController.getLeftTriggerButton()){
       if(!wasWait){
         Robot.intake.extendIntake();
         Timer.delay(.5);
@@ -44,6 +44,7 @@ public class IntakeGamepadControl extends CommandBase {
       Robot.intake.retractIntake();
       Robot.intake.setRoller(0);
     }
+    */
 
     //Robot.oi.xboxController.leftTrigger.whenActive(new IntakePowerCell());
   }
