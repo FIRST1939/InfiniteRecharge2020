@@ -8,6 +8,9 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.FeedIndexer;
+import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.FeedIndexerForTime;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -21,6 +24,6 @@ public class ShootCloseWait extends SequentialCommandGroup {
    */
   public ShootCloseWait() {
     addCommands(new WaitCommand(3));
-    addCommands(new ShootClose());
+    addCommands(new FeedIndexerForTime(4));
   }
 }

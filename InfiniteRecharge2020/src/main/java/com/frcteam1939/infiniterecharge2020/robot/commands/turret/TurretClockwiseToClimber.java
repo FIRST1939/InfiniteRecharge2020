@@ -9,7 +9,6 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TurretClockwiseToClimber extends CommandBase {
@@ -34,8 +33,7 @@ public class TurretClockwiseToClimber extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.turret.set(.1);
-    Timer.delay(.5);
+    //Timer.delay(.5);
     Robot.turret.set(0);
   }
 

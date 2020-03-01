@@ -7,7 +7,6 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
-import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeIn;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeOut;
 

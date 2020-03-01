@@ -7,7 +7,6 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
-import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalOutput;

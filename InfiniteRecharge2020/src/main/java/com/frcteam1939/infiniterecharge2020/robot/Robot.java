@@ -13,7 +13,6 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepa
 import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
-//import com.frcteam1939.infiniterecharge2020.robot.commands.lights.LightsUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.smartdashboard.SmartDashboardUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;

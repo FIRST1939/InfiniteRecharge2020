@@ -8,7 +8,6 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

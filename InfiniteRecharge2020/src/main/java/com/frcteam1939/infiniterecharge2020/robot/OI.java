@@ -20,14 +20,12 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeIn;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.FrontTrenchShooterSetup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.LongShooterSetup;
-import com.frcteam1939.infiniterecharge2020.util.DoNothing;
-import com.frcteam1939.infiniterecharge2020.util.Gamepad;
 import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class OI {
   public final Joystick left;
@@ -43,6 +41,8 @@ public class OI {
   public final JoystickButton climberUp;
   public final JoystickButton climberDown;
   public final JoystickButton extendBrake;
+  public final JoystickButton intake;
+
 
 
 
@@ -65,8 +65,12 @@ public class OI {
     shooterFar = new JoystickButton(xboxController, XboxController2.A_BUTTON);
     shoot = new JoystickButton(xboxController, XboxController2.RIGHT_BUTTON);
     intakeReverse = new JoystickButton(xboxController, XboxController2.BACK_BUTTON);
+    intake = new JoystickButton(xboxController, XboxController2.LEFT_TRIGGER);
+    index = new JoystickButton(xboxController, XboxController2.LEFT_BUTTON);
 
-    
+    //public final Trigger leftTrigger = new Trigger();
+    //public final Trigger rightTrigger = new Trigger();
+
     shoot.whileHeld(new FeedIndexer());
     /*shoot.whileHeld(new ConditionalCommand(
       new ShootClose(),
@@ -79,7 +83,6 @@ public class OI {
 
     //shoot.whenPressed(new ConditionalCommand(new ShootClose(), new ShootFar3(), )
 
-    index = new JoystickButton(xboxController, XboxController2.LEFT_BUTTON);
 
     shooterClose.whileHeld(new InitiationLineShooterSetup());
     shooterMid.whileHeld(new FrontTrenchShooterSetup());
@@ -89,8 +92,10 @@ public class OI {
     intakeReverse.whenReleased(new IntakeIn());
 
     index.whenPressed(new Index());
-    deployIntake.whenPressed(new DeployIntake());  
-    deployIntake.whenReleased(new IntakeIn());  
+    intake.whenPressed(new DeployIntake());
+    intake.whenReleased(new IntakeIn());
+    /*deployIntake.whenPressed(new DeployIntake());  
+    deployIntake.whenReleased(new IntakeIn());  */
 
     climberUp.whileHeld(new MoveClimber(1));
     climberDown.whileHeld(new MoveClimber(-1));

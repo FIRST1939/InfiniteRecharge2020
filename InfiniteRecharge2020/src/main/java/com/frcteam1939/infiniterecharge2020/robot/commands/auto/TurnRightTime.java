@@ -5,54 +5,45 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.intake;
+package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeGamepadControl extends CommandBase {
-
-  boolean wasWait = false;
-  public IntakeGamepadControl() {
-    addRequirements(Robot.intake);
+public class TurnRightTime extends CommandBase {
+  /**
+   * Creates a new TurnRightTime.
+   */
+  double time = 0;
+  double initialTime;
+  public TurnRightTime(double wait) {
+    time = wait;
+   addRequirements(Robot.drivetrain);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    initialTime = Timer.getFPGATimestamp();
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*if (Robot.oi.xboxController.getLeftTriggerButton()){
-      if(!wasWait){
-        Robot.intake.extendIntake();
-        Timer.delay(.5);
-        Robot.intake.setRoller(.6);
-        wasWait = true;
-      }
-      else{
-        Robot.intake.setRoller(.6);
-        Robot.intake.extendIntake();
-
-      }
-    }
-    else {
-      wasWait = false;
-      Robot.intake.retractIntake();
-      Robot.intake.setRoller(0);
-    }
-    */
-
-    //Robot.oi.xboxController.leftTrigger.whenActive(new IntakePowerCell());
+    Robot.drivetrain.setPercentOutput(.5, -5);
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.drivetrain.stop();
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (Timer.getFPGATimestamp()>initialTime+time);
   }
 }
