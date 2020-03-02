@@ -19,7 +19,7 @@ public class ShootThreeTurnBackup extends SequentialCommandGroup {
    */
   public ShootThreeTurnBackup() {
    addCommands(new InitiationLineShooterSetupAuto());
-   addCommands(new TurnRightTime(1.0));
+   addCommands(new TurnRightTime(1.2));
    addCommands(new DriveBackwardWait());
   }
 }

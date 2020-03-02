@@ -30,6 +30,7 @@ import com.frcteam1939.infiniterecharge2020.util.Limelight;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -103,6 +104,7 @@ public class Robot extends TimedRobot {
    // shooter.setDefaultCommand(new ShooterGamepadControl());
     drivetrain.setDefaultCommand(new DriveByJoystick());
     indexer.setDefaultCommand(new IndexerGamepadControl());
+    climber.enableBrakeModeClimber();
     //climber.setDefaultCommand(new ClimberGamepadControl());
    // intake.setDefaultCommand(new IntakeGamepadControl());
     turret.setDefaultCommand(new TurretGamepadControl());
@@ -201,10 +203,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+   
   }
 
   @Override
   public void disabledInit() {
+    climber.enableBrakeModeClimber();
     intake.retractIntake();
     intake.setRoller(0);
     shooter.hoodDown();

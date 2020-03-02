@@ -5,18 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class FeedIndexer extends CommandBase {
+public class MoveClimberDown extends CommandBase {
   /**
-   * Creates a new FeedIndexer.
+   * Creates a new MoveClimberDown.
    */
-  public FeedIndexer() {
-    addRequirements(Robot.indexer);
+  public MoveClimberDown() {
+    addRequirements(Robot.climber);
   }
 
   // Called when the command is initially scheduled.
@@ -27,24 +27,15 @@ public class FeedIndexer extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if(Robot.shooter.isReady()&& (Robot.shooter.isReadyLimelight())){
-      Robot.indexer.set(Robot.indexer.INDEXER_SHOOT_SPEED);
-      Robot.intake.extendIntake();
-    }
-    else{
-      Robot.indexer.stop();
-    }
-
+    Robot.climber.setClimber(-1);
+   // Robot.climber.climberBrakeRetract();
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.stop();
-    Robot.intake.retractIntake();
-
+    Robot.climber.setClimber(0);
   }
 
   // Returns true when the command should end.

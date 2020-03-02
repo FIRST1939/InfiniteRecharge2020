@@ -27,12 +27,14 @@ public class TurnRightTime extends CommandBase {
   @Override
   public void initialize() {
     initialTime = Timer.getFPGATimestamp();
+    System.out.println("initialized auto");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.drivetrain.setPercentOutput(.5, -5);
+    System.out.println("Ran Drivetrain");
+    Robot.drivetrain.setPercentOutput(.2, -.2);
   }
 
   // Called once the command ends or is interrupted.

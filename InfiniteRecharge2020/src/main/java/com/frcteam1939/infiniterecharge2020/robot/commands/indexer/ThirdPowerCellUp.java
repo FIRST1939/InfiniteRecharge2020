@@ -32,6 +32,8 @@ public class ThirdPowerCellUp extends CommandBase {
       excecuteCount = 1;
     }
     Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
+    //Robot.indexer.setHorizontal(-.1);
+
   }
 
   // Called once the command ends or is interrupted.

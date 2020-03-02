@@ -24,7 +24,7 @@ public class DeployIntake extends SequentialCommandGroup {
     super(
       new IntakeOut2(),
       new WaitCommand(0.5),
-      new SetIntake(.8)
+      new SetIntake(.6)
     );
   }
 }

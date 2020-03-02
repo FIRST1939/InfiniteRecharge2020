@@ -9,6 +9,8 @@ package com.frcteam1939.infiniterecharge2020.robot;
 
 import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ExtendBrake;
 import com.frcteam1939.infiniterecharge2020.robot.commands.climber.MoveClimber;
+import com.frcteam1939.infiniterecharge2020.robot.commands.climber.MoveClimberDown;
+import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.TurnThree;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.FeedIndexer;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
@@ -18,6 +20,7 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.intake.DeployIntake;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.DeployIntakeReverse;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeIn;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.FrontTrenchShooterSetup;
+import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.HoodDown;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.LongShooterSetup;
 import com.frcteam1939.infiniterecharge2020.util.XboxController2;
@@ -42,6 +45,9 @@ public class OI {
   public final JoystickButton climberDown;
   public final JoystickButton extendBrake;
   public final JoystickButton intake;
+  public final JoystickButton hoodDown;
+  public final JoystickButton stopIndexer;
+  public final JoystickButton turnThree;
 
 
 
@@ -67,10 +73,18 @@ public class OI {
     intakeReverse = new JoystickButton(xboxController, XboxController2.BACK_BUTTON);
     intake = new JoystickButton(xboxController, XboxController2.LEFT_TRIGGER);
     index = new JoystickButton(xboxController, XboxController2.LEFT_BUTTON);
+    hoodDown = new JoystickButton(xboxController, XboxController2.START_BUTTON);
+    stopIndexer = new JoystickButton(xboxController, XboxController2.LEFT_JOYSTICK_BUTTON);
+    turnThree = new JoystickButton(xboxController, XboxController2.LEFT_JOYSTICK_BUTTON);
+
+    
 
     //public final Trigger leftTrigger = new Trigger();
     //public final Trigger rightTrigger = new Trigger();
 
+    hoodDown.whenPressed(new HoodDown());
+    //stopIndexer.toggleWhenActive(command, interruptible)
+    //fstopIndexer.cancelWhenPressed(new Index());
     shoot.whileHeld(new FeedIndexer());
     /*shoot.whileHeld(new ConditionalCommand(
       new ShootClose(),
@@ -90,16 +104,17 @@ public class OI {
 
     intakeReverse.whenPressed(new DeployIntakeReverse());
     intakeReverse.whenReleased(new IntakeIn());
-
-    index.whenPressed(new Index());
-    intake.whenPressed(new DeployIntake());
-    intake.whenReleased(new IntakeIn());
-    /*deployIntake.whenPressed(new DeployIntake());  
-    deployIntake.whenReleased(new IntakeIn());  */
+    index.toggleWhenActive(new Index());
+    //index.whenPressed(new Index());
+   // intake.whenPressed(new DeployIntake());
+    //intake.whenReleased(new IntakeIn());
+    deployIntake.whenPressed(new DeployIntake());  
+    deployIntake.whenReleased(new IntakeIn());  
 
     climberUp.whileHeld(new MoveClimber(1));
-    climberDown.whileHeld(new MoveClimber(-1));
-    climberDown.whileHeld(new ExtendBrake());
+    climberDown.whileHeld(new MoveClimberDown());
+    extendBrake.whileHeld(new ExtendBrake());
+    turnThree.whenPressed(new TurnThree());
 
 
   

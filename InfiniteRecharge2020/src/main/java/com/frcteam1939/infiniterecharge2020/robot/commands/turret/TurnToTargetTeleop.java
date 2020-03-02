@@ -31,7 +31,12 @@ public class TurnToTargetTeleop extends CommandBase {
   public void execute() {
 
     double output = -Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
-    
+    if(Math.abs(Robot.limelightTurret.getHorizontalAngleError())<1.5){
+      Robot.shooter.setReadyLimelight(true);
+    }
+    else{
+      Robot.shooter.setReadyLimelight(false);
+    }
     Robot.turret.set(output);
   }
 

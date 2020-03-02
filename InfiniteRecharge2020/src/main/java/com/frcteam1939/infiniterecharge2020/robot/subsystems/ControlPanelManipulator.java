@@ -67,7 +67,7 @@ public class ControlPanelManipulator extends SubsystemBase {
   String gameData;
 
   public ControlPanelManipulator(){
-    
+   // spark.enableVoltageCompensation()
     //talon.enableVoltageCompensation(true);
     // talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute); // Need to check
   }

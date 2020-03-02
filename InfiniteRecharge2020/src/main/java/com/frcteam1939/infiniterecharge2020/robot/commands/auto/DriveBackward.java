@@ -26,7 +26,7 @@ public class DriveBackward extends CommandBase {
   public void initialize() {
    initialTime = Timer.getFPGATimestamp();
 
-    Robot.drivetrain.setPercentOutput(-.3, -.3);
+    Robot.drivetrain.setPercentOutput(.3, .3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,6 +44,7 @@ public class DriveBackward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return ((currentTime-initialTime)>1);
+    
+    return ((currentTime-initialTime)>.5);
   }
 }

@@ -30,6 +30,7 @@ public class MoveClimber extends CommandBase {
   @Override
   public void execute() {
     Robot.climber.setClimber(value);
+    //Robot.climber.climberBrakeRetract();
   }
 
   // Called once the command ends or is interrupted.

@@ -5,21 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
+package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
+
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class DriveBackwardWait extends SequentialCommandGroup {
-  /**
-   * Creates a new DriveBackwardWait.
-   */
-  public DriveBackwardWait() {
-    addCommands(new WaitCommand(1));
-    addCommands(new DriveBackward());
+public class HoodDown extends InstantCommand {
+  public HoodDown() {
+    addRequirements(Robot.shooter);
+  }
 
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    Robot.shooter.hoodDown();
   }
 }
