@@ -19,9 +19,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class ShootCloseWait extends SequentialCommandGroup {
-  /**
-   * Creates a new ShootCloseWait.
-   */
+
   public ShootCloseWait() {
     addCommands(new WaitCommand(3));
     addCommands(new FeedIndexerForTime(4));

@@ -19,7 +19,6 @@ public class ExtendBrake extends InstantCommand {
     addRequirements(Robot.climber);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.climber.climberBrakeExtend();

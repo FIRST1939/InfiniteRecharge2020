@@ -25,37 +25,10 @@ public class IndexerGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
-   /* boolean clearIndexer = Robot.oi.right.getRawButton(2);
-    if(clearIndexer){
-      Robot.intake.extendIntake();
-      Robot.indexer.set(-1);
-      Timer.delay(.2);
-      Robot.shooter.set(-1);
-    }
-    if(!clearIndexer){
-      Robot.intake.retractIntake();
-      Robot.indexer.set(0);
-      Robot.shooter.set(0);
-    }*/
-
     double verticalValue = -Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_Y)/2;
     double horizontalValue = Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_X)/2;
     Robot.indexer.setVertical(verticalValue);
     Robot.indexer.setHorizontal(horizontalValue);
-/*
-    Robot.oi.xboxController.leftButton.whenPressed(new Index());
-
-    Robot.oi.xboxController.back.cancelWhenPressed(new Index());
-
-    if (Robot.shooter.close){
-      Robot.oi.xboxController.rightButton.whenHeld(new ShootClose());
-    }
-    else if (Robot.shooter.far){
-      Robot.oi.xboxController.rightButton.whenHeld(new ShootFar3());
-    }
-    else if(Robot.shooter.mid){
-      Robot.oi .xboxController.rightButton.whenHeld(new ShootMid());
-    }*/
   }
 
   @Override
