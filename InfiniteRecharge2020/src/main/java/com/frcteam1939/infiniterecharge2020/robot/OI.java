@@ -23,6 +23,7 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.FrontTrenchSh
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.HoodDown;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.LongShooterSetup;
+import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooter;
 import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -97,8 +98,8 @@ public class OI {
 
     //shoot.whenPressed(new ConditionalCommand(new ShootClose(), new ShootFar3(), )
 
-
-    shooterClose.whileHeld(new InitiationLineShooterSetup());
+    shooterClose.toggleWhenActive(new SetShooter(2394));
+    //shooterClose.whileHeld(new InitiationLineShooterSetup());
     shooterMid.whileHeld(new FrontTrenchShooterSetup());
     shooterFar.whileHeld(new LongShooterSetup());
 

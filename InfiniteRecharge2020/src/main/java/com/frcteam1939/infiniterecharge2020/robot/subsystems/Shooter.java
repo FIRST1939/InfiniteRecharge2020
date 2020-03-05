@@ -8,8 +8,12 @@
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,6 +21,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.frcteam1939.infiniterecharge2020.util.Constants;
 
 public class Shooter extends SubsystemBase {
 
@@ -35,8 +40,42 @@ public class Shooter extends SubsystemBase {
 
   private Solenoid bigSolenoid = new Solenoid(RobotMap.shooterHoodBigSolenoid);
   private Solenoid smallSolenoid = new Solenoid(RobotMap.shooterHoodSmallSolenoid);
+
+  private TalonFXConfiguration config = new TalonFXConfiguration();
   
   public Shooter(){
+    config.primaryPID.selectedFeedbackSensor = TalonFXFeedbackDevice.IntegratedSensor.toFeedbackDevice();
+    
+    config.slot0.kF = Constants.PID_Constants.sF;
+    config.slot0.kP = Constants.PID_Constants.sP;
+    config.slot0.kI = Constants.PID_Constants.sI;
+    config.slot0.kD = Constants.PID_Constants.sD;
+
+    config.slot0.integralZone = Constants.PID_Constants.sIzone;
+    config.slot0.closedLoopPeakOutput = Constants.PID_Constants.sPeakOutput;
+
+    //config.auxPIDPolarity = false; //true right talon, false left talon
+
+    config.slot0.closedLoopPeriod = 1;
+
+   /* shooterTalon1.config_kF(0,Constants.PID_Constants.sF,Constants.kTimeoutMs);
+    shooterTalon1.config_kP(0,Constants.PID_Constants.sP,Constants.kTimeoutMs);
+    shooterTalon1.config_kI(0,Constants.PID_Constants.sI,Constants.kTimeoutMs);
+    shooterTalon1.config_kD(0,Constants.PID_Constants.sD,Constants.kTimeoutMs);*/
+
+
+
+    shooterTalon1.configAllSettings(config);
+    shooterTalon2.configAllSettings(config);
+
+    /*
+    _rightMaster.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, Constants.kTimeoutMs);
+		_rightMaster.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 20, Constants.kTimeoutMs);
+    _leftMaster.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 5, Constants.kTimeoutMs);
+    */
+
+
+    
     shooterTalon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     shooterTalon2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     shooterTalon1.enableVoltageCompensation(true);
@@ -47,6 +86,8 @@ public class Shooter extends SubsystemBase {
 
     shooterTalon2.follow(shooterTalon1);
     disableBrakeMode();
+
+    shooterTalon1.selectProfileSlot(0, 0);
   }
 
   @Override
@@ -65,10 +106,23 @@ public class Shooter extends SubsystemBase {
     Robot.lights.strobeGreen();
   }
 
+  public void setRPM(double rpm){
+    double targetRPM = rpm;
+    double targetUnitsPer100ms = targetRPM * Constants.PID_Constants.sSensorUnitsPerRevolutions / 600;//why /600 thats what it said in example code?
+    double feedFwdTerm = 0;
+    shooterTalon1.set(TalonFXControlMode.Velocity, targetUnitsPer100ms,DemandType.ArbitraryFeedForward,feedFwdTerm);
+    ///shooterTalon1.set(TalonFXControlMode.Velocity, targetUnitsPer100ms);
+    shooterTalon2.follow(shooterTalon1);
+  }
+
   public double getSpeed(){
     double speed1 = shooterTalon1.getSelectedSensorVelocity();
     double speed2 = shooterTalon2.getSelectedSensorVelocity();
     return (speed1 + speed2) / 2;
+  }
+
+  public double getRevolutions(){
+    return getSpeed()/Constants.PID_Constants.sSensorUnitsPerRevolutions;
   }
 
   public double getTemperature(){

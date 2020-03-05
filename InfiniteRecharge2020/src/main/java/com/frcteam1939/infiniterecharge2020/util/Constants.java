@@ -37,4 +37,19 @@ public class Constants {
         public static final double kPDriveVel = 0;
       }
 
+    public static final class PID_Constants{
+        public static final double sF = 0;
+        public static final double sP = 0;
+        public static final double sI = 0;
+        public static final double sD = 0;
+        public static final double sPeakOutput = 0;
+        public static final int sIzone = 0;
+        public static final double sSensorUnitsPerRevolutions = 2048;
+
+    }
+
+    public static final int timeoutMs = 30;
+
+
+
 }

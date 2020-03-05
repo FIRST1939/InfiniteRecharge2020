@@ -9,6 +9,7 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.smartdashboard;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -27,6 +28,8 @@ public class SmartDashboardUpdater extends CommandBase {
     SmartDashboard.putBoolean("Far Shot", Robot.shooter.far);
     SmartDashboard.putBoolean("Mid Shot", Robot.shooter.mid);
     SmartDashboard.putBoolean("Close Shot", Robot.shooter.close);
+
+   // SmartDashboard.putNumber("Shooter RPM", )
 
 
     SmartDashboard.putNumber("Indexer Current", Robot.indexer.getHorzCurrentDraw());

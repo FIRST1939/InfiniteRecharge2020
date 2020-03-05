@@ -13,28 +13,30 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SetShooter extends CommandBase {
 
-  double value;
+  double rpm;
 
-  public SetShooter(double value) {
-    this.value = value;
+  public SetShooter(double rpm) {
+    this.rpm = rpm;
     addRequirements(Robot.shooter);
   }
 
   @Override
   public void initialize() {
-    Robot.shooter.set(value);
+    Robot.shooter.setRPM(rpm);
   }
 
   @Override
   public void execute() {
+    
   }
 
   @Override
   public void end(boolean interrupted) {
+    Robot.shooter.stop();
   }
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
