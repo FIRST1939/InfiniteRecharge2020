@@ -13,37 +13,32 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TurnRightTime extends CommandBase {
-  /**
-   * Creates a new TurnRightTime.
-   */
+
   double time = 0;
   double initialTime;
+
   public TurnRightTime(double wait) {
     time = wait;
-   addRequirements(Robot.drivetrain);
+    addRequirements(Robot.drivetrain);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     initialTime = Timer.getFPGATimestamp();
     System.out.println("initialized auto");
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     System.out.println("Ran Drivetrain");
     Robot.drivetrain.setPercentOutput(.2, -.2);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     Robot.drivetrain.stop();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return (Timer.getFPGATimestamp()>initialTime+time);

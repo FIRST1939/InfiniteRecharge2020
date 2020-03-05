@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class DriveBackwardWait extends SequentialCommandGroup {
-  /**
-   * Creates a new DriveBackwardWait.
-   */
+
   public DriveBackwardWait() {
     addCommands(new WaitCommand(1));
     addCommands(new DriveBackward());

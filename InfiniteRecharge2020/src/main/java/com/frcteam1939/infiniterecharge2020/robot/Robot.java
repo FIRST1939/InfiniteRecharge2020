@@ -8,13 +8,8 @@
 package com.frcteam1939.infiniterecharge2020.robot;
 
 import com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain.DriveByJoystick;
-import com.frcteam1939.infiniterecharge2020.robot.commands.auto.InitiationLineBackUp;
 import com.frcteam1939.infiniterecharge2020.robot.commands.auto.ShootThreeTurnBackup;
-import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
-import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
-import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.smartdashboard.SmartDashboardUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
@@ -30,7 +25,6 @@ import com.frcteam1939.infiniterecharge2020.util.Limelight;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -98,18 +92,12 @@ public class Robot extends TimedRobot {
 
     Robot.climber.zeroEncoder();
     Robot.climber.climberBrakeRetract();
+    Robot.climber.enableBrakeModeClimber();
     
-
-    //controlPanelManipulator.setDefaultCommand(new ControlPanelManipulatorGamepadControl());
-   // shooter.setDefaultCommand(new ShooterGamepadControl());
     drivetrain.setDefaultCommand(new DriveByJoystick());
     indexer.setDefaultCommand(new IndexerGamepadControl());
-    climber.enableBrakeModeClimber();
-    //climber.setDefaultCommand(new ClimberGamepadControl());
-   // intake.setDefaultCommand(new IntakeGamepadControl());
     turret.setDefaultCommand(new TurretGamepadControl());
     smartDashboardSubsystem.setDefaultCommand(new SmartDashboardUpdater().perpetually());
-    //lights.setDefaultCommand(new LightsUpdater().perpetually());
   }
 
   /**
@@ -122,15 +110,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    /*CommandScheduler.getInstance().setDefaultCommand(Robot.controlPanelManipulator, new ControlPanelManipulatorGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.shooter, new ShooterGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.drivetrain, new DriveByJoystick());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.indexer, new IndexerGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.climber, new ClimberGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.intake, new IntakeGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.turret, new TurretGamepadControl());
-    CommandScheduler.getInstance().setDefaultCommand(Robot.smartDashboardSubsystem, new SmartDashboardUpdater().perpetually());
-    */
     CommandScheduler.getInstance().run();
   }
 
@@ -203,23 +182,21 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-   
   }
 
   @Override
   public void disabledInit() {
-    climber.enableBrakeModeClimber();
-    intake.retractIntake();
-    intake.setRoller(0);
-    shooter.hoodDown();
-    limelightTurret.setPipeline(RobotMap.turretOffPipeline);
-    limelightBase.setPipeline(RobotMap.baseDriverPipeline);
+    Robot.climber.enableBrakeModeClimber();
+    Robot.intake.retractIntake();
+    Robot.intake.setRoller(0);
+    Robot.shooter.hoodDown();
+    Robot.limelightTurret.setPipeline(RobotMap.turretOffPipeline);
+    Robot.limelightBase.setPipeline(RobotMap.baseDriverPipeline);
     Robot.climber.disableBrakeModeClimber();
     Robot.controlPanelManipulator.disableBrakeMode();
     Robot.drivetrain.disableBrakeMode();
     Robot.indexer.disableBrakeMode();
     Robot.turret.disableBrakeMode();
-    Robot.climber.climberBrakeExtend();
   }
   @Override
   public void testPeriodic() {

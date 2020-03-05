@@ -12,19 +12,15 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class FeedIndexer extends CommandBase {
-  /**
-   * Creates a new FeedIndexer.
-   */
+
   public FeedIndexer() {
     addRequirements(Robot.indexer);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
@@ -35,11 +31,8 @@ public class FeedIndexer extends CommandBase {
     else{
       Robot.indexer.stop();
     }
-
-
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.stop();
@@ -47,7 +40,6 @@ public class FeedIndexer extends CommandBase {
 
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

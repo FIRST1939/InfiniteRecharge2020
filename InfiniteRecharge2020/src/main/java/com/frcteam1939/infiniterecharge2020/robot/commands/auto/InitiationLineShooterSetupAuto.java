@@ -18,15 +18,11 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooterClo
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class InitiationLineShooterSetupAuto extends ParallelDeadlineGroup {
-  /**
-   * Creates a new InitiationLineShooterSetupWait.
-   */
+
   public InitiationLineShooterSetupAuto() {
-    // Add your commands in the super() call.  Add the deadline first.
     super(
         //new TurnToTargetTeleop(RobotMap.turretClosePipeline),
         new ShootCloseWait(),
-
         new SetShooterCloseAuto()
         //new DriveBackwardWait()
     );

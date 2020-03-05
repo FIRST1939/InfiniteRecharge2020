@@ -27,7 +27,7 @@ public class Shooter extends SubsystemBase {
   private boolean isShooting = false;
 
   private boolean ready;
-  private boolean ready2;
+  private boolean readyLimelight;
 
   
   private TalonFX shooterTalon1 = new TalonFX(RobotMap.shooterFalcon1);
@@ -122,16 +122,15 @@ public class Shooter extends SubsystemBase {
   }
   
   public boolean isReadyLimelight(){
-    return ready2;
+    return readyLimelight;
   }
 
   public void setReadyLimelight(boolean status){
-    ready2 = status;
+    readyLimelight = status;
   }
 
 
-  public boolean getIsShooting()
-  {
+  public boolean getIsShooting(){
     return isShooting;
   }
 }

@@ -15,9 +15,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class TurretToClimb extends SequentialCommandGroup {
-  /**
-   * Creates a new ZeroTurret.
-   */
+
   public TurretToClimb() {
     if (Robot.turret.getPosition() < -0.1){
       addCommands(new TurretClockwiseToClimber());

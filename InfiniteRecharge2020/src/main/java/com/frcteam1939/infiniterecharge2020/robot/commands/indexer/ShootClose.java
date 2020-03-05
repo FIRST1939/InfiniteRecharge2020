@@ -40,7 +40,6 @@ public class ShootClose extends CommandBase {
     if(!wasWait){
       Robot.intake.extendIntake();
       Robot.indexer.set(.5);
-      //Timer.delay(.5);
       Robot.intake.setRoller(.5);
       wasWait= true;
     }

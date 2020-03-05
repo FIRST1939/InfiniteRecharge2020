@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class ShootThreeTurnBackup extends SequentialCommandGroup {
-  /**
-   * Creates a new ShootThreeTurnBackup.
-   */
+
   public ShootThreeTurnBackup() {
    addCommands(new InitiationLineShooterSetupAuto());
    addCommands(new TurnRightTime(1.2));

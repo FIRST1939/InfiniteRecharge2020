@@ -33,7 +33,6 @@ public class TurretClockwiseToClimber extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //Timer.delay(.5);
     Robot.turret.set(0);
   }
 

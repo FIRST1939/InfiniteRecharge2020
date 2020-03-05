@@ -32,7 +32,6 @@ public class TurretGamepadControl extends CommandBase {
         double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
         Robot.turret.set(value);
       }
-     
     }
   
     @Override

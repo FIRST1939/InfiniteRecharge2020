@@ -19,7 +19,6 @@ public class HoodDown extends InstantCommand {
     addRequirements(Robot.shooter);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.shooter.hoodDown();

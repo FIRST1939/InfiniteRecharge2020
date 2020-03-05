@@ -12,19 +12,15 @@ import com.frcteam1939.infiniterecharge2020.robot.Robot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class MoveClimberDown extends CommandBase {
-  /**
-   * Creates a new MoveClimberDown.
-   */
+
   public MoveClimberDown() {
     addRequirements(Robot.climber);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     Robot.climber.setClimber(-1);
@@ -32,13 +28,11 @@ public class MoveClimberDown extends CommandBase {
 
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     Robot.climber.setClimber(0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
