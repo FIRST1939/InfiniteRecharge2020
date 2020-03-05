@@ -32,16 +32,16 @@ public class DriveByJoystick extends CommandBase {
 
 	if(squaredInputs){
 		if(move>0){
-			move = (Robot.oi.left.getY())^2;
+			move = Math.pow(Robot.oi.left.getY(),2);
 		}
 		else if(move<0){
-			move = -1*((Robot.oi.left.getY())^2);
+			move = -1*(Math.pow(Robot.oi.left.getY(),2));
 		}
 		if(rotate>0){
-			move = (Robot.oi.left.getX())^2;
+			move = (Math.pow(Robot.oi.left.getX(),2));
 		}
 		else if(rotate<0){
-			move = -1*((Robot.oi.left.getX())^2);
+			move = -1*(Math.pow(Robot.oi.left.getX(),2));
 		}
 	}
 
