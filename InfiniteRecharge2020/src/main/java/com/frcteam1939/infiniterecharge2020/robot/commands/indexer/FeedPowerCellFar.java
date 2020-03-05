@@ -9,7 +9,6 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class FeedPowerCellFar extends CommandBase {
@@ -19,6 +18,7 @@ public class FeedPowerCellFar extends CommandBase {
   boolean wasWait = false;
   double currentPos;
   public FeedPowerCellFar() {
+    addRequirements(Robot.indexer);
     addRequirements(Robot.indexer);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -50,6 +50,9 @@ public class FeedPowerCellFar extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.set(0);
+    Robot.intake.retractIntake();
+    Robot.intake.setRoller(0);
+
   }
 
   // Returns true when the command should end.

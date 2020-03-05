@@ -8,10 +8,9 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
+import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class IndexerGamepadControl extends CommandBase {
@@ -39,11 +38,11 @@ public class IndexerGamepadControl extends CommandBase {
       Robot.shooter.set(0);
     }*/
 
-    double verticalValue = -Robot.oi.xboxController.getRightStickY()/2;
-    double horizontalValue = Robot.oi.xboxController.getRightStickX()/2;
+    double verticalValue = -Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_Y)/2;
+    double horizontalValue = Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_X)/2;
     Robot.indexer.setVertical(verticalValue);
     Robot.indexer.setHorizontal(horizontalValue);
-
+/*
     Robot.oi.xboxController.leftButton.whenPressed(new Index());
 
     Robot.oi.xboxController.back.cancelWhenPressed(new Index());
@@ -56,7 +55,7 @@ public class IndexerGamepadControl extends CommandBase {
     }
     else if(Robot.shooter.mid){
       Robot.oi .xboxController.rightButton.whenHeld(new ShootMid());
-    }
+    }*/
   }
 
   @Override

@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunIndexerUntilDistance extends CommandBase {
+public class MoveClimberDown extends CommandBase {
   /**
-   * Creates a new RunIndexerUntilDistance.
+   * Creates a new MoveClimberDown.
    */
-  
-  public RunIndexerUntilDistance() {
-    addRequirements(Robot.indexer);
+  public MoveClimberDown() {
+    addRequirements(Robot.climber);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -27,19 +27,20 @@ public class RunIndexerUntilDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.indexer.setHorizontal(.25);
+    Robot.climber.setClimber(-1);
+   // Robot.climber.climberBrakeRetract();
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.set(0);
+    Robot.climber.setClimber(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return  ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60));
+    return false;
   }
 }

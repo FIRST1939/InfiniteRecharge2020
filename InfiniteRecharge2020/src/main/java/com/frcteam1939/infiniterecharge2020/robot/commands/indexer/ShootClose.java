@@ -18,16 +18,20 @@ public class ShootClose extends CommandBase {
    */
 
   boolean wasWait = false;
+  double startTime;
+  private static final double someDelay = 0.5;
   
   public ShootClose() {
     addRequirements(Robot.indexer);
     addRequirements(Robot.intake);
+    startTime = 0;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.intake.extendIntake();
+    startTime = Timer.getFPGATimestamp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,7 +40,7 @@ public class ShootClose extends CommandBase {
     if(!wasWait){
       Robot.intake.extendIntake();
       Robot.indexer.set(.5);
-      Timer.delay(.5);
+      //Timer.delay(.5);
       Robot.intake.setRoller(.5);
       wasWait= true;
     }
@@ -46,6 +50,14 @@ public class ShootClose extends CommandBase {
       Robot.intake.setRoller(.5);
     }
     
+    if (Timer.getFPGATimestamp() <= startTime + someDelay) {
+      Robot.indexer.set(.5);
+      Robot.intake.extendIntake();
+      return;
+    }
+
+    Robot.intake.extendIntake();
+
   }
 
   // Called once the command ends or is interrupted.

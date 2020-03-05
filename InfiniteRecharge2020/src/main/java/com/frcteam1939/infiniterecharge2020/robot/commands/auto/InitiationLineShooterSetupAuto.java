@@ -7,14 +7,12 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooterClose;
-import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurnToTargetTeleop;
+import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooterCloseAuto;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -26,10 +24,11 @@ public class InitiationLineShooterSetupAuto extends ParallelDeadlineGroup {
   public InitiationLineShooterSetupAuto() {
     // Add your commands in the super() call.  Add the deadline first.
     super(
-        new TurnToTargetTeleop(RobotMap.turretClosePipeline),
-        new SetShooterClose(),
+        //new TurnToTargetTeleop(RobotMap.turretClosePipeline),
         new ShootCloseWait(),
-        new DriveBackwardWait()
+
+        new SetShooterCloseAuto()
+        //new DriveBackwardWait()
     );
   }
 }

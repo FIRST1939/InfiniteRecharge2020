@@ -8,9 +8,7 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TurnToTargetTeleop extends CommandBase {
@@ -33,18 +31,23 @@ public class TurnToTargetTeleop extends CommandBase {
   public void execute() {
 
     double output = -Robot.turret.anglePID.calculate(Robot.limelightTurret.getHorizontalAngleError());
-    
+    if(Math.abs(Robot.limelightTurret.getHorizontalAngleError())<1.5){
+      Robot.shooter.setReadyLimelight(true);
+    }
+    else{
+      Robot.shooter.setReadyLimelight(false);
+    }
     Robot.turret.set(output);
   }
 
   @Override
   public void end(boolean interrupted) {
-    Robot.limelightTurret.setPipeline(RobotMap.turretOffPipeline);
+    Robot.limelightTurret.setPipeline(5);
     Robot.turret.set(0);
   }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(Robot.oi.xboxController.getLeftStickX()) > 0.5 ;
+    return Robot.oi.xboxController.getStartButtonPressed();
   }
 }

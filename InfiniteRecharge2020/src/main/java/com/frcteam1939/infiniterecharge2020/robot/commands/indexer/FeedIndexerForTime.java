@@ -9,17 +9,22 @@ package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunIndexerUntilDistance extends CommandBase {
+public class FeedIndexerForTime extends CommandBase {
   /**
-   * Creates a new RunIndexerUntilDistance.
+   * Creates a new FeedIndexer.
    */
-  
-  public RunIndexerUntilDistance() {
+  double wait = 0;
+  double initialTime;
+  public FeedIndexerForTime(double time) {
+    wait = time;
     addRequirements(Robot.indexer);
+    initialTime = Timer.getFPGATimestamp();
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -27,19 +32,26 @@ public class RunIndexerUntilDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.indexer.setHorizontal(.25);
+
+    if(Robot.shooter.isReady()){
+      Robot.indexer.set(Robot.indexer.INDEXER_SHOOT_SPEED);
+    }
+    else{
+      Robot.indexer.stop();
+    }
+
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.set(0);
+    Robot.indexer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return  ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60));
+    return (Timer.getFPGATimestamp() > initialTime + wait);
   }
 }

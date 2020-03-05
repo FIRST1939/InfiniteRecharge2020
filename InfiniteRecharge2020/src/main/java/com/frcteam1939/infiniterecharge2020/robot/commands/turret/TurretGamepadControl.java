@@ -8,10 +8,8 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.turret;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooter;
+import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TurretGamepadControl extends CommandBase {
@@ -26,14 +24,15 @@ public class TurretGamepadControl extends CommandBase {
   
     @Override
     public void execute() {
-
-      Robot.oi.xboxController.rightJoystick.whenPressed(new TurretToClimb2());
-      if (Robot.turret.isAtClimberPosition()){
-        Robot.turret.zeroEncoder();
+      if(Robot.shooter.getIsShooting()){
+        double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X)*.2;
+        Robot.turret.set(value);
       }
-
-      double value = Robot.oi.xboxController.getLeftStickX() * .75;
-      Robot.turret.set(value);
+      else{
+        double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
+        Robot.turret.set(value);
+      }
+     
     }
   
     @Override

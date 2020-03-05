@@ -42,6 +42,6 @@ public class TurnToTargetAuto extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(Robot.oi.xboxController.getLeftStickX()) > 0.5 ;
+    return false; // Math.abs(Robot.oi.xboxController.getLeftStickX()) > 0.5 ;
   }
 }

@@ -23,6 +23,7 @@ public class IntakeIn extends CommandBase {
   @Override
   public void initialize() {
     Robot.intake.retractIntake();
+    Robot.intake.setRoller(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

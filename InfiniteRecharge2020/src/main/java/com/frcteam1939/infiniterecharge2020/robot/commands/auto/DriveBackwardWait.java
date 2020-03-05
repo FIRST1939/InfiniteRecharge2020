@@ -18,7 +18,7 @@ public class DriveBackwardWait extends SequentialCommandGroup {
    * Creates a new DriveBackwardWait.
    */
   public DriveBackwardWait() {
-    addCommands(new WaitCommand(9));
+    addCommands(new WaitCommand(1));
     addCommands(new DriveBackward());
 
   }

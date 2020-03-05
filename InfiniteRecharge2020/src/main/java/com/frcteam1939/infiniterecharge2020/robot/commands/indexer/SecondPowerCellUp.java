@@ -33,6 +33,8 @@ public class SecondPowerCellUp extends CommandBase {
       excecuteCount = 1;
     }
     Robot.indexer.setVertical(Robot.indexer.INDEXER_VERTICAL_SPEED);
+    //Robot.indexer.setHorizontal(-.1);
+
     if((Robot.indexer.getPosition()>currentPos+1.35)||(Robot.indexer.getPosition()<currentPos+1.35)){
       tooFar = false;
     }
@@ -46,7 +48,7 @@ public class SecondPowerCellUp extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (Robot.indexer.getPosition())>1.2;
+    return (Robot.indexer.getPosition())>1.264;
     //return (((!((Robot.indexer.getDistanceBottom() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceBottom() > Robot.indexer.DIST_ONE_BALL - 60))) && ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60)))|| Robot.indexer.getPosition()>currentPos+1);
   }
   

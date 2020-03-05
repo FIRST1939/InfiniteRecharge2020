@@ -8,7 +8,6 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -25,9 +24,10 @@ public class ShooterGamepadControl extends CommandBase {
   @Override
   public void execute() {
   
-   Robot.oi.xboxController.y.whenPressed(new InitiationLineShooterSetup());
+   /*Robot.oi.xboxController.y.whenPressed(new InitiationLineShooterSetup());
    Robot.oi.xboxController.a.whenPressed(new LongShooterSetup());
    Robot.oi.xboxController.b.whenPressed(new FrontTrenchShooterSetup());
+   */
 
 
     /*if(Robot.oi.xboxController.y.get()){

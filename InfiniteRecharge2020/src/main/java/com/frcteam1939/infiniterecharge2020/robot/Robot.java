@@ -9,11 +9,11 @@ package com.frcteam1939.infiniterecharge2020.robot;
 
 import com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain.DriveByJoystick;
 import com.frcteam1939.infiniterecharge2020.robot.commands.auto.InitiationLineBackUp;
+import com.frcteam1939.infiniterecharge2020.robot.commands.auto.ShootThreeTurnBackup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ClimberGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.ControlPanelManipulatorGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
-import com.frcteam1939.infiniterecharge2020.robot.commands.lights.LightsUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.ShooterGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.smartdashboard.SmartDashboardUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
@@ -30,6 +30,7 @@ import com.frcteam1939.infiniterecharge2020.util.Limelight;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -99,15 +100,16 @@ public class Robot extends TimedRobot {
     Robot.climber.climberBrakeRetract();
     
 
-    controlPanelManipulator.setDefaultCommand(new ControlPanelManipulatorGamepadControl());
-    shooter.setDefaultCommand(new ShooterGamepadControl());
+    //controlPanelManipulator.setDefaultCommand(new ControlPanelManipulatorGamepadControl());
+   // shooter.setDefaultCommand(new ShooterGamepadControl());
     drivetrain.setDefaultCommand(new DriveByJoystick());
     indexer.setDefaultCommand(new IndexerGamepadControl());
-    climber.setDefaultCommand(new ClimberGamepadControl());
-    intake.setDefaultCommand(new IntakeGamepadControl());
+    climber.enableBrakeModeClimber();
+    //climber.setDefaultCommand(new ClimberGamepadControl());
+   // intake.setDefaultCommand(new IntakeGamepadControl());
     turret.setDefaultCommand(new TurretGamepadControl());
     smartDashboardSubsystem.setDefaultCommand(new SmartDashboardUpdater().perpetually());
-    lights.setDefaultCommand(new LightsUpdater().perpetually());
+    //lights.setDefaultCommand(new LightsUpdater().perpetually());
   }
 
   /**
@@ -154,8 +156,8 @@ public class Robot extends TimedRobot {
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
     //Robot.lights.theaterCase();
-
-    autonomousCommand = new InitiationLineBackUp();
+    autonomousCommand = new ShootThreeTurnBackup();
+    //autonomousCommand = new InitiationLineBackUp();
 
     autonomousCommand.schedule();
     isAutoRunning = true;
@@ -201,10 +203,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+   
   }
 
   @Override
   public void disabledInit() {
+    climber.enableBrakeModeClimber();
+    intake.retractIntake();
+    intake.setRoller(0);
+    shooter.hoodDown();
     limelightTurret.setPipeline(RobotMap.turretOffPipeline);
     limelightBase.setPipeline(RobotMap.baseDriverPipeline);
     Robot.climber.disableBrakeModeClimber();

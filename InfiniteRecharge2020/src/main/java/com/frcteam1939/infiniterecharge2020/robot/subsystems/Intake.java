@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.intake.IntakeGamepadControl;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;

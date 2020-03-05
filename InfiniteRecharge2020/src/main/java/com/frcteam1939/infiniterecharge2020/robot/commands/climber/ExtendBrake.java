@@ -5,25 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
+package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
 
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurnToTargetTeleop;
+import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class FrontTrenchShooterSetup extends ParallelCommandGroup {
-  /**
-   * Creates a new FrontTrenchShooterSetup.
-   */
-  public FrontTrenchShooterSetup() {
-    // Add your commands in the super() call.  Add the deadline first.
-    super(
-      new TurnToTargetTeleop(RobotMap.turretMidPipeline),
-      new SetShooterMid()
-    );
+public class ExtendBrake extends InstantCommand {
+  public ExtendBrake() {
+    addRequirements(Robot.climber);
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    Robot.climber.climberBrakeExtend();
   }
 }

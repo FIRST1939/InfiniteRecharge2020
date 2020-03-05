@@ -8,8 +8,6 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveByJoystick extends CommandBase {
@@ -47,9 +45,9 @@ public class DriveByJoystick extends CommandBase {
 			rotate = 0;
 		} else {
 			if (slowDown) {
-				rotate = map(rotate, 0, 0.4);
+				rotate = map(rotate, 0, 0.3);
 			} else {
-				rotate = map(rotate, 0, 0.6);
+				rotate = map(rotate, 0, 0.45);
 			}
 		}
 

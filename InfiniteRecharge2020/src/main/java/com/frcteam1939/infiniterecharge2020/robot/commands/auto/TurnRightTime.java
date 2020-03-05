@@ -5,41 +5,47 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frcteam1939.infiniterecharge2020.robot.commands.indexer;
+package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunIndexerUntilDistance extends CommandBase {
+public class TurnRightTime extends CommandBase {
   /**
-   * Creates a new RunIndexerUntilDistance.
+   * Creates a new TurnRightTime.
    */
-  
-  public RunIndexerUntilDistance() {
-    addRequirements(Robot.indexer);
+  double time = 0;
+  double initialTime;
+  public TurnRightTime(double wait) {
+    time = wait;
+   addRequirements(Robot.drivetrain);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    initialTime = Timer.getFPGATimestamp();
+    System.out.println("initialized auto");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.indexer.setHorizontal(.25);
-
+    System.out.println("Ran Drivetrain");
+    Robot.drivetrain.setPercentOutput(.2, -.2);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.indexer.set(0);
+    Robot.drivetrain.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return  ((Robot.indexer.getDistanceTop() < Robot.indexer.DIST_ONE_BALL + 60) && (Robot.indexer.getDistanceTop() > Robot.indexer.DIST_ONE_BALL - 60));
+    return (Timer.getFPGATimestamp()>initialTime+time);
   }
 }

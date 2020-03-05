@@ -8,8 +8,8 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
+import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SetShooterClose extends CommandBase {
@@ -31,14 +31,17 @@ public class SetShooterClose extends CommandBase {
   @Override
   public void execute() {
 
+    double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
+    Robot.turret.set(value);
+
     double speedShooter = Robot.shooter.getSpeed();
 
-      if (speedShooter < 11000){
+      if (speedShooter < 9163){
         Robot.shooter.set(1);
         Robot.shooter.setReady(false);
       } 
-      else if (speedShooter > 11000 && speedShooter < 13000){
-        Robot.shooter.set(0.6);
+      else if (speedShooter > 9163 && speedShooter < 10829){
+        Robot.shooter.set(0.5);
         Robot.shooter.setReady(true);
 
       }

@@ -8,6 +8,7 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.shooter;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
+import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -32,19 +33,22 @@ public class SetShooterFar extends CommandBase {
   @Override
   public void execute() {
 
+    double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
+    Robot.turret.set(value);
+
     double speedShooter = Robot.shooter.getSpeed();
 
-      if (speedShooter < 15000){
+      if (speedShooter < 14750){
         Robot.shooter.set(1);
         Robot.shooter.setReady(false);
       } 
-      else if (speedShooter > 15000 && speedShooter < 16500){
-        Robot.shooter.set(0.73);
+      else if (speedShooter > 14750 && speedShooter < 15100){
+        Robot.shooter.set(0.6955);
         Robot.shooter.setReady(true);
 
       }
       else {
-        Robot.shooter.set(0.63);
+        Robot.shooter.set(0.621);
         Robot.shooter.setReady(false);
       } 
   }

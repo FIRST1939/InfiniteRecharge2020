@@ -8,8 +8,6 @@
 package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClimberGamepadControl extends CommandBase {
@@ -25,6 +23,7 @@ public class ClimberGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
+    
     boolean climberUp = Robot.oi.left.getRawButton(3);
     boolean climberDown = Robot.oi.left.getRawButton(2);
 

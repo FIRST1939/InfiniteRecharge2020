@@ -7,11 +7,7 @@
 
 package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
 
-import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
-import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
 
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -20,7 +16,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class InitiationLineBackUp extends SequentialCommandGroup {
 
   public InitiationLineBackUp() {
-    addCommands(new PanLeftUntilVision(RobotMap.turretClosePipeline));
+   // addCommands(new PanLeftUntilVision(RobotMap.turretClosePipeline));
     addCommands(new InitiationLineShooterSetupAuto());
+    
   }
 }

@@ -14,10 +14,11 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
-import com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain.DriveByJoystick;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+
 
 public class Drivetrain extends SubsystemBase {
 
@@ -218,12 +219,12 @@ public class Drivetrain extends SubsystemBase {
 
     frontLeft.configNominalOutputForward(+0);
 		frontLeft.configNominalOutputReverse(-0);
-		frontLeft.configPeakOutputForward(+1);
-    frontLeft.configPeakOutputReverse(-1);
+		frontLeft.configPeakOutputForward(+.7);
+    frontLeft.configPeakOutputReverse(-.7);
     frontRight.configNominalOutputForward(+0);
 		frontRight.configNominalOutputReverse(-0);
-		frontRight.configPeakOutputForward(+1);
-    frontRight.configPeakOutputReverse(-1);
+		frontRight.configPeakOutputForward(+.7);
+    frontRight.configPeakOutputReverse(-.7);
     frontLeft.enableVoltageCompensation(true);
     frontRight.enableVoltageCompensation(true);
 
@@ -238,8 +239,8 @@ public class Drivetrain extends SubsystemBase {
     frontLeft.configMotionAcceleration(MOTION_MAGIC_ACCELERATION);
     frontRight.configMotionCruiseVelocity(MOTION_MAGIC_CRUISE_VELOCITY);
     frontRight.configMotionAcceleration(MOTION_MAGIC_ACCELERATION);
-    frontLeft.configOpenloopRamp(.2);
-    frontRight.configOpenloopRamp(.2);
+    frontLeft.configOpenloopRamp(.5);
+    frontRight.configOpenloopRamp(.5);
 
   }
 }
