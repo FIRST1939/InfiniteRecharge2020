@@ -7,14 +7,34 @@
 
 package com.frcteam1939.infiniterecharge2020.util;
 
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+
 /**
  * Add your docs here.
  */
 public class Constants {
 
-    public static final double ksVolts = 0;
-    public static final double kvVoltSecondsPerMeter = 0;
-    public static final double kaVoltSecondsSquaredPerMeter = 0;
-    public static final double kPDriveVel = 8.5;
+    public static final class DriveConstants {
+
+        public static final double kTrackwidthMeters = 0;
+        public static final DifferentialDriveKinematics kDriveKinematics =
+            new DifferentialDriveKinematics(kTrackwidthMeters);
+    
+        public static final int kEncoderCPR = 0;
+        public static final double kWheelDiameterMeters = 0;
+        public static final double kEncoderDistancePerPulse =
+            // Assumes the encoders are directly mounted on the wheel shafts
+            (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
+    
+        public static final boolean kGyroReversed = true;
+    
+    
+        public static final double ksVolts = 0;
+        public static final double kvVoltSecondsPerMeter = 0;
+        public static final double kaVoltSecondsSquaredPerMeter = 0;
+    
+        // Example value only - as above, this must be tuned for your drive!
+        public static final double kPDriveVel = 0;
+      }
 
 }
