@@ -33,7 +33,50 @@ public class SetShooterMid extends CommandBase {
     Robot.turret.set(value);
     double speedShooter = Robot.shooter.getSpeed();
 
-    if (speedShooter < 13500){
+
+    if (speedShooter < 13600){
+      Robot.shooter.set(1);
+      Robot.shooter.setReady(false);
+
+    } 
+    else if (speedShooter > 13400 && speedShooter < 14400){
+      Robot.shooter.setReady(true);
+      Robot.shooter.set(0.67);
+    }
+    else {
+      Robot.shooter.setReady(false);
+      Robot.shooter.set(0.45);
+    }
+
+   /*if (speedShooter < 11600){
+      Robot.shooter.set(1);
+      Robot.shooter.setReady(false);
+
+    } 
+    else if (speedShooter > 11600 && speedShooter < 12600){
+      Robot.shooter.setReady(true);
+      Robot.shooter.set(0.588);
+    }
+    else {
+      Robot.shooter.setReady(false);
+      Robot.shooter.set(0.45);
+    }*/
+
+    /*if (speedShooter < 11000){
+      Robot.shooter.set(1);
+      Robot.shooter.setReady(false);
+
+    } 
+    else if (speedShooter > 11000 && speedShooter < 12000){
+      Robot.shooter.setReady(true);
+      Robot.shooter.set(0.55);
+    }
+    else {
+      Robot.shooter.setReady(false);
+      Robot.shooter.set(0.45);
+    }*/
+
+   /* if (speedShooter < 13500){
       Robot.shooter.set(1);
       Robot.shooter.setReady(false);
 
@@ -46,7 +89,7 @@ public class SetShooterMid extends CommandBase {
       Robot.shooter.setReady(false);
       Robot.shooter.set(0.5);
     }
-
+*/
       } 
   
 

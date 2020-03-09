@@ -24,7 +24,7 @@ public class SetShooterClose extends CommandBase {
     Robot.shooter.close = true;
     Robot.shooter.mid = false;
     Robot.shooter.far = false;
-    Robot.shooter.hoodMiddleLow();
+    Robot.shooter.hoodMiddleHigh();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,10 +36,26 @@ public class SetShooterClose extends CommandBase {
 
     double speedShooter = Robot.shooter.getSpeed();
 
+    if (speedShooter < 9163){
+      Robot.shooter.set(1);
+      Robot.shooter.setReady(false);
+    }  
+    else if (speedShooter > 9163 && speedShooter < 10829){
+      Robot.shooter.set(0.5);
+      Robot.shooter.setReady(true);
+
+    }
+    else {
+      Robot.shooter.set(0.45);
+      Robot.shooter.setReady(false);
+
+    } 
+    
+    /*
       if (speedShooter < 9163){
         Robot.shooter.set(1);
         Robot.shooter.setReady(false);
-      } 
+      }  
       else if (speedShooter > 9163 && speedShooter < 10829){
         Robot.shooter.set(0.5);
         Robot.shooter.setReady(true);
@@ -50,7 +66,7 @@ public class SetShooterClose extends CommandBase {
         Robot.shooter.setReady(false);
 
       } 
-
+*/
   }
 
   // Called once the command ends or is interrupted.

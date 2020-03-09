@@ -22,7 +22,7 @@ public class FrontTrenchShooterSetup extends ParallelCommandGroup {
   public FrontTrenchShooterSetup() {
     // Add your commands in the super() call.  Add the deadline first.
     super(
-      new TurnToTargetTeleop(RobotMap.turretMidPipeline),
+      new TurnToTargetTeleop(RobotMap.turretClosePipeline),
       new SetShooterMid()
     );
   }

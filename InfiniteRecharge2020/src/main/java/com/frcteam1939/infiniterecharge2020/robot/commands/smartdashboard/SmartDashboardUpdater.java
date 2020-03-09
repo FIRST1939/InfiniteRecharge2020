@@ -29,7 +29,9 @@ public class SmartDashboardUpdater extends CommandBase {
     SmartDashboard.putBoolean("Mid Shot", Robot.shooter.mid);
     SmartDashboard.putBoolean("Close Shot", Robot.shooter.close);
 
-   // SmartDashboard.putNumber("Shooter RPM", )
+    SmartDashboard.putNumber("Shooter RPM", Robot.shooter.getRevolutions());
+    SmartDashboard.putNumber("Shooter Set RMP", Robot.shooter.getSetRPM());
+
 
 
     SmartDashboard.putNumber("Indexer Current", Robot.indexer.getHorzCurrentDraw());

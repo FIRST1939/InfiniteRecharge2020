@@ -15,7 +15,7 @@ public class DriveByJoystick extends CommandBase {
   private static double DEAD_BAND = 0.1;
   private static double ROTATE_DEAD_BAND = 0.15;
 
-  private boolean squaredInputs = true;
+  private boolean squaredInputs = false;
 
   public DriveByJoystick() {
     addRequirements(Robot.drivetrain);

@@ -30,6 +30,7 @@ public class Shooter extends SubsystemBase {
   public boolean far = false;
   
   private boolean isShooting = false;
+  private double setRPM = 1500;
 
   private boolean ready;
   private boolean ready2;
@@ -108,8 +109,8 @@ public class Shooter extends SubsystemBase {
 
   public void setRPM(double rpm){
     double targetRPM = rpm;
-    double targetUnitsPer100ms = targetRPM * Constants.PID_Constants.sSensorUnitsPerRevolutions / 600;//why /600 thats what it said in example code?
-    double feedFwdTerm = 0;
+    double targetUnitsPer100ms = targetRPM * Constants.PID_Constants.sSensorUnitsPerRevolutions/ 600;//why /600 thats what it said in example code?
+    double feedFwdTerm = .1;
     shooterTalon1.set(TalonFXControlMode.Velocity, targetUnitsPer100ms,DemandType.ArbitraryFeedForward,feedFwdTerm);
     ///shooterTalon1.set(TalonFXControlMode.Velocity, targetUnitsPer100ms);
     shooterTalon2.follow(shooterTalon1);
@@ -122,7 +123,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getRevolutions(){
-    return getSpeed()/Constants.PID_Constants.sSensorUnitsPerRevolutions;
+    return (getSpeed()/Constants.PID_Constants.sSensorUnitsPerRevolutions)*600;
   }
 
   public double getTemperature(){
@@ -183,9 +184,14 @@ public class Shooter extends SubsystemBase {
     ready2 = status;
   }
 
-
   public boolean getIsShooting()
   {
     return isShooting;
   }
+
+  public double getSetRPM()
+  {
+    return setRPM;
+  }
+
 }

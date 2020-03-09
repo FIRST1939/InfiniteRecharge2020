@@ -39,7 +39,7 @@ public class Constants {
 
     public static final class PID_Constants{
         public static final double sF = 0;
-        public static final double sP = 0;
+        public static final double sP = .1;
         public static final double sI = 0;
         public static final double sD = 0;
         public static final double sPeakOutput = 0;
