@@ -99,7 +99,8 @@ public class OI {
     //shoot.whenPressed(new ConditionalCommand(new ShootClose(), new ShootFar3(), )
 
     //shooterClose.toggleWhenActive(new SetShooter(1500));
-    shooterClose.whileHeld(new InitiationLineShooterSetup());
+    shooterClose.whileHeld(new SetShooter());
+    //shooterClose.whileHeld(new InitiationLineShooterSetup());
     shooterMid.whileHeld(new FrontTrenchShooterSetup());
     shooterFar.whileHeld(new LongShooterSetup());
 

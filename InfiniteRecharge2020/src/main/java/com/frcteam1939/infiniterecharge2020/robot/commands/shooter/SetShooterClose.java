@@ -31,6 +31,7 @@ public class SetShooterClose extends CommandBase {
   @Override
   public void execute() {
 
+
     double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
     Robot.turret.set(value);
 

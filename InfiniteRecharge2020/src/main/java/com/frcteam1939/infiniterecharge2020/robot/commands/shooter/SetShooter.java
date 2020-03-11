@@ -15,14 +15,18 @@ public class SetShooter extends CommandBase {
 
   double rpm;
 
-  public SetShooter(double rpm) {
-    this.rpm = rpm;
+  public SetShooter() {
+   // this.rpm = rpm;
     addRequirements(Robot.shooter);
   }
 
   @Override
   public void initialize() {
-    Robot.shooter.setRPM(rpm);
+    Robot.shooter.set(.67);//59
+    Robot.shooter.hoodMiddleHigh();
+    Robot.shooter.setReady(true);
+    Robot.shooter.setReadyLimelight(true);
+    //Robot.shooter.setRPM(rpm);
   }
 
   @Override

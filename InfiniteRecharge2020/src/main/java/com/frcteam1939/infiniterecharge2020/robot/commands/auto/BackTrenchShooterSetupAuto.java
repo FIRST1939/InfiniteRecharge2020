@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
+package com.frcteam1939.infiniterecharge2020.robot.commands.auto;
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.SetShooterMid;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurnToTargetTeleop;
