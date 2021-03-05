@@ -25,13 +25,25 @@ public class TurretGamepadControl extends CommandBase {
     @Override
     public void execute() {
       if(Robot.shooter.getIsShooting()){
-        double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X)*.2;
+        double value = Robot.oi.gamepad.getRawAxis(0)*.2;
         Robot.turret.set(value);
       }
       else{
-        double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
+        double value = Robot.oi.gamepad.getRawAxis(0);
         Robot.turret.set(value);
       }
+      /*
+      if(!Robot.drivetrain.getControllerDriveMode()){
+        if(Robot.shooter.getIsShooting()){
+          double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X)*.2;
+          Robot.turret.set(value);
+        }
+        else{
+          double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
+          Robot.turret.set(value);
+        }
+      }
+      */
     }
   
     @Override

@@ -5,41 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-/*
-package com.frcteam1939.infiniterecharge2020.robot.commands.climber;
+package com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class MoveClimber extends CommandBase {
-
-  double value;
-
-  public MoveClimber(double value) {
-    this.value = value;
-    addRequirements(Robot.climber);
+public class ControllerMode extends CommandBase {
+  /**
+   * Creates a new ControllerMode.
+   */
+  public ControllerMode() {
+    addRequirements(Robot.drivetrain);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.climber.setClimber(value);
-    //Robot.climber.climberBrakeRetract();
+    Robot.drivetrain.toggleControllerDriveMode();
+    System.out.println("Test Print");
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.climber.setClimber(0);
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
   }
 }
-
-*/

@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+/*
 package com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
@@ -40,3 +40,4 @@ public class TurnThree extends CommandBase {
     return (Robot.controlPanelManipulator.getRotations() > currentPos+600);
   }
 }
+*/

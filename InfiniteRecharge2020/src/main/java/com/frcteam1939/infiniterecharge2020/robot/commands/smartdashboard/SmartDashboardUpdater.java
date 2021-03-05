@@ -37,7 +37,7 @@ public class SmartDashboardUpdater extends CommandBase {
     SmartDashboard.putBoolean("Hall Effect - Counter Clockwise", Robot.turret.isAtCounterClockwiseLimit());
     SmartDashboard.putBoolean("Hall Effect - Climber", Robot.turret.isAtClimberPosition());
 
-    SmartDashboard.putString("Color", Robot.controlPanelManipulator.getColor());
+    //SmartDashboard.putString("Color", Robot.controlPanelManipulator.getColor());
 
     SmartDashboard.putNumber("Intake Current", Robot.intake.getCurrent());
 
@@ -47,7 +47,7 @@ public class SmartDashboardUpdater extends CommandBase {
     SmartDashboard.putNumber("Left Encoder", Robot.drivetrain.getLeftPosition());
     SmartDashboard.putNumber("Right Encoder", Robot.drivetrain.getRightPosition());
 
-    SmartDashboard.putNumber("Climber Position", Robot.climber.getPosition());
+    //SmartDashboard.putNumber("Climber Position", Robot.climber.getPosition());
 
     SmartDashboard.putNumber("Limelight - Horizontal Angle Error", Robot.limelightTurret.getHorizontalAngleError());
     SmartDashboard.putNumber("Limelight - Distance", Robot.limelightTurret.getTargetDistance());

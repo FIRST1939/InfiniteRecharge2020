@@ -7,10 +7,7 @@
 
 package com.frcteam1939.infiniterecharge2020.robot;
 
-import com.frcteam1939.infiniterecharge2020.robot.commands.climber.ExtendBrake;
-import com.frcteam1939.infiniterecharge2020.robot.commands.climber.MoveClimber;
-import com.frcteam1939.infiniterecharge2020.robot.commands.climber.MoveClimberDown;
-import com.frcteam1939.infiniterecharge2020.robot.commands.controlpanelmanipulator.TurnThree;
+import com.frcteam1939.infiniterecharge2020.robot.commands.drivetrain.ControllerMode;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.FeedIndexer;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.Index;
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.ShootClose;
@@ -23,6 +20,7 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.FrontTrenchSh
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.HoodDown;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.LongShooterSetup;
+import com.frcteam1939.infiniterecharge2020.util.Gamepad;
 import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -34,6 +32,7 @@ public class OI {
   public final Joystick left;
   public final Joystick right;
   public final XboxController xboxController;
+  public final Gamepad gamepad;
   public final JoystickButton deployIntake;
   public final JoystickButton index;
   public final JoystickButton shooterClose;
@@ -48,8 +47,7 @@ public class OI {
   public final JoystickButton hoodDown;
   public final JoystickButton stopIndexer;
   public final JoystickButton turnThree;
-
-
+  public final JoystickButton controllerMode;
 
 
 
@@ -57,14 +55,30 @@ public class OI {
   //public final Gamepad gamepad = new Gamepad(2);
 
   public OI() {
-    left  = new Joystick(0);
-    right = new Joystick(1);
+    left  = new Joystick(1);
+    right = new Joystick(0);
     xboxController = new XboxController(2);
+    gamepad = new Gamepad(3);
+
     
     climberUp = new JoystickButton(left, 3);
     climberDown = new JoystickButton(left, 2);
     extendBrake = new JoystickButton(left, 5);
+    controllerMode = new JoystickButton(right, 2);
 
+    deployIntake = new JoystickButton(gamepad, 1);
+    shooterClose = new JoystickButton(gamepad, 4);
+    shooterMid = new JoystickButton(gamepad, 3);
+    shooterFar = new JoystickButton(gamepad, 2);
+    shoot = new JoystickButton(gamepad, 6);
+    intakeReverse = new JoystickButton(gamepad, 9);
+    intake = new JoystickButton(gamepad, 7);
+    index = new JoystickButton(gamepad, 5);
+    hoodDown = new JoystickButton(gamepad, 10);
+    stopIndexer = new JoystickButton(gamepad, 11);
+    turnThree = new JoystickButton(gamepad, 11);
+
+    /*
     deployIntake = new JoystickButton(xboxController, XboxController2.X_BUTTON);
     shooterClose = new JoystickButton(xboxController, XboxController2.Y_BUTTON);
     shooterMid = new JoystickButton(xboxController, XboxController2.B_BUTTON);
@@ -76,9 +90,9 @@ public class OI {
     hoodDown = new JoystickButton(xboxController, XboxController2.START_BUTTON);
     stopIndexer = new JoystickButton(xboxController, XboxController2.LEFT_JOYSTICK_BUTTON);
     turnThree = new JoystickButton(xboxController, XboxController2.LEFT_JOYSTICK_BUTTON);
+    */
 
-    
-
+    //controllerMode.whileHeld(new ControllerMode());
     //public final Trigger leftTrigger = new Trigger();
     //public final Trigger rightTrigger = new Trigger();
 
@@ -97,24 +111,25 @@ public class OI {
 
     //shoot.whenPressed(new ConditionalCommand(new ShootClose(), new ShootFar3(), )
 
-
     shooterClose.whileHeld(new InitiationLineShooterSetup());
     shooterMid.whileHeld(new FrontTrenchShooterSetup());
     shooterFar.whileHeld(new LongShooterSetup());
 
-    intakeReverse.whenPressed(new DeployIntakeReverse());
+    intakeReverse.whenPressed(new DeployIntake());
     intakeReverse.whenReleased(new IntakeIn());
     index.toggleWhenActive(new Index());
+    deployIntake.whenPressed(new DeployIntake());
+    //*****index.toggleWhenActive(new Index());
     //index.whenPressed(new Index());
-   // intake.whenPressed(new DeployIntake());
-    //intake.whenReleased(new IntakeIn());
-    deployIntake.whenPressed(new DeployIntake());  
-    deployIntake.whenReleased(new IntakeIn());  
+    //intake.whenPressed(new DeployIntake());
+    intake.whenReleased(new IntakeIn());
+  
+    //deployIntake.whenReleased(new IntakeIn());  
 
-    climberUp.whileHeld(new MoveClimber(1));
-    climberDown.whileHeld(new MoveClimberDown());
-    extendBrake.whileHeld(new ExtendBrake());
-    turnThree.whenPressed(new TurnThree());
+    //climberUp.whileHeld(new MoveClimber(1));
+    //climberDown.whileHeld(new MoveClimberDown());
+    //extendBrake.whileHeld(new ExtendBrake());
+    //turnThree.whenPressed(new TurnThree());
 
 
   

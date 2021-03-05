@@ -21,21 +21,23 @@ public class RobotMap {
     public static final int turretTalon = 39;
     public static final int shooterFalcon1 = 37;
     public static final int shooterFalcon2 = 36;
-    public static final int controlPanelSpark = 5;
+    public static final int sidewinderSpark = 6;
+    //public static final int controlPanelSpark = 5;
     public static final int climberFalcon = 40;
     public static final int gondolaTalon = 28;
 
   // Solenoids
     public static final int PCM = 0;
     public static final int intakeSolenoid = 6;
-    public static final int climberBrakeSolenoidForward = 4;
-    public static final int climberBrakeSolenoidReverse = 5;
+    public static final int sidewinderSolenoid = 4;
+    //public static final int climberBrakeSolenoidForward = 4;
+    //public static final int climberBrakeSolenoidReverse = 5;
     public static final int shooterHoodBigSolenoid = 0;
     public static final int shooterHoodSmallSolenoid = 1;
 
   // Distance Sensors
     public static final int indexerBottomDistanceSensor = 0;
-    public static final int indexerTopDistanceSensor = 1;
+    public static final int indexerTopDistanceSensor = 1; 
 
   // Digital Input
     public static final int turretClimberHallEffect = 5;

@@ -12,8 +12,8 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.auto.ShootThreeTurnBa
 import com.frcteam1939.infiniterecharge2020.robot.commands.indexer.IndexerGamepadControl;
 import com.frcteam1939.infiniterecharge2020.robot.commands.smartdashboard.SmartDashboardUpdater;
 import com.frcteam1939.infiniterecharge2020.robot.commands.turret.TurretGamepadControl;
-import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
-import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
+//import com.frcteam1939.infiniterecharge2020.robot.subsystems.Climber;
+//import com.frcteam1939.infiniterecharge2020.robot.subsystems.ControlPanelManipulator;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Drivetrain;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Indexer;
 import com.frcteam1939.infiniterecharge2020.robot.subsystems.Intake;
@@ -39,8 +39,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
 
-  public static Climber climber;
-  public static ControlPanelManipulator controlPanelManipulator;
+  //public static Climber climber;
+  //public static ControlPanelManipulator controlPanelManipulator;
   public static Drivetrain drivetrain;
   public static Intake intake;
   public static Indexer indexer;
@@ -67,8 +67,8 @@ public class Robot extends TimedRobot {
   static {
 		try {
       driverStation = DriverStation.getInstance();
-      climber = new Climber();
-      controlPanelManipulator = new ControlPanelManipulator();
+      //climber = new Climber();
+      //controlPanelManipulator = new ControlPanelManipulator();
       drivetrain = new Drivetrain();
       intake = new Intake();
       indexer = new Indexer();
@@ -90,9 +90,9 @@ public class Robot extends TimedRobot {
     limelightTurret.setPipeline(RobotMap.turretOffPipeline);
     limelightBase.setPipeline(RobotMap.baseDriverPipeline);
 
-    Robot.climber.zeroEncoder();
-    Robot.climber.climberBrakeRetract();
-    Robot.climber.enableBrakeModeClimber();
+    //Robot.climber.zeroEncoder();
+    //Robot.climber.climberBrakeRetract();
+    //Robot.climber.enableBrakeModeClimber();
     
     drivetrain.setDefaultCommand(new DriveByJoystick());
     indexer.setDefaultCommand(new IndexerGamepadControl());
@@ -129,8 +129,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    Robot.climber.enableBrakeModeClimber();
-    Robot.controlPanelManipulator.enableBrakeMode();
+    //Robot.climber.enableBrakeModeClimber();
+    //Robot.controlPanelManipulator.enableBrakeMode();
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
@@ -168,13 +168,14 @@ public class Robot extends TimedRobot {
     limelightTurret.setPipeline(RobotMap.turretOffPipeline);
     limelightBase.setPipeline(RobotMap.baseDriverPipeline);
     
-    Robot.climber.enableBrakeModeClimber();
-    Robot.controlPanelManipulator.enableBrakeMode();
+    //Robot.drivetrain.strafe(0.5);
+    //Robot.climber.enableBrakeModeClimber();
+    //Robot.controlPanelManipulator.enableBrakeMode();
     Robot.drivetrain.enableBrakeMode();
     Robot.indexer.enableBrakeMode();
     Robot.turret.enableBrakeMode();
-    Robot.climber.zeroEncoder();
-    Robot.climber.climberBrakeRetract();
+    //Robot.climber.zeroEncoder();
+    //Robot.climber.climberBrakeRetract();
   }
 
   /**
@@ -186,14 +187,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    Robot.climber.enableBrakeModeClimber();
+    //Robot.climber.enableBrakeModeClimber();
     Robot.intake.retractIntake();
     Robot.intake.setRoller(0);
     Robot.shooter.hoodDown();
     Robot.limelightTurret.setPipeline(RobotMap.turretOffPipeline);
     Robot.limelightBase.setPipeline(RobotMap.baseDriverPipeline);
-    Robot.climber.disableBrakeModeClimber();
-    Robot.controlPanelManipulator.disableBrakeMode();
+    //Robot.climber.disableBrakeModeClimber();
+    //Robot.controlPanelManipulator.disableBrakeMode();
     Robot.drivetrain.disableBrakeMode();
     Robot.indexer.disableBrakeMode();
     Robot.turret.disableBrakeMode();

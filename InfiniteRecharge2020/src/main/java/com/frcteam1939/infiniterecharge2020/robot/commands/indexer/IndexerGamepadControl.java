@@ -25,10 +25,14 @@ public class IndexerGamepadControl extends CommandBase {
 
   @Override
   public void execute() {
-    double verticalValue = -Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_Y)/2;
-    double horizontalValue = Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_X)/2;
-    Robot.indexer.setVertical(verticalValue);
-    Robot.indexer.setHorizontal(horizontalValue);
+    double verticalValue = -Robot.oi.gamepad.getRawAxis(3)/2;
+    double horizontalValue = Robot.oi.gamepad.getRawAxis(2)/2;
+    //double verticalValue = -Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_Y)/2;
+    //double horizontalValue = Robot.oi.xboxController.getRawAxis(XboxController2.RIGHT_X)/2;
+    if(!Robot.drivetrain.getControllerDriveMode()){
+      Robot.indexer.setVertical(verticalValue);
+      Robot.indexer.setHorizontal(horizontalValue);
+    }
   }
 
   @Override

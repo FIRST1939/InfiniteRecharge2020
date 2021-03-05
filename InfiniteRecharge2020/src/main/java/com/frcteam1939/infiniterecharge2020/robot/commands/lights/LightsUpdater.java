@@ -38,9 +38,10 @@ public class LightsUpdater extends CommandBase {
     else if(Robot.turret.isAtClimberPosition()){
       Robot.lights.green();
     }
-    else if(Robot.climber.isClimbing){
+    /*else if(Robot.climber.isClimbing){
       Robot.lights.theaterCase();
     }
+    */
     else if(Robot.getAllianceColor()){
       Robot.lights.fireRed();
     }

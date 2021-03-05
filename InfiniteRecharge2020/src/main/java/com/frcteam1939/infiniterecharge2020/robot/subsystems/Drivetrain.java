@@ -14,7 +14,14 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import com.frcteam1939.infiniterecharge2020.robot.RobotMap;
+import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -38,16 +45,31 @@ public class Drivetrain extends SubsystemBase {
   private static final double posI = 0;
   private static final double posD = 0;
 
-  // public PIDController turnPID;
-	private static final double turnF = 0.0;
-	private static final double turnP = 0.0;
-	private static final double turnI = 0.0;
-	private static final double turnD = 0.0;
+	private static final double MAX_TURN_OUPUT = 0.25;
+	private static final double turnF = 0;//= 0.071;
+	private static final double turnP = 0.03;
+	private static final double turnI = 0;
+	private static final double turnD = 0;
 
   private TalonFX frontLeft = new TalonFX(RobotMap.leftFrontFalcon);
   private TalonFX backLeft = new TalonFX(RobotMap.leftBackFalcon);
   private TalonFX frontRight = new TalonFX(RobotMap.rightFrontFalcon);
   private TalonFX backRight = new TalonFX(RobotMap.rightBackFalcon);
+
+  public CANSparkMax sidewinder = new CANSparkMax(RobotMap.sidewinderSpark, MotorType.kBrushless);
+  private Solenoid solenoid = new Solenoid(RobotMap.sidewinderSolenoid);
+
+  private AHRS navx;
+  private PIDController posPID;
+  private PIDController turnPID;
+
+  private boolean controllerDriveMode = false;
+  private boolean sidewinderDown = true; 
+  /*
+  private AHRS navx;
+	public PIDController posPID;
+  public PIDController turnPID;
+  */
 
   // private AHRS navx;
   // public Limelight limelight = new Limelight();
@@ -55,14 +77,20 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain(){
     setupMasterTalons();
 
-    // navx = new AHRS(Port.kUSB);
-		// navx.setPIDSourceType(PIDSourceType.kDisplacement);
-		// turnPID = new PIDController(turnP, turnI, turnD, turnF, navx, output -> {});
-		// turnPID.setInputRange(-180, 180);
-		// turnPID.setContinuous(true);
-		// turnPID.setOutputRange(-MAX_TURN_OUTPUT, MAX_TURN_OUTPUT);
-		// turnPID.setSetpoint(0);
-    // turnPID.enable();
+    
+
+    this.navx = new AHRS(Port.kMXP);
+		this.navx.setPIDSourceType(PIDSourceType.kDisplacement);
+		this.turnPID = new PIDController(turnP, turnI, turnD, this.navx, output -> {});
+		this.turnPID.setInputRange(-180, 180);
+		this.turnPID.setContinuous(true);
+		this.turnPID.setOutputRange(-MAX_TURN_OUPUT, MAX_TURN_OUPUT);
+		this.turnPID.setSetpoint(0);
+    this.turnPID.enable();
+
+    this.sidewinder.enableVoltageCompensation(12.0);
+    
+    SmartDashboard.putBoolean("Controller Mode", controllerDriveMode);
 
   }
   @Override
@@ -111,6 +139,18 @@ public class Drivetrain extends SubsystemBase {
     return frontRight.getMotorOutputVoltage();
   }
 
+  
+  public double getHeading() {
+		if (this.navx.isConnected()) return this.navx.pidGet();
+		else return 0;
+	}
+
+	public double getTurnSpeed() {
+		if (this.navx.isConnected()) return this.navx.getRate();
+		else return 0;
+  }
+  
+
   // public double getHeading() {
 	// 	if (navx.isConnected()) {
 	// 		return navx.pidGet();
@@ -127,7 +167,38 @@ public class Drivetrain extends SubsystemBase {
 	// 	}
 	// }
 
+  public boolean getControllerDriveMode(){
+    return controllerDriveMode;
+  }
+
   // Set Methods
+
+  public void toggleControllerDriveMode(){
+    if(controllerDriveMode == true){
+      controllerDriveMode = false;
+    } else if(controllerDriveMode == false){
+      controllerDriveMode = true;
+    }
+  }
+
+  public void toggleSidewinder(){
+    if(sidewinderDown == false){
+      
+      sidewinderDown();
+      sidewinderDown = true;
+    } else {
+      sidewinderUp();
+      sidewinderDown = false;
+    }
+  }
+
+  public void enableControllerDriveMode(){
+    controllerDriveMode = true;
+  }
+
+  public void disableControllerDriveMode(){
+    controllerDriveMode = false;
+  }
 
   public void setPercentOutput(double leftPercent, double rightPercent){
     frontLeft.set(ControlMode.PercentOutput, leftPercent);
@@ -148,8 +219,43 @@ public class Drivetrain extends SubsystemBase {
     frontRight.setSelectedSensorPosition(0);
   }
 
-  public void drive(double moveValue, double rotateValue) {
+  public void sidewinderDown() {
+		solenoid.set(true);
+	}
 
+	public void sidewinderUp() {
+		solenoid.set(false);
+  }
+  
+  public void strafe(double voltage) {
+	  sidewinder.set(voltage);
+  }
+
+  public void resetGyro() {
+		if (this.navx != null) {
+			this.navx.reset();
+		}
+  }
+  
+  private boolean correcting = false;
+
+  public void drive(double moveValue, double rotateValue, double strafeValue) {
+
+    if (rotateValue == 0 && strafeValue != 0) {
+			if (!this.correcting) {
+				this.resetGyro();
+				this.turnPID.reset();
+				this.turnPID.enable();
+				this.turnPID.setSetpoint(0);
+				this.correcting = true;
+			}
+			rotateValue = this.turnPID.get() + turnF * strafeValue;
+		} else if (this.correcting) {
+			this.correcting = false;
+    }
+
+    strafe(-strafeValue);
+    
 		// Calculate left and right speeds from move and rotate values
 		double leftMotorSpeed;
 		double rightMotorSpeed;

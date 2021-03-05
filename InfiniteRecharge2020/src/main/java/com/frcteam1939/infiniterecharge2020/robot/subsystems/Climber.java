@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/*
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -57,7 +58,7 @@ public class Climber extends SubsystemBase {
   // Positive is left
   /*public void setGondola(double value){
     gondolaTalon.set(ControlMode.PercentOutput, value);
-  }*/
+  }
 
   public void climberBrakeExtend(){
     climberBrake.set(DoubleSolenoid.Value.kReverse);
@@ -87,11 +88,13 @@ public class Climber extends SubsystemBase {
     return climberTalon.getMotorOutputPercent();
   }
 
- /* public void enableBrakeModeGondola(){
+  public void enableBrakeModeGondola(){
     gondolaTalon.setNeutralMode(NeutralMode.Brake);
   }
 
   public void disableBrakeModeGondola(){
     gondolaTalon.setNeutralMode(NeutralMode.Coast);
-  }*/
+  }
 }
+
+*/

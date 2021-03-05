@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/*
 package com.frcteam1939.infiniterecharge2020.robot.subsystems;
 
 import com.frcteam1939.infiniterecharge2020.robot.Robot;
@@ -57,8 +58,8 @@ public class ControlPanelManipulator extends SubsystemBase {
   private final Color kGreenTarget = ColorMatch.makeColor(Green_r, Green_g, Green_b);
   private final Color kRedTarget = ColorMatch.makeColor(Red_r, Red_g, Red_b);
   private final Color kYellowTarget = ColorMatch.makeColor(Yellow_r, Yellow_g, Yellow_b);
-  */
-
+  
+  
   private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
@@ -93,7 +94,7 @@ public class ControlPanelManipulator extends SubsystemBase {
   public void resetEncoder(){
     spark.();
   }
-  */
+  
 
   public void enableBrakeMode() {
     spark.setIdleMode(IdleMode.kBrake);
@@ -159,3 +160,4 @@ public class ControlPanelManipulator extends SubsystemBase {
   }
 
 }
+*/
