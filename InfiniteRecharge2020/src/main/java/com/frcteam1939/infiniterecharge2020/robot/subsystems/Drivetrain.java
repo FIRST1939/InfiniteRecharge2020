@@ -63,7 +63,7 @@ public class Drivetrain extends SubsystemBase {
   private PIDController posPID;
   private PIDController turnPID;
 
-  private boolean controllerDriveMode = false;
+  private boolean controllerDriveMode = true;
   private boolean sidewinderDown = true; 
   /*
   private AHRS navx;

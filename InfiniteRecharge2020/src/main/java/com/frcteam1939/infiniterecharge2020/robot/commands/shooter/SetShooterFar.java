@@ -38,19 +38,36 @@ public class SetShooterFar extends CommandBase {
 
     double speedShooter = Robot.shooter.getSpeed();
 
-      if (speedShooter < 14750){
+    /*
+    if (speedShooter < 30000){
+      Robot.shooter.set(1);
+      Robot.shooter.setReady(false);
+    } 
+    else if (speedShooter > 30000 && speedShooter < 32000){
+      Robot.shooter.set(1);
+      Robot.shooter.setReady(true);
+
+    }
+    else {
+      Robot.shooter.set(1);
+      Robot.shooter.setReady(false);
+    } 
+    */
+    
+      if (speedShooter < 13600){
         Robot.shooter.set(1);
         Robot.shooter.setReady(false);
       } 
-      else if (speedShooter > 14750 && speedShooter < 15100){
-        Robot.shooter.set(0.6955);
+      else if (speedShooter > 13600 && speedShooter < 14200){
+        Robot.shooter.set(0.52);
         Robot.shooter.setReady(true);
 
       }
       else {
-        Robot.shooter.set(0.621);
+        Robot.shooter.set(0.46);
         Robot.shooter.setReady(false);
-      } 
+      }
+      
   }
 
   // Called once the command ends or is interrupted.

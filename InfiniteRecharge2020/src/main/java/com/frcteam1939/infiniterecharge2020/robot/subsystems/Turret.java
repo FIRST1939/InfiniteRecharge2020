@@ -35,8 +35,8 @@ public class Turret extends SubsystemBase {
   private DigitalInput hallEffectCounterClockwise = new DigitalInput(RobotMap.turretCounterclockwiseStopHallEffect);
   private DigitalInput hallEffectClimber = new DigitalInput(RobotMap.turretClimberHallEffect);
 
-  public static final double POSITIVE_LIMIT = 2.5; // Clockwise Hall Effect
-  public static final double NEGATIVE_LIMIT = -2.80; // Counterclockwise Hall Effect
+  public static final double POSITIVE_LIMIT = 2.6; // Clockwise Hall Effect
+  public static final double NEGATIVE_LIMIT = -2.82; // Counterclockwise Hall Effect
 
   public Turret(){
     talon.enableVoltageCompensation(true);

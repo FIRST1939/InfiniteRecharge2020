@@ -22,7 +22,7 @@ public class InitiationLineShooterSetup extends ParallelCommandGroup {
   public InitiationLineShooterSetup() {
     // Add your commands in the super() call.  Add the deadline first.
     super(
-        new TurnToTargetTeleop(RobotMap.turretClosePipeline),
+        //new TurnToTargetTeleop(RobotMap.turretClosePipeline),
         new SetShooterClose()
     );
   }

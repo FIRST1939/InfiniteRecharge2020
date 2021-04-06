@@ -43,7 +43,7 @@ public class DriveByJoystick extends CommandBase {
 	if(!Robot.drivetrain.getControllerDriveMode()){
 		move = Robot.oi.left.getY();
 		rotate = Robot.oi.right.getX();
-		strafe = Robot.oi.left.getX();
+		strafe = 0;//Robot.oi.left.getX();
 
 		turbo = Robot.oi.left.getRawButton(1) || Robot.oi.right.getRawButton(1);
 	} else if(Robot.drivetrain.getControllerDriveMode()){

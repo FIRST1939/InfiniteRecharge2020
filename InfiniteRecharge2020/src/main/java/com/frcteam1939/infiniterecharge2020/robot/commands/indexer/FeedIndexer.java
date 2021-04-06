@@ -26,7 +26,7 @@ public class FeedIndexer extends CommandBase {
 
     if(Robot.shooter.isReady()&& (Robot.shooter.isReadyLimelight())){
       Robot.indexer.set(Robot.indexer.INDEXER_SHOOT_SPEED);
-      Robot.intake.extendIntake();
+      //Robot.intake.extendIntake();
     }
     else{
       Robot.indexer.stop();
@@ -36,7 +36,7 @@ public class FeedIndexer extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.indexer.stop();
-    Robot.intake.retractIntake();
+    //Robot.intake.retractIntake();
 
   }
 

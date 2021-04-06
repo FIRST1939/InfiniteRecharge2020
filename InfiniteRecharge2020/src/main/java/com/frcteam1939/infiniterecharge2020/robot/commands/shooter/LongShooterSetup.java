@@ -22,7 +22,7 @@ public class LongShooterSetup extends ParallelDeadlineGroup {
   public LongShooterSetup() {
     // Add your commands in the super() call.  Add the deadline first.
     super(
-      new TurnToTargetTeleop(RobotMap.turretFarPipeline),
+      new TurnToTargetTeleop(RobotMap.turretMidPipeline),
       new SetShooterFar()
     );
   }

@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SetShooterClose extends CommandBase {
 
-  public SetShooterClose() {
+  public 
+  SetShooterClose() {
     addRequirements(Robot.shooter);
   }
 
@@ -24,7 +25,7 @@ public class SetShooterClose extends CommandBase {
     Robot.shooter.close = true;
     Robot.shooter.mid = false;
     Robot.shooter.far = false;
-    Robot.shooter.hoodMiddleLow();
+    Robot.shooter.hoodDown();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,17 +37,17 @@ public class SetShooterClose extends CommandBase {
 
     double speedShooter = Robot.shooter.getSpeed();
 
-      if (speedShooter < 9163){
+      if (speedShooter < 8800){
         Robot.shooter.set(1);
         Robot.shooter.setReady(false);
       } 
-      else if (speedShooter > 9163 && speedShooter < 10829){
-        Robot.shooter.set(0.5);
+      else if (speedShooter > 8800 && speedShooter < 10500){
+        Robot.shooter.set(0.46);
         Robot.shooter.setReady(true);
 
       }
       else {
-        Robot.shooter.set(0.45);
+        Robot.shooter.set(0.41);
         Robot.shooter.setReady(false);
 
       } 

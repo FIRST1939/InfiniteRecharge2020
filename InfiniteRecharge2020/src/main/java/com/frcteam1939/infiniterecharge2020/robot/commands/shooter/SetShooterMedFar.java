@@ -12,9 +12,11 @@ import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class SetShooterMid extends CommandBase {
-
-  public SetShooterMid() {
+public class SetShooterMedFar extends CommandBase {
+  /**
+   * Creates a new SetShooterFar.
+   */
+  public SetShooterMedFar() {
     addRequirements(Robot.shooter);
   }
 
@@ -22,33 +24,34 @@ public class SetShooterMid extends CommandBase {
   @Override
   public void initialize() {
     Robot.shooter.close = false;
-    Robot.shooter.mid = true;
-    Robot.shooter.far = false;
-    Robot.shooter.hoodMiddleLow();
+    Robot.shooter.mid = false;
+    Robot.shooter.far = true;
+    Robot.shooter.hoodMiddleHigh();
   }
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     double value = Robot.oi.xboxController.getRawAxis(XboxController2.LEFT_X);
     Robot.turret.set(value);
+
     double speedShooter = Robot.shooter.getSpeed();
 
-    if (speedShooter < 11700){
+    if (speedShooter < 13000){
       Robot.shooter.set(1);
       Robot.shooter.setReady(false);
-
     } 
-    else if (speedShooter > 11700 && speedShooter < 12700){
+    else if (speedShooter > 13000 && speedShooter < 13500){
+      Robot.shooter.set(0.49);
       Robot.shooter.setReady(true);
-      Robot.shooter.set(0.37);
+
     }
     else {
+      Robot.shooter.set(0.44);
       Robot.shooter.setReady(false);
-      Robot.shooter.set(0.29);
-    }
-
-      } 
-  
+    } 
+} 
 
   // Called once the command ends or is interrupted.
   @Override
@@ -62,4 +65,3 @@ public class SetShooterMid extends CommandBase {
     return false;
   }
 }
-

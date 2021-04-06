@@ -20,6 +20,7 @@ import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.FrontTrenchSh
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.HoodDown;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.InitiationLineShooterSetup;
 import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.LongShooterSetup;
+import com.frcteam1939.infiniterecharge2020.robot.commands.shooter.MidLongShooterSetup;
 import com.frcteam1939.infiniterecharge2020.util.Gamepad;
 import com.frcteam1939.infiniterecharge2020.util.XboxController2;
 
@@ -37,6 +38,7 @@ public class OI {
   public final JoystickButton index;
   public final JoystickButton shooterClose;
   public final JoystickButton shooterMid;
+  public final JoystickButton shooterMidFar;
   public final JoystickButton shooterFar;
   public final JoystickButton shoot;
   public final JoystickButton intakeReverse;
@@ -66,10 +68,11 @@ public class OI {
     extendBrake = new JoystickButton(left, 5);
     controllerMode = new JoystickButton(right, 2);
 
-    deployIntake = new JoystickButton(gamepad, 1);
-    shooterClose = new JoystickButton(gamepad, 4);
-    shooterMid = new JoystickButton(gamepad, 3);
-    shooterFar = new JoystickButton(gamepad, 2);
+    deployIntake = new JoystickButton(gamepad, 8);
+    shooterClose = new JoystickButton(gamepad, 4);//y
+    shooterMid = new JoystickButton(gamepad, 3);//b
+    shooterMidFar = new JoystickButton(gamepad, 2);//a
+    shooterFar = new JoystickButton(gamepad, 1);//x
     shoot = new JoystickButton(gamepad, 6);
     intakeReverse = new JoystickButton(gamepad, 9);
     intake = new JoystickButton(gamepad, 7);
@@ -113,12 +116,16 @@ public class OI {
 
     shooterClose.whileHeld(new InitiationLineShooterSetup());
     shooterMid.whileHeld(new FrontTrenchShooterSetup());
+    shooterMidFar.whileHeld(new MidLongShooterSetup());
     shooterFar.whileHeld(new LongShooterSetup());
 
-    intakeReverse.whenPressed(new DeployIntake());
-    intakeReverse.whenReleased(new IntakeIn());
+    //intakeReverse.whileHeld(new shoot)
+    //intakeReverse.whenPressed(new DeployIntake());
+    //intakeReverse.whenReleased(new IntakeIn());
     index.toggleWhenActive(new Index());
-    deployIntake.whenPressed(new DeployIntake());
+    //deployIntake.whenPressed(new DeployIntake());
+    //deployIntake.whenReleased(new IntakeIn());
+    deployIntake.toggleWhenActive(new DeployIntake());
     //*****index.toggleWhenActive(new Index());
     //index.whenPressed(new Index());
     //intake.whenPressed(new DeployIntake());
